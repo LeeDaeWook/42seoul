@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_str_is_printable.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/10/02 22:39:34 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/12 19:14:06 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+int	ft_count_isascii(char *str)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	len;
 
-#endif
+	len = 0;
+	while (*str++ != '\0')
+		len++;
+	return (len);
+}
+
+int	ft_isascii(char *str)
+{
+	int	flag;
+	int	len;
+
+	flag = 0;
+	len = ft_count_isascii(str);
+	while (*str != '\0')
+	{
+		if (*str >= 0 && *str <= 127)
+				flag++;
+		str++;
+	}
+	if (flag == len)
+		return (1);
+	return (0);
+}

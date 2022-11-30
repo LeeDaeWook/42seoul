@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/11/17 14:43:17 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/17 14:43:20 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+char	*ft_strupcase(char *str)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	i;
 
-#endif
+	i = 0;
+	while (*(str + i) != '\0')
+	{
+		if (*(str + i) >= 'a' && *(str + i) <= 'z')
+				*(str + i) -= 32;
+		i++;
+	}
+	return (str);
+}

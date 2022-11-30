@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/10/01 14:32:03 by daewoole          #+#    #+#             */
+/*   Updated: 2022/10/01 14:33:06 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+void	ft_swap(int *a, int *b)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	temp;
 
-#endif
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}

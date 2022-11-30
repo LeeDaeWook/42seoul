@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/10/10 19:29:22 by daewoole          #+#    #+#             */
+/*   Updated: 2022/10/10 19:36:36 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+#define t_point struct t_point
+
+t_point
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
-#endif
+	int	x;
+	int	y;
+};

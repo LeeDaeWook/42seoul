@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/11/24 19:51:15 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/24 20:01:04 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int		i;
 
-#endif
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+}
+
+/*
+void	ft_strupcase(unsigned int i, char *s)
+{
+	(void) i;
+	if (*s >= 'a' && *s <= 'z')
+		*s -= 32;
+}
+
+#include <stdio.h>
+
+int main(void)
+{
+	char s[] = "abcdezzzzz";
+	ft_striteri(s, ft_strupcase);
+	printf("%s\n", s);
+
+	return (0);
+}
+*/

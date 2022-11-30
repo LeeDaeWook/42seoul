@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/10/01 14:37:30 by daewoole          #+#    #+#             */
+/*   Updated: 2022/10/01 14:40:08 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <unistd.h>
 
-typedef struct s_list
+void	ft_putstr(char *str)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	i;
 
-#endif
+	i = 0;
+	while (*(str + i) != '\0')
+	{
+		write(1, (str + i), 1);
+		i++;
+	}
+}

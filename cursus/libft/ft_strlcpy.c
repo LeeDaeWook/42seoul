@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/11/17 14:42:00 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/17 14:42:04 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	unsigned int	i;
 
-#endif
+	i = 0;
+	while ((i + 1) < size && src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	while ((i + 1) <= size)
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	i = 0;
+	while (src[i] != '\0')
+		i++;
+	return (i);
+}

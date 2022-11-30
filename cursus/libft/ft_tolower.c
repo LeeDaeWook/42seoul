@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/11/17 14:43:06 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/17 14:43:09 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+char	*ft_strlowcase(char *str)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	i;
 
-#endif
+	i = 0;
+	while (*(str + i) != '\0')
+	{
+		if (*(str + i) >= 'A' && *(str + i) <= 'Z')
+				*(str + i) += 32;
+		i++;
+	}
+	return (str);
+}

@@ -1,21 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/11/17 14:42:53 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/17 14:42:56 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+char	*ft_strstr(char *str, char *to_find)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	i;
+	int	j;
+	int	temp;
 
-#endif
+	i = 0;
+	j = 0;
+	if (!(*to_find))
+		return (str);
+	while (*(str + j) != '\0')
+	{
+		if (*(to_find + i) == *(str + j))
+		{
+			if (i == 0)
+				temp = j;
+			i++;
+			if (*(to_find + i) == '\0')
+				return (str + temp);
+		}
+		else
+			i = 0;
+		j++;
+	}
+	return (0);
+}

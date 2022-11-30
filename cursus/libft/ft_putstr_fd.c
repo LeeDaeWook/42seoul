@@ -1,21 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/11/24 20:15:12 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/24 20:34:30 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <unistd.h>
 
-typedef struct s_list
+int	ft_strlen(char *str)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	i;
 
-#endif
+	i = 0;
+	while (*(str + i) != '\0')
+		i++;
+	return (i);
+}
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
+}
+
+/*
+#include <stdio.h>
+#include <fcntl.h>
+
+int main(void)
+{
+	int	fd;
+	char	s[] = "abcdef";
+
+	fd = open("file", O_WRONLY | O_CREAT, 0777);
+	ft_putstr_fd(s, fd);
+
+	return (0);
+}
+*/

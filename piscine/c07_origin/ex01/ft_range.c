@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_range.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/10/11 13:53:52 by daewoole          #+#    #+#             */
+/*   Updated: 2022/10/11 13:57:00 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <stdlib.h>
 
-typedef struct s_list
+int	*ft_range(int min, int max)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	*array;
+	int	i;
 
-#endif
+	i = 0;
+	if (min >= max)
+		return (NULL);
+	array = (int*)malloc(sizeof(int) * (max - min));
+	if (array == 0)
+		return (NULL);
+	while (min < max)
+	{
+		*(array + i) = min;
+		min++;
+		i++;
+	}
+	return (array);
+}

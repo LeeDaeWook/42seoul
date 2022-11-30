@@ -1,21 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/10/01 23:41:18 by daewoole          #+#    #+#             */
+/*   Updated: 2022/11/12 19:14:25 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
 
-typedef struct s_list
+int	ft_count_isalpha(char *str)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int	len;
 
-#endif
+	len = 0;
+	while (*str++ != '\0')
+		len++;
+	return (len);
+}
+
+int	ft_isalpha(char *str)
+{
+	int	flag;
+	int	len;
+
+	flag = 0;
+	len = ft_count_isalpha(str);
+	while (*str != '\0')
+	{
+		if ((*str >= 'A' && *str <= 'Z') || (*str >= 'a' && *str <= 'z'))
+			flag++;
+		str++;
+	}
+	if (flag == len)
+		return (1);
+	return (0);
+}

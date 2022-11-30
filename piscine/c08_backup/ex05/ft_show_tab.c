@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_show_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 21:10:40 by daewoole         ###   ########.fr       */
+/*   Created: 2022/10/10 22:33:22 by daewoole          #+#    #+#             */
+/*   Updated: 2022/10/10 23:16:50 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef LIBFT_H
-# define LIBFT_H
+#include <unistd.h>
+#include "ft_strs_to_tab.c"
 
-typedef struct s_list
+void	ft_show_tab(struct s_stock_str *par)
 {
-	void			*content;
-	struct s_list	*next;
-}	t_list;
+	int i;
+	int	strlen;
 
-#endif
+	i = 0;
+	while (par[i].str != 0)
+	{
+		strlen = par[i].size;
+		par[i].size += '0';
+		write(1, par[i].str, strlen);
+		write(1, "\n", 1);
+		write(1, &(par[i].size), 1);
+		write(1, "\n", 1);
+		write(1, par[i].copy, strlen);
+		write(1, "\n", 1);
+		i++;
+	}
+}
