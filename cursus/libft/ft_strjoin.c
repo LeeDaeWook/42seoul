@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:12:44 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/22 19:38:08 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:20:19 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -29,7 +29,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	j;
 
 	len = ft_strlen(s1) + ft_strlen(s2);
-	str = (char*)malloc(sizeof(char) * (len + 1));
+	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
 	i = 0;

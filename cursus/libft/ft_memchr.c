@@ -6,20 +6,20 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:13:18 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/17 15:33:57 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:29:19 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string.h>
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char new_c;
-	char	*str;
+	unsigned char	new_c;
+	char			*str;
 	unsigned int	i;
 
 	new_c = (unsigned char)c;
 	i = 0;
-	str = (char*)s;
+	str = (char *)s;
 	while (str[i] != '\0' && i < n)
 	{
 		if (str[i] == new_c)
@@ -30,7 +30,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 		return (&str[i]);
 	return (0);
 }
-
 /*
 #include <stdio.h>
 

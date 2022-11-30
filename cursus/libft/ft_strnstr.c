@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:29:01 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/17 16:45:57 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:19:41 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string.h>
@@ -15,10 +15,10 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	unsigned int	i;
 	unsigned int	j;
-	int	temp;
-	char	*str;
+	int				temp;
+	char			*str;
 
-	str = (char*)haystack;
+	str = (char *)haystack;
 	i = 0;
 	j = 0;
 	if (!(*needle))

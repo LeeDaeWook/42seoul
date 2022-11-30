@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:28:22 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/22 20:00:29 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:18:45 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -36,11 +36,11 @@ int	is_set(char c, char const *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*str;
+	char			*str;
 	unsigned int	i;
 	unsigned int	j;
 
-	str = (char*)malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!str)
 		return (0);
 	i = 0;

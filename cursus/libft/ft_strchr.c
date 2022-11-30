@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:43:40 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/22 19:51:24 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:20:56 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	*str;
 
-	str = (char*)s;
+	str = (char *)s;
 	while (*str != '\0')
 	{
 		if (*str == c)
@@ -25,8 +25,7 @@ char	*ft_strchr(const char *s, int c)
 		return (str);
 	return (0);
 }
-
-
+/*
 #include <stdio.h>
 #include <string.h>
 
@@ -40,4 +39,4 @@ int main(void)
 	
 	return (0);
 }
-
+*/

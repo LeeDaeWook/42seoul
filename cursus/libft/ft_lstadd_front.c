@@ -6,10 +6,15 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/30 02:32:16 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/30 02:52:34 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:36:30 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-
+	if (new)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
+}

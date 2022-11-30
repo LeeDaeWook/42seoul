@@ -6,12 +6,12 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 20:35:05 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/24 20:42:48 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:21:27 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
 
-void ft_putnbr_fd(int n, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
 	char	temp;
 
@@ -30,7 +30,6 @@ void ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n / 10, fd);
 	write(fd, &temp, 1);
 }
-
 /*
 #include <stdio.h>
 #include <fcntl.h>

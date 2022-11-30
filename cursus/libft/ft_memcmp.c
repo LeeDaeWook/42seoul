@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:34:41 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/17 16:26:49 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:28:51 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <string.h>
@@ -32,10 +32,10 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*new_s1;
 	unsigned char	*new_s2;
 	unsigned int	i;
-	int	diff;
+	int				diff;
 
-	new_s1 = (unsigned char*)s1;
-	new_s2 = (unsigned char*)s2;
+	new_s1 = (unsigned char *)s1;
+	new_s2 = (unsigned char *)s2;
 	i = 0;
 	while (i < n && i < ft_check_len(new_s1, new_s2))
 	{
@@ -49,7 +49,6 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-
 /*
 #include <stdio.h>
 

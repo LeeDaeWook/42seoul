@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:28:33 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/22 22:38:17 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:33:51 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <stdlib.h>
@@ -65,13 +65,12 @@ char	*ft_itoa(int n)
 {
 	char	*result;
 
-	result = (char*)malloc(sizeof(char) * (ft_len(n) + 1));
+	result = (char *)malloc(sizeof(char) * (ft_len(n) + 1));
 	if (!result)
 		return (0);
 	ft_excute(n, result, ft_len(n));
 	return (result);
 }
-
 /*
 #include <stdio.h>
 
