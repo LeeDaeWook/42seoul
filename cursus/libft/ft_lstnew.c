@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 14:41:23 by daewoole          #+#    #+#             */
-/*   Updated: 2022/11/17 14:41:27 by daewoole         ###   ########.fr       */
+/*   Created: 2022/11/24 20:59:37 by daewoole          #+#    #+#             */
+/*   Updated: 2022/12/01 20:02:32 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
 
-int	ft_atoi(char *str)
+t_list	*ft_lstnew(void *content)
 {
-	int	result;
-	int	i;
-	int	sign;
+	t_list	*new_node;
 
-	result = 0;
-	i = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	while (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	result *= sign;
-	return (result);
+	new_node = (t_list *)malloc(sizeof(t_list) * 1);
+	if (!new_node)
+		return (0);
+	new_node->content = content;
+	new_node->next = 0;
+	return (new_node);
 }
+/*
+#include <stdio.h>
+
+int main(void)
+{
+	t_list	*new;
+	int	d;
+
+	d = 10000;
+	new = ft_lstnew(&d);
+	printf("%d\n", *(int*)ft_lstnew(&d)->content);
+
+	return (0);
+}
+*/

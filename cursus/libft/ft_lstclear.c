@@ -38,13 +38,13 @@ int main(void)
 
 	head = &first;
 
-	//*con1 = 123;
+	*con1 = 123;
 	//first.content = malloc(sizeof(int) * 1);
 	first.content = con1;
 	//first.next = (t_list*)malloc(sizeof(t_list) * 1);
 	first.next = &second;
 
-	//*con2 = 456;
+	*con2 = 456;
 	//second.content = malloc(sizeof(int) * 1);
 	second.content = con2;
 	//second.next = (t_list*)malloc(sizeof(t_list) * 1);
