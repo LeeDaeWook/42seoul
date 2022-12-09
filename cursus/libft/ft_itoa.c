@@ -71,13 +71,3 @@ char	*ft_itoa(int n)
 	ft_excute(n, result, ft_len(n));
 	return (result);
 }
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	printf("%s\n", ft_itoa(-2147483648));
-
-	return (0);
-}
-*/

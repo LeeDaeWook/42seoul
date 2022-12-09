@@ -15,18 +15,3 @@ void	ft_putchar_fd(char c, int fd)
 {
 	write(fd, &c, 1);
 }
-
-/*
-#include <stdio.h>
-#include <fcntl.h>
-
-int main(void)
-{
-	int	fd;
-
-	fd = open("file", O_WRONLY | O_CREAT, 0777);
-	ft_putchar_fd('7', fd);
-
-	return (0);
-}
-*/

@@ -85,23 +85,3 @@ char	**ft_split(char const *s, char c)
 	split(result, s, c);
 	return (result);
 }
-
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	char s[] = "abco123o123456o::dddd";
-	int	i = 0;
-	char	**result;
-
-	result = ft_split(s, 'o');
-	while (result[i])
-	{
-		printf("%s\n", result[i]);
-		i++;
-	}
-
-	return (0);
-}
-*/

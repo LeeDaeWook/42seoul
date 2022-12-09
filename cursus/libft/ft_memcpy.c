@@ -30,19 +30,3 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main(void)
-{
-	//char dst[10];
-	char dst[] = "abcde";
-	const char src[] = "12345";
-	//printf("memcpy: %s\n", memcpy(dst, src, 10));
-	printf("ft_memcpy: %s\n", ft_memcpy((void*)dst, (void*)src, 10));
-
-	return (0);
-}
-*/

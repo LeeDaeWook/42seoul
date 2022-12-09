@@ -44,7 +44,7 @@ fclean : clean
 
 re : fclean all
 
-bonus : $(OBJS) $(OBJS_B)
+bonus : $(OBJS_B)
 	$(AR) $(NAME) $^
 
 .PHONY : all clean fclean re bonus

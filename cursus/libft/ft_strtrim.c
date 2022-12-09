@@ -44,16 +44,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	}
 	return (str);
 }
-
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	char s1[] = ":,abcDEF";
-	char set[] = ":,aF";
-	printf("%s\n", ft_strtrim(s1, set));
-
-	return (0);
-}
-*/

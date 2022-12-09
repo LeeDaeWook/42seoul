@@ -36,13 +36,3 @@ char	*ft_strstr(const char *str, const char *to_find)
 	}
 	return (0);
 }
-/*
-#include <stdio.h>
-int main(void)
-{
-	const char	s1[] = "abcde";
-	const char	s2[] = "cd";
-	printf("%s\n", ft_strstr(s1, s2));
-	return (0);
-}
-*/

@@ -34,17 +34,3 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
-/*
-#include <string.h>
-
-int main(void)
-{
-	char dst1[] = "abcdefghi";
-	char dst2[] = "abcdefghi";
-	//char src[] = "123456789";
-	//printf("memmove: %s\n", memmove(dst1 + 2, dst1, sizeof(dst1)));
-	printf("ft_memmove: %s\n", ft_memmove(dst2 + 2, dst2, sizeof(dst1)));
-
-	return (0);
-}
-*/

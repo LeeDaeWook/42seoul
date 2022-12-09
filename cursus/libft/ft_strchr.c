@@ -25,19 +25,3 @@ char	*ft_strchr(const char *s, int c)
 		return (str);
 	return (0);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main(void)
-{
-	char str[50] = "hello, my name is 42";
-	//char str[50] = "\0";
-
-	printf("strchr: %s\n", strchr(str, 'o'));
-	printf("ft_strchr: %s\n", ft_strchr(str, 'o'));
-	
-	return (0);
-}
-*/

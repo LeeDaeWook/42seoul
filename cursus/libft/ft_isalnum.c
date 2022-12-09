@@ -29,15 +29,3 @@ int	ft_isalnum(char *str)
 		return (1);
 	return (0);
 }
-
-/*
-#include <stdio.h>
-int main(void)
-{
-	char	str[] = "---";
-
-	printf("%d\n", ft_isalnum(str));
-
-	return (0);
-}
-*/

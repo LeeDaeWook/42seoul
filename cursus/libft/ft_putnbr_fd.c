@@ -30,17 +30,3 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n / 10, fd);
 	write(fd, &temp, 1);
 }
-/*
-#include <stdio.h>
-#include <fcntl.h>
-
-int main(void)
-{
-	int	fd;
-
-	fd = open("file_putnbr_fd", O_WRONLY | O_CREAT, 0777);
-	ft_putnbr_fd(-2147483648, fd);
-
-	return (0);
-}
-*/

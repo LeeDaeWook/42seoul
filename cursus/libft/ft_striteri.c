@@ -21,23 +21,3 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 		i++;
 	}
 }
-
-/*
-void	ft_strupcase(unsigned int i, char *s)
-{
-	(void) i;
-	if (*s >= 'a' && *s <= 'z')
-		*s -= 32;
-}
-
-#include <stdio.h>
-
-int main(void)
-{
-	char s[] = "abcdezzzzz";
-	ft_striteri(s, ft_strupcase);
-	printf("%s\n", s);
-
-	return (0);
-}
-*/

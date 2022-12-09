@@ -24,15 +24,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		substr[i++] = s[start++];
 	return (substr);
 }
-
-/*
-#include <stdio.h>
-
-int main(void)
-{	
-	char	s[] = "abcdefghijklmnopq";
-	printf("%s\n", ft_substr(s, 3, 5));
-
-	return (0);
-}
-*/

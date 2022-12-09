@@ -39,17 +39,3 @@ char	*ft_strnstr(const char *str, const char *needle, size_t len)
 	}
 	return (0);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-int main(void)
-{
-	char haystack[] = "hello, here is 42seoul's cluster";
-	char needle[] = "llo";
-	printf("strnstr: %s\n", strnstr(haystack, needle, 10));
-	printf("ft_strnstr: %s\n", ft_strnstr(haystack, needle, 10));
-
-	return (0);
-}
-*/

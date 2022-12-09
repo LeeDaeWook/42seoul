@@ -49,16 +49,3 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	}
 	return (0);
 }
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	char s1[] = "abcde\200";
-	char s2[] = "abcde\10";
-	printf("memcmp: %d\n", memcmp(s1, s2, 6));
-	printf("ft_memcmp: %d\n", ft_memcmp(s1, s2, 6));
-
-	return (0);
-}
-*/

@@ -24,26 +24,3 @@ void	*ft_memset(void*ptr, int c, size_t len)
 		char_ptr[i++] = (unsigned char)c;
 	return (ptr);
 }
-
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-//	char arr[] = "seoul";
-	int arr2[10];
-	int num = 3;
-//	printf("memset: %s\n", memset(arr, 'c', 10 * sizeof(char)));
-//	printf("ft_memset: %s\n", ft_memset(arr, 'c', 10 * sizeof(char)));
-
-	memset(arr2, 1, num * sizeof(int));	
-	for (int i = 0; i < num; i++)
-		printf("memset: %d\n", arr2[i]);
-
-	ft_memset(arr2, 1, num * sizeof(int));
-	for (int i = 0; i < num; i++)
-		printf("ft_memset: %d\n", arr2[i]);
-
-	return (0);
-}
-*/

@@ -30,17 +30,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 		return (&str[i]);
 	return (0);
 }
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	//char str[50] = "hello, my name is 42";
-	char str[50] = "\0";
-
-	printf("memchr: %s\n", memchr(str, '\0', 21));
-	printf("ft_memchr: %s\n", ft_memchr(str, '\0', 21));
-	
-	return (0);
-}
-*/

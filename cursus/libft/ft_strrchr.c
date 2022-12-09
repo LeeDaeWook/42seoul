@@ -29,19 +29,3 @@ char	*ft_strrchr(const char *s, int c)
 	}
 	return (0);
 }
-
-/*
-#include <stdio.h>
-#include <string.h>
-
-int main(void)
-{
-	char str[50] = "hello, my name is 42";
-	//char str[50] = "\0";
-
-	printf("strchr: %s\n", strrchr(str, ','));
-	printf("ft_strchr: %s\n", ft_strrchr(str, ','));
-	
-	return (0);
-}
-*/

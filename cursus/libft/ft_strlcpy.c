@@ -31,16 +31,3 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 		i++;
 	return (i);
 }
-
-/*
-#include <stdio.h>
-int main(void)
-{
-	char	dest[] = "abcde";
-	const char	src[] = "12345";
-
-	printf("%zu\n", ft_strlcpy(dest, src, 3));
-
-	return (0);
-}
-*/

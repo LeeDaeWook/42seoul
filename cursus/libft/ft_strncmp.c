@@ -43,15 +43,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-/*
-#include <stdio.h>
-int main(void)
-{
-	const char	s1[] = "abcde";
-	const char	s2[] = "12345";
-
-	printf("%d\n", ft_strncmp(s1, s2, 1));
-
-	return (0);
-}
-*/

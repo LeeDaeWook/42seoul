@@ -27,23 +27,4 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	}
 	str[i] = '\0';
 	return (str);
-}	
-/*
-char	ft_strupcase(unsigned int i, char c)
-{
-	(void) i;
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
-	return (c);
 }
-
-#include <stdio.h>
-
-int main(void)
-{
-	char s[] = "abcde";
-	printf("%s\n", ft_strmapi(s, ft_strupcase));
-
-	return (0);
-}
-*/

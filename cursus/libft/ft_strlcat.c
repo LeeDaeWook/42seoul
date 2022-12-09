@@ -51,15 +51,3 @@ size_t	ft_strlcat(char*dest, const char*src, size_t size)
 		return (src_len + size);
 	return (dest_len + src_len);
 }
-/*
-#include <stdio.h>
-int main(void)
-{
-	char	dest[] = "abcde";
-	const	char	src[] = "12345";
-
-	printf("%zu\n", ft_strlcat(dest, src, 3));
-
-	return (0);
-}
-*/

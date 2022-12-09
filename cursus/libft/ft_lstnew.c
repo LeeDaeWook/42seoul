@@ -22,18 +22,3 @@ t_list	*ft_lstnew(void *content)
 	new_node->next = 0;
 	return (new_node);
 }
-/*
-#include <stdio.h>
-
-int main(void)
-{
-	t_list	*new;
-	int	d;
-
-	d = 10000;
-	new = ft_lstnew(&d);
-	printf("%d\n", *(int*)ft_lstnew(&d)->content);
-
-	return (0);
-}
-*/
