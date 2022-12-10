@@ -13,8 +13,8 @@
 
 int	ft_isdigit(char *str)
 {
-	int	flag;
-	int	len;
+	size_t	flag;
+	size_t	len;
 
 	flag = 0;
 	len = ft_strlen(str);

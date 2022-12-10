@@ -13,8 +13,8 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char			*str;
-	int				len;
+	char		*str;
+	size_t		len;
 	unsigned int	i;
 	unsigned int	j;
 

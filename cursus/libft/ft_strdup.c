@@ -13,7 +13,7 @@
 
 char	*ft_strdup(char *src)
 {
-	int		src_len;
+	int	src_len;
 	char	*cp_src;
 
 	src_len = 0;

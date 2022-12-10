@@ -13,7 +13,7 @@
 
 size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	while ((i + 1) < size && src[i] != '\0')

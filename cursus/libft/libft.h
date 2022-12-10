@@ -23,7 +23,7 @@ typedef struct s_list
 
 int		ft_atoi(char *str);
 void		*ft_memset(void*ptr, int c, size_t len);
-int		ft_strlen(char *str);
+size_t		ft_strlen(char *str);
 void		ft_bzero(void*s, size_t n);
 void		*ft_calloc(size_t count, size_t size);
 int		ft_isalnum(char *str);

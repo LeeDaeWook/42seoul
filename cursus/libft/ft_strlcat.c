@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-unsigned int	ft_copy(char *dest, char *src, unsigned int size,
-		unsigned int dest_len)
+size_t	ft_copy(char *dest, char *src, size_t size, size_t dest_len)
 {
-	unsigned int	src_len;
+	size_t	src_len;
 
 	src_len = 0;
 	if (size > dest_len)

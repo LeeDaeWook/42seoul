@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
@@ -17,8 +17,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char	*dst_ptr;
 	unsigned char	*src_ptr;
 
-	if (n > (size_t)ft_strlen((char *)dst) \
-			|| n > (size_t)ft_strlen((char *)src))
+	if (n > ft_strlen((char *)dst) || n > (size_t)ft_strlen((char *)src))
 		return (0);
 	dst_ptr = (unsigned char *)dst;
 	src_ptr = (unsigned char *)src;

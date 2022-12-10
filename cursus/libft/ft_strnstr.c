@@ -15,8 +15,8 @@ char	*ft_strnstr(const char *str, const char *needle, size_t len)
 {
 	unsigned int	i;
 	unsigned int	j;
-	int				temp;
-	char			*new_str;
+	int		temp;
+	char		*new_str;
 
 	new_str = (char *)str;
 	i = 0;
