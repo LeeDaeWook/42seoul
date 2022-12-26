@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:16:06 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/22 17:52:19 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/26 21:18:03 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -22,4 +22,3 @@ void	*ft_memset(void*ptr, int c, size_t len)
 		char_ptr[i++] = (unsigned char)c;
 	return (ptr);
 }
-

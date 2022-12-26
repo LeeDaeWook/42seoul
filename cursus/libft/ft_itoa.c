@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:28:33 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/01 19:57:08 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/26 21:25:33 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -34,12 +34,10 @@ int	ft_len(int n)
 	return (i);
 }
 
-void	ft_excute(int n, char *result, int len)
+void	ft_excute(int n, char *result, int i)
 {
-	int	i;
 	int	sign;
 
-	i = len - 1;
 	sign = 1;
 	if (n == -2147483648)
 	{
@@ -71,7 +69,7 @@ char	*ft_itoa(int n)
 	result = (char *)malloc(sizeof(char) * (ft_len(n) + 1));
 	if (!result)
 		return (0);
-	ft_excute(n, result, ft_len(n));
+	ft_excute(n, result, ft_len(n) - 1);
 	result[ft_len(n)] = '\0';
 	return (result);
 }

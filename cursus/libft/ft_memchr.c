@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:13:18 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/22 16:45:53 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/26 21:17:28 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -26,7 +26,5 @@ void	*ft_memchr(const void *s, int c, size_t n)
 			return (&str[i]);
 		i++;
 	}
-	//if (str[i] == '\0' && c == '\0' && i < n)
-	//	return (&str[i]);
 	return (0);
 }

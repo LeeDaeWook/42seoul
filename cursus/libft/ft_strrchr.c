@@ -6,14 +6,14 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 15:01:09 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/01 20:23:02 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/26 21:23:17 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char		*str;
-	char		*first_addr;
+	char			*str;
+	char			*first_addr;
 	unsigned char	chr;
 
 	str = (char *)s;
