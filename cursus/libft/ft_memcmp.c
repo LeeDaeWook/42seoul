@@ -11,33 +11,17 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-unsigned int	ft_check_len(unsigned char *s1, unsigned char *s2)
-{
-	unsigned int	i;
-	unsigned int	j;
-
-	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
-		i++;
-	while (s2[j] != '\0')
-		j++;
-	if (i < j)
-		return (j);
-	return (i);
-}
-
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	unsigned char	*new_s1;
 	unsigned char	*new_s2;
 	unsigned int	i;
-	int				diff;
+	int		diff;
 
 	new_s1 = (unsigned char *)s1;
 	new_s2 = (unsigned char *)s2;
 	i = 0;
-	while (i < n && i < ft_check_len(new_s1, new_s2))
+	while (i < n )
 	{
 		diff = (new_s1[i] - new_s2[i]);
 		if (new_s1[i] > new_s2[i])

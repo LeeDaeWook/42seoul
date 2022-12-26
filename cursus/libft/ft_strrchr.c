@@ -12,20 +12,24 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	char	*str;
-	char	*first_addr;
+	char		*str;
+	char		*first_addr;
+	unsigned char	chr;
 
 	str = (char *)s;
 	first_addr = str;
+	chr = (unsigned char)c;
 	while (*str != '\0')
 		str++;
-	if (*str == '\0' && c == '\0')
+	if (*str == '\0' && chr == '\0')
 		return (str);
 	while (str != first_addr)
 	{
-		if (*str == c)
+		if (*str == chr)
 			return (str);
 		str--;
 	}
+	if (*str == chr)
+		return (str);
 	return (0);
 }

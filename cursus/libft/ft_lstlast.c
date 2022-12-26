@@ -15,6 +15,7 @@ t_list	*ft_lstlast(t_list *lst)
 {
 	t_list	*present_node;
 
+	present_node = 0;
 	while (lst)
 	{
 		present_node = lst;

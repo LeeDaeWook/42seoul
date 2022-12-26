@@ -6,14 +6,14 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:47:25 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/01 20:13:14 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:48:07 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 char	*ft_strdup(char *src)
 {
-	int	src_len;
+	int		src_len;
 	char	*cp_src;
 
 	src_len = 0;

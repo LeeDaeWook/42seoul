@@ -15,6 +15,8 @@ int	ft_len(int n)
 {
 	int	i;
 
+	if (n == 0)
+		return (1);
 	if (n == -2147483648)
 		return (11);
 	if (n < 0)
@@ -49,6 +51,8 @@ void	ft_excute(int n, char *result, int len)
 		n *= -1;
 		sign = -1;
 	}
+	if (i == 0)
+		result[i] = n + '0';
 	while (i > 0)
 	{
 		result[i--] = n % 10 + '0';
@@ -58,7 +62,6 @@ void	ft_excute(int n, char *result, int len)
 		else if (i == 0 && sign > 0)
 			result[i] = n % 10 + '0';
 	}	
-	result[len] = '\0';
 }
 
 char	*ft_itoa(int n)
@@ -69,5 +72,6 @@ char	*ft_itoa(int n)
 	if (!result)
 		return (0);
 	ft_excute(n, result, ft_len(n));
+	result[ft_len(n)] = '\0';
 	return (result);
 }

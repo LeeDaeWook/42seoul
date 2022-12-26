@@ -9,7 +9,7 @@ typedef struct s_flag
     int zero;
     int dot;
     int star;
-    int width;
+    unsigned int width;
 
 }   t_flag;
 

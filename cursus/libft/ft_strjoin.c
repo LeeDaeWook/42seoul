@@ -6,15 +6,15 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:12:44 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/01 22:05:32 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:52:37 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char		*str;
-	size_t		len;
+	char			*str;
+	size_t			len;
 	unsigned int	i;
 	unsigned int	j;
 

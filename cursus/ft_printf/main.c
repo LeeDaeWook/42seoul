@@ -10,10 +10,10 @@ int main(void)
     unsigned int    un = 2147483649;
     char    num[] = "12345";
 
-    output1 = printf("printf:%20d\n", 1000);
+    output1 = printf("printf:   %.5d\n", 15000);
     printf("output of printf: %d\n", output1);
 
-    output2 = ft_printf("ft_printf:%d\n", 1000);
+    output2 = ft_printf("ft_printf:%-10d\n", 1000);
     printf("output of ft_printf: %d\n", output2);
 
     //t_flag flag;

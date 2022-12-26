@@ -6,25 +6,14 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 19:55:18 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/01 19:55:57 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:25:03 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_isprint(char *str)
+int	ft_isprint(int c)
 {
-	size_t	flag;
-	size_t	len;
-
-	flag = 0;
-	len = ft_strlen(str);
-	while (*str != '\0')
-	{
-		if (*str >= 32 && *str <= 126)
-				flag++;
-		str++;
-	}
-	if (flag == len)
+	if (c >= 32 && c <= 126)
 		return (1);
 	return (0);
 }

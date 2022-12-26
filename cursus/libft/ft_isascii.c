@@ -6,25 +6,14 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 19:53:02 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/01 19:53:09 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:23:49 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-int	ft_isascii(char *str)
+int	ft_isascii(int c)
 {
-	size_t	flag;
-	size_t	len;
-
-	flag = 0;
-	len = ft_strlen(str);
-	while (*str != '\0')
-	{
-		if (*str >= 0 && *str <= 127)
-				flag++;
-		str++;
-	}
-	if (flag == len)
+	if (c >= 0 && c <= 127)
 		return (1);
 	return (0);
 }

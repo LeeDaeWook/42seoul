@@ -40,12 +40,44 @@ void    print_char(int c, char* format, int* ret_val)
     *ret_val += 1;
 }
 
+void    excute_width(int *ret_val, t_flag *flag, unsigned long long num)
+{
+    int c;
+    size_t len;
+
+    if (flag->width == 0 || flag->minus == 1 || ft_len(num) >= flag->width)
+        return ;
+    len = width - ft_len(num);
+    if (flag->zero == 1)
+        c = '0';
+    else
+        c = ' ';
+    while (len > 0)
+    {
+        write(1, &c, 1);
+        len--;
+    }
+}
+
+void    excute_flag(char *format, int* ret_val, t_flag *flag)
+{
+    if (flag->minus == 1)
+        return ;
+    else if (flag->zero == 1 && flag->minus != 1)
+        return ;
+    //else if (flag->dot == 1)
+    else if (flag->star == 1)
+
+}
+
 void    print_num(unsigned long long num, char* format, int* ret_val, t_flag *flag)
 {
     if (*format == 'd' || *format == 'i')
     {
+        excute_flag(format, ret_val, flag);
+        excute_width(ret_val, flag, num);
         ft_putnbr_fd(num, 1);
-        *ret_val += ft_len(num);
+        *ret_val += flag->width;
     }
     else if (*format == 'u')
     {
@@ -55,7 +87,7 @@ void    print_num(unsigned long long num, char* format, int* ret_val, t_flag *fl
     else if (*format == 'p' || *format == 'x' || *format == 'X')
     {
         if (*format == 'p')
-            *ret_val += write(1, "0x", 2);
+            *ret_val += write(1, "0x", 2); // hard coding...
         ft_putnbr_base(num, ret_val, format);
     }
 }
@@ -66,7 +98,7 @@ void    print_str(char* str, char *format, int *ret_val)
     *ret_val += ft_strlen(str);
 }
 
-char    *ft_width(char *format, int *ret_val, t_flag *flag)
+char    *get_width(char *format, int *ret_val, t_flag *flag)
 {
     flag->width = ft_atoi(format);
     while (*format >= '0' && *format <= '9') // 맨 앞 숫자를 제외하고는 뒤에 0이 나올 수 있음
@@ -82,11 +114,11 @@ char    *put_type(char* format, va_list *ap, int* ret_val, t_flag *flag)
     else if (*format == 's')
         print_str(va_arg(*ap, char*), format, ret_val);
     else if (*format == 'p')
-        print_num((unsigned long long)va_arg(*ap, void*), format, ret_val);
+        print_num((unsigned long long)va_arg(*ap, void*), format, ret_val, flag);
     else if (*format == 'd' || *format == 'i')
-        print_num(va_arg(*ap, int), format, ret_val);
+        print_num(va_arg(*ap, int), format, ret_val, flag);
     else if (*format == 'u' || *format == 'x' || *format == 'X')
-        print_num(va_arg(*ap, unsigned int), format, ret_val);
+        print_num(va_arg(*ap, unsigned int), format, ret_val, flag);
     else if (*format == '%')
         print_char('%', format, ret_val);
 
@@ -113,7 +145,7 @@ char    *search_option(char *format, va_list *ap, int *ret_val)
         format++;
     }
     if (*format >= '1' && *format <= '9')
-        format = ft_width(format, ret_val, flag);
+        format = get_width(format, ret_val, flag);
     
     format = put_type(format, ap, ret_val, flag);
     
