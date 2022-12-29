@@ -6,12 +6,12 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 14:42:14 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/01 21:16:30 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/29 10:32:49 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen(const char *str)
 {
 	size_t	i;
 

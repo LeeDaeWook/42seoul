@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 21:08:59 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/22 18:30:04 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/29 10:32:58 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef LIBFT_H
@@ -23,7 +23,7 @@ typedef struct s_list
 
 int		ft_atoi(const char *s);
 void	*ft_memset(void*ptr, int c, size_t len);
-size_t	ft_strlen(char *str);
+size_t	ft_strlen(const char *str);
 void	ft_bzero(void*s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 int		ft_isalnum(int c);

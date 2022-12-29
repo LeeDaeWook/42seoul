@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 18:59:39 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/26 21:24:37 by daewoole         ###   ########.fr       */
+/*   Updated: 2022/12/29 14:49:13 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -21,6 +21,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (ft_strlen((char *)s) <= start)
 	{
 		str = (char *)malloc(sizeof(char));
+		if (!str)
+			return (0);
 		*str = '\0';
 		return (str);
 	}
