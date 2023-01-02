@@ -28,7 +28,7 @@ CC = gcc
 
 CFLAGS = -c -Wall -Wextra -Werror
 
-$(NAME) : $(OBJS) $(OBJS_B)
+$(NAME) : $(OBJS)
 	$(AR) $@ $^
 
 %.o: %.c
@@ -44,9 +44,7 @@ fclean : clean
 
 re : fclean all
 
-bonus : $(NAME)
-
-#bonus : $(OBJS_B)
-#	$(AR) $(NAME) $^
+bonus : 
+	make SRCS="$(SRCS) $(SRCS_B)"
 
 .PHONY : all clean fclean re bonus
