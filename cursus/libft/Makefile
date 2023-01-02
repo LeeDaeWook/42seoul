@@ -28,7 +28,7 @@ CC = gcc
 
 CFLAGS = -c -Wall -Wextra -Werror
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(OBJS_B)
 	$(AR) $@ $^
 
 %.o: %.c
@@ -44,7 +44,9 @@ fclean : clean
 
 re : fclean all
 
-bonus : $(OBJS_B)
-	$(AR) $(NAME) $^
+bonus : $(NAME)
+
+#bonus : $(OBJS_B)
+#	$(AR) $(NAME) $^
 
 .PHONY : all clean fclean re bonus

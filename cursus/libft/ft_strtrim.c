@@ -27,26 +27,18 @@ int	is_set(char c, char const *set)
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char			*str;
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	len;
+	size_t	front;
+	size_t	back;
 
-	i = 0;
-	len = ft_strlen((char *)s1);
-	while (s1[i])
-		len -= is_set(s1[i++], set);
-	str = (char *)malloc(sizeof(char) * (len + 1));
+	front = 0;
+	back = ft_strlen((char *)s1);	
+	while (s1[front] && is_set(s1[front], set))
+		front++;
+	while (s1[back - 1] && is_set(s1[back - 1], set) && back > front)
+		back--;
+	str = (char *)malloc(sizeof(char) * (back - front + 1));
 	if (!str)
 		return (0);
-	i = 0;
-	j = 0;
-	while (s1[i])
-	{
-		if (is_set(s1[i], set))
-			i++;
-		else
-			str[j++] = s1[i++];
-	}
-	str[j] = '\0';
+	ft_strlcpy(str, &s1[front], back - front + 1);
 	return (str);
 }

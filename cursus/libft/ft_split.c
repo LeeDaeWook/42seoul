@@ -36,27 +36,22 @@ int	word_count(char const *s, char c)
 	return (wordcount);
 }
 
-void	ft_strcpy(char *dest, char const *src, char c)
+void	ft_memfree(char **result, int word)
 {
-	int	i;
-
-	i = 0;
-	while (not_charset(src[i], c) == 1)
+	while (word >= 0)
 	{
-		dest[i] = src[i];
-		i++;
+		free(result[word]);
+		result[word] = 0;
+		word--;
 	}
-	dest[i] = '\0';
 }
 
-void	split(char **result, char const *s, char c)
+void	excute_ft_split(char **result, char const *s, char c, int i)
 {
-	int	i;
 	int	j;
 	int	word;
 
 	word = 0;
-	i = 0;
 	while (s[i] != '\0')
 	{
 		if (not_charset(s[i], c) == 0)
@@ -68,8 +63,11 @@ void	split(char **result, char const *s, char c)
 				j++;
 			result[word] = (char *)malloc(sizeof(char) * (j + 1));
 			if (!result[word])
+			{
+				ft_memfree(result, --word);
 				return ;
-			ft_strcpy(result[word], s + i, c);
+			}
+			ft_strlcpy(result[word], s + i, j + 1);
 			i += j;
 			word++;
 		}
@@ -86,6 +84,6 @@ char	**ft_split(char const *s, char c)
 	if (!result)
 		return (0);
 	result[word] = 0;
-	split(result, s, c);
+	excute_ft_split(result, s, c, 0);
 	return (result);
 }

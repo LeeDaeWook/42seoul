@@ -13,29 +13,21 @@
 
 char	*ft_strnstr(const char *str, const char *needle, size_t len)
 {
-	unsigned int	i;
-	unsigned int	j;
-	unsigned int	temp;
+	size_t	str_len;
+	size_t	needle_len;
 
-	i = 0;
-	j = 0;
-	if (!needle || (*str == '\0' && *needle == '\0'))
+	if (*needle == '\0')
 		return ((char *)str);
-	while (str[j] != '\0' && j < len)
+	str_len = ft_strlen(str);
+	needle_len = ft_strlen(needle);
+	if (str_len < needle_len || len < needle_len)
+		return (0);
+	while (*str && needle_len <= len)
 	{
-		if (needle[i] == str[j])
-		{
-			if (i == 0)
-				temp = j;
-			if (needle[++i] == '\0')
-				return ((char *)&str[temp]);
-		}
-		else if (i > 0)
-		{
-			j = temp;
-			i = 0;
-		}
-		j++;
+		if (ft_memcmp(str, needle, needle_len) == 0)
+			return ((char*)str);
+		str++;
+		len--;
 	}
 	return (0);
 }
