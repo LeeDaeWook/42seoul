@@ -27,7 +27,8 @@ void	ft_putnbr_base(unsigned long long nbr, int *ret_val, char *format)
 
     base = "0123456789abcdef";
 	if (*format == 'X')
-		base = uppercase(base);
+		base = "0123456789ABCDEF";
+		//base = uppercase(base);
 	base_len = 0;
 	while (*(base + base_len))
 		base_len++;
