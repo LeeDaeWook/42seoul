@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 19:28:22 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/26 21:23:46 by daewoole         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:44:52 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -26,12 +26,12 @@ int	is_set(char c, char const *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char			*str;
+	char	*str;
 	size_t	front;
 	size_t	back;
 
 	front = 0;
-	back = ft_strlen((char *)s1);	
+	back = ft_strlen((char *)s1);
 	while (s1[front] && is_set(s1[front], set))
 		front++;
 	while (s1[back - 1] && is_set(s1[back - 1], set) && back > front)

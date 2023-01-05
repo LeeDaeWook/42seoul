@@ -6,7 +6,7 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:29:01 by daewoole          #+#    #+#             */
-/*   Updated: 2022/12/26 21:27:00 by daewoole         ###   ########.fr       */
+/*   Updated: 2023/01/02 12:44:09 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -25,7 +25,7 @@ char	*ft_strnstr(const char *str, const char *needle, size_t len)
 	while (*str && needle_len <= len)
 	{
 		if (ft_memcmp(str, needle, needle_len) == 0)
-			return ((char*)str);
+			return ((char *)str);
 		str++;
 		len--;
 	}
