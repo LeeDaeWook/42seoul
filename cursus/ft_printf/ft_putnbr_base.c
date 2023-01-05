@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "ft_printf.h"
 
 char	*uppercase(char *str)
 {
