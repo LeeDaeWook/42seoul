@@ -6,7 +6,7 @@ char	*uppercase(char *str)
 	int	i;
 
 	i = 0;
-	new_base = (char*)malloc(sizeof(char) * ft_strlen(str));
+	new_base = (char*)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	while (str[i] != '\0')
 	{
 		if (str[i] >= 97 && str[i] <= 122)
@@ -15,6 +15,7 @@ char	*uppercase(char *str)
 			new_base[i] = str[i];
 		i++;
 	}
+	new_base[i] = '\0';
 	return (new_base);
 }
 

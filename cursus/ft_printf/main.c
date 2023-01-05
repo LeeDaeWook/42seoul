@@ -10,10 +10,10 @@ int main(void)
     unsigned int    un = 2147483649;
     char    num[] = "12345";
 
-    output1 = printf("printf: %X \n", 16);
+    output1 = printf("printf: %X \n", 101);
     printf("output of printf: %d\n", output1);
 
-    output2 = ft_printf("ft_printf: %X \n", 16);
+    output2 = ft_printf("ft_printf: %X \n", 101);
     printf("output of ft_printf: %d\n", output2);
 	
     /*
