@@ -6,29 +6,10 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 13:48:01 by daewoole          #+#    #+#             */
-/*   Updated: 2023/01/05 13:48:05 by daewoole         ###   ########.fr       */
+/*   Updated: 2023/01/11 07:44:04 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
-
-char	*uppercase(char *str)
-{
-	char	*new_base;
-	int	i;
-
-	i = 0;
-	new_base = (char*)malloc(sizeof(char) * (ft_strlen(str) + 1));
-	while (str[i] != '\0')
-	{
-		if (str[i] >= 97 && str[i] <= 122)
-			new_base[i] = str[i] - 32;
-		else
-			new_base[i] = str[i];
-		i++;
-	}
-	new_base[i] = '\0';
-	return (new_base);
-}
 
 void	ft_putnbr_base(unsigned long long nbr, int *ret_val, char *format)
 {
@@ -36,10 +17,9 @@ void	ft_putnbr_base(unsigned long long nbr, int *ret_val, char *format)
 	char	c;
 	char	*base;
 
-    base = "0123456789abcdef";
+	base = "0123456789abcdef";
 	if (*format == 'X')
 		base = "0123456789ABCDEF";
-		//base = uppercase(base);
 	base_len = 0;
 	while (*(base + base_len))
 		base_len++;
