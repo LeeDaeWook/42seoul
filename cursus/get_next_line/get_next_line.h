@@ -10,8 +10,7 @@ typedef struct s_node {
 typedef struct s_list {
     t_node  *head;
     t_node  *cur;
-    //t_node  *before;  
-    //t_node  *tail;
+    t_node  *before;  
 }   t_list;
 
 # include <unistd.h>
@@ -25,5 +24,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 int	    find_node(int fd, t_list *lst);
 int	    add_node(int fd, t_list *lst);
 char	*read_file(t_list *lst, char* buf);
+char    *remove_node(t_list *lst);
 
 #endif

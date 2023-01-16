@@ -1,3 +1,7 @@
+#include "get_next_line.h"
+
+//#include <stdio.h>
+
 char	*ft_strchr(const char *s, int c)
 {
 	char			*str;
@@ -19,21 +23,22 @@ char	*ft_strchr(const char *s, int c)
 char	*ft_strdup(char *src)
 {
 	int		src_len;
-	char	*cp_src;
+	char	*dest;
 
 	src_len = ft_strlen(src);
-	cp_src = malloc(sizeof(char) * src_len);
-	if (!cp_src)
+	dest = malloc(sizeof(char) * (src_len + 1));
+	if (!dest)
 		return (0);
 	while (*src)
-		*cp_src++ = *src++;
-	cp_src = cp_src - src_len;
-	return (cp_src);
+		*dest++ = *src++;
+	*dest = '\0';
+	dest = dest - src_len;
+	return (dest);
 }
 
-size_t	ft_strlen(const char *str)
+unsigned int	ft_strlen(const char *str)
 {
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
 	while (*(str + i) != '\0')
@@ -41,61 +46,24 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-size_t	ft_copy(char *dest, char *src, size_t size, size_t dest_len)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	src_len;
+	char			*str;
+	unsigned int	len;
+	unsigned int	i;
+	unsigned int	j;
 
-	src_len = 0;
-	if (size > dest_len)
-	{
-		while (*src != '\0' && (src_len + 1) < (size - dest_len))
-		{
-			*dest++ = *src++;
-			src_len++;
-		}
-		*dest = '\0';
-	}
-	while (*src != '\0')
-	{
-		src_len++;
-		src++;
-	}
-	return (src_len);
-}
-
-size_t	ft_strlcat(char*dest, const char*src, size_t size)
-{
-	unsigned int	src_len;
-	unsigned int	dest_len;
-
-	src_len = 0;
-	dest_len = 0;
-	while (*dest != '\0')
-	{
-		dest++;
-		dest_len++;
-	}
-	src_len = ft_copy(dest, (char *)src, size, dest_len);
-	if (size <= dest_len)
-		return (src_len + size);
-	return (dest_len + src_len);
-}
-
-char	*ft_strcat(char *dest, char *src)
-{
-	int	i;
-	int	j;
-
+	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (0);
 	i = 0;
 	j = 0;
-	while (dest[i] != '\0')
-		i++;
-	while (src[j] != '\0')
-	{
-		dest[i] = src[j];
-		i++;
-		j++;
-	}
-	dest[i] = '\0';
-	return (dest);
+	while (s1[i])
+		str[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		str[j++] = s2[i++];
+	str[j] = '\0';
+	return (str);
 }
