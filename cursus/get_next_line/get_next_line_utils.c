@@ -1,6 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 10:37:33 by daewoole          #+#    #+#             */
+/*   Updated: 2023/01/16 10:37:46 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "get_next_line.h"
-
-//#include <stdio.h>
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -46,7 +55,7 @@ unsigned int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char			*str;
 	unsigned int	len;
@@ -54,6 +63,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	unsigned int	j;
 
 	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	free(s1);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
