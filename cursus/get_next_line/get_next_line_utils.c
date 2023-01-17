@@ -63,7 +63,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	unsigned int	j;
 
 	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-	free(s1);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
@@ -75,5 +74,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
+	free(s1);
 	return (str);
 }
