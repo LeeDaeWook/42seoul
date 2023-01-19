@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 10:33:42 by daewoole          #+#    #+#             */
-/*   Updated: 2023/01/19 14:37:42 by daewoole         ###   ########.fr       */
+/*   Created: 2023/01/19 14:23:11 by daewoole          #+#    #+#             */
+/*   Updated: 2023/01/19 14:24:50 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -34,8 +34,6 @@ int				find_node(int fd, t_n **head, t_n **cur, t_n **before);
 int				add_node(t_n **head, t_n **cur, t_n **before);
 char			*read_file(t_n **head, t_n **cur, t_n **before);
 char			*make_str(t_n **head, t_n **cur, t_n **before);
-void			remove_node(t_n **head, t_n **cur, t_n **before);
-
-char	*ft_substr(char *s, unsigned int start, size_t len);
+char			*remove_node(t_n **head, t_n **cur, t_n **before);
 
 #endif

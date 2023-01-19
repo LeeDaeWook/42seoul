@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 10:37:33 by daewoole          #+#    #+#             */
-/*   Updated: 2023/01/19 14:14:34 by daewoole         ###   ########.fr       */
+/*   Created: 2023/01/19 14:23:48 by daewoole          #+#    #+#             */
+/*   Updated: 2023/01/19 14:24:04 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -68,7 +68,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 	{
-		// free(s1);
+		free(s1);
 		return (0);
 	}
 	i = 0;
@@ -79,11 +79,11 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
-	// free(s1);
+	free(s1);
 	return (str);
 }
 
-void	remove_node(t_n **head, t_n **cur, t_n **before)
+char	*remove_node(t_n **head, t_n **cur, t_n **before)
 {
 	t_n	*temp;
 
@@ -97,41 +97,10 @@ void	remove_node(t_n **head, t_n **cur, t_n **before)
 	{
 		*cur = (*cur)->next;
 		*head = *cur;
-		// *head = (*cur)->next;
-		// *cur = NULL;
 	}
 	else
 		(*before)->next = (*cur)->next;
 	free(temp);
 	temp = 0;
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	char	*str;
-	size_t	i;
-
-	if (!s)
-		return (0);
-	if (ft_strlen((char *)s) <= start)
-	{
-		str = (char *)malloc(sizeof(char));
-		if (!str)
-			return (0);
-		*str = '\0';
-		return (str);
-	}
-	else
-		str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) - start + 1));
-	if (!str)
-	{
-		free(s);
-		return (0);
-	}
-	i = 0;
-	while (s[start] && i < len)
-		str[i++] = s[start++];
-	str[i] = '\0';
-	free(s);
-	return (str);
+	return (0);
 }

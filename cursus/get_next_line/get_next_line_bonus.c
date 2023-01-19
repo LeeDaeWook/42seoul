@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/16 10:38:08 by daewoole          #+#    #+#             */
-/*   Updated: 2023/01/19 14:36:19 by daewoole         ###   ########.fr       */
+/*   Created: 2023/01/19 14:23:27 by daewoole          #+#    #+#             */
+/*   Updated: 2023/01/19 14:40:46 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
@@ -18,7 +18,7 @@ char	*get_next_line(int fd)
 	t_n			*before;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE < 0)
+	if (fd < 0)
 		return (0);
 	if (!find_node(fd, &head, &cur, &before))
 	{
@@ -34,7 +34,6 @@ char	*get_next_line(int fd)
 		line = ft_strdup(line);
 		remove_node(&head, &cur, &before);
 	}
-	// else
 	if (!line && cur->backup)
 		remove_node(&head, &cur, &before);
 	return (line);
@@ -93,7 +92,6 @@ char	*read_file(t_n **head, t_n **cur, t_n **before)
 {
 	int		read_size;
 	char	buf[BUFFER_SIZE + 1];
-	char	*temp;
 
 	while (!ft_strchr((*cur)->backup, '\n'))
 	{
@@ -103,10 +101,7 @@ char	*read_file(t_n **head, t_n **cur, t_n **before)
 		else if (read_size == 0 && (*cur)->backup)
 			break ;
 		buf[read_size] = '\0';
-		temp = (*cur)->backup;
 		(*cur)->backup = ft_strjoin((*cur)->backup, buf);
-		if (temp)
-			free(temp);
 		if (!(*cur)->backup)
 		{
 			remove_node(head, cur, before);
@@ -124,25 +119,12 @@ char	*make_str(t_n **head, t_n **cur, t_n **before)
 	temp = (*cur)->backup;
 	line = ft_strdup((*cur)->backup);
 	(*cur)->backup = ft_strdup(ft_strchr((*cur)->backup, '\n') + 1);
-	// if (!(*cur)->backup)
-	// {	
-	// 	remove_node(head, cur, before);
-	// 	free(line);
-	// 	return (0);
-	// }
 	free(temp);
-
-	int i;
-	i = 0;
-	while (line[i] != '\n')
-		i++;
-	line = ft_substr(line, 0, i + 1);
-
-	// temp = ft_strchr(line, '\n');
-	// if (temp && (temp - line + 1) < ft_strlen(line))
-	// *(temp + 1) = '\0';
-	// else if (temp)
-		// line = ft_strjoin(line, "\0");
+	temp = ft_strchr(line, '\n');
+	if (temp && (temp - line + 1) < ft_strlen(line))
+		*(temp + 1) = '\0';
+	else if (temp)
+		line = ft_strjoin(line, "\0");
 	if (!line)
 	{
 		remove_node(head, cur, before);
