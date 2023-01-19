@@ -16,6 +16,8 @@ char	*ft_strchr(const char *s, int c)
 	char			*str;
 	unsigned char	chr;
 
+	if (!s)
+		return (0);
 	str = (char *)s;
 	chr = (unsigned char)c;
 	while (*str != '\0')

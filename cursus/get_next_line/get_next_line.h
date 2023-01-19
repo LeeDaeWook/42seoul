@@ -38,11 +38,8 @@ unsigned int	ft_strlen(const char *str);
 char			*ft_strjoin(char *s1, char *s2);
 int				find_node(int fd, t_list *lst);
 int				add_node(int fd, t_list *lst);
-//char			*read_file(t_list *lst, char *buf);
 char			*remove_node(t_list *lst);
-//char			*make_str(t_list *lst, char *line, char *buf, char *temp);
-
-char			*make_str(t_list *lst, char *line, char *buf);
 char			*read_file(t_list *lst);
+char			*make_str(t_list *lst);
 
 #endif
