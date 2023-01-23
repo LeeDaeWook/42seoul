@@ -36,6 +36,4 @@ char			*read_file(t_n **head, t_n **cur, t_n **before);
 char			*make_str(t_n **head, t_n **cur, t_n **before);
 void			remove_node(t_n **head, t_n **cur, t_n **before);
 
-char	*ft_substr(char *s, unsigned int start, size_t len);
-
 #endif

@@ -51,6 +51,8 @@ unsigned int	ft_strlen(const char *str)
 {
 	unsigned int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (*(str + i) != '\0')
 		i++;
@@ -67,10 +69,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
-	{
-		// free(s1);
 		return (0);
-	}
 	i = 0;
 	j = 0;
 	while (s1[i])
@@ -79,7 +78,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
-	// free(s1);
 	return (str);
 }
 
@@ -97,41 +95,8 @@ void	remove_node(t_n **head, t_n **cur, t_n **before)
 	{
 		*cur = (*cur)->next;
 		*head = *cur;
-		// *head = (*cur)->next;
-		// *cur = NULL;
 	}
 	else
 		(*before)->next = (*cur)->next;
 	free(temp);
-	temp = 0;
-}
-
-char	*ft_substr(char *s, unsigned int start, size_t len)
-{
-	char	*str;
-	size_t	i;
-
-	if (!s)
-		return (0);
-	if (ft_strlen((char *)s) <= start)
-	{
-		str = (char *)malloc(sizeof(char));
-		if (!str)
-			return (0);
-		*str = '\0';
-		return (str);
-	}
-	else
-		str = (char *)malloc(sizeof(char) * (ft_strlen((char *)s) - start + 1));
-	if (!str)
-	{
-		free(s);
-		return (0);
-	}
-	i = 0;
-	while (s[start] && i < len)
-		str[i++] = s[start++];
-	str[i] = '\0';
-	free(s);
-	return (str);
 }

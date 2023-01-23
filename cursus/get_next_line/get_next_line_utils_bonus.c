@@ -51,6 +51,8 @@ unsigned int	ft_strlen(const char *str)
 {
 	unsigned int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (*(str + i) != '\0')
 		i++;
@@ -67,10 +69,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
-	{
-		free(s1);
 		return (0);
-	}
 	i = 0;
 	j = 0;
 	while (s1[i])
@@ -79,11 +78,10 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[i])
 		str[j++] = s2[i++];
 	str[j] = '\0';
-	free(s1);
 	return (str);
 }
 
-char	*remove_node(t_n **head, t_n **cur, t_n **before)
+void	remove_node(t_n **head, t_n **cur, t_n **before)
 {
 	t_n	*temp;
 
@@ -101,6 +99,4 @@ char	*remove_node(t_n **head, t_n **cur, t_n **before)
 	else
 		(*before)->next = (*cur)->next;
 	free(temp);
-	temp = 0;
-	return (0);
 }

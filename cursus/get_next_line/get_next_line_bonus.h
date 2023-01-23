@@ -34,6 +34,6 @@ int				find_node(int fd, t_n **head, t_n **cur, t_n **before);
 int				add_node(t_n **head, t_n **cur, t_n **before);
 char			*read_file(t_n **head, t_n **cur, t_n **before);
 char			*make_str(t_n **head, t_n **cur, t_n **before);
-char			*remove_node(t_n **head, t_n **cur, t_n **before);
+void			remove_node(t_n **head, t_n **cur, t_n **before);
 
 #endif
