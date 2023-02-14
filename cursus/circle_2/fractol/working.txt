@@ -1,1 +1,0 @@
-다음에 할일: rand(), srand()로 랜덤 complex number 생성하는 부분 함수안쓰고 구현하기
