@@ -33,7 +33,7 @@ int make_byte(char *c, int *bit, siginfo_t *siginfo)
     return (0);
 }
 
-void get_sig_server(int signal, siginfo_t *siginfo, void *context)
+void get_sig(int signal, siginfo_t *siginfo, void *context)
 {
     static int bit;
     static char c;
@@ -56,11 +56,11 @@ void get_sig_server(int signal, siginfo_t *siginfo, void *context)
     kill(siginfo->si_pid, SIGUSR1); // client로부터 signal을 받을 때마다 client한테 signal 전송 (ack)
 }
 
-void initializing_server(struct sigaction *sigac)
+void initializing(struct sigaction *sigac)
 {
     sigac->sa_flags = SA_SIGINFO;
     sigemptyset(&(sigac->sa_mask));
-    sigac->__sigaction_u.__sa_sigaction = get_sig_server;
+    sigac->__sigaction_u.__sa_sigaction = get_sig;
     g_ser.message = (char *)malloc(sizeof(char));
 }
 
@@ -70,7 +70,7 @@ int main()
     // siginfo_t siginfo;
 
     ft_printf("Server PID: %d\n", getpid());
-    initializing_server(&sigac);
+    initializing(&sigac);
     sigaction(SIGUSR1, &sigac, NULL);
     sigaction(SIGUSR2, &sigac, NULL);
     while (1)

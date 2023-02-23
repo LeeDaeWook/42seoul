@@ -23,7 +23,7 @@ void send_sig(int server_pid, char *message)
     }
 }
 
-void get_sig_client(int signal, siginfo_t *siginfo, void *context)
+void get_sig(int signal, siginfo_t *siginfo, void *context)
 {
     (void)context;
     (void)siginfo;
@@ -44,7 +44,7 @@ void get_sig_client(int signal, siginfo_t *siginfo, void *context)
     }
 }
 
-void initializing_client(int argc, char *argv[], struct sigaction *sigac)
+void initializing(int argc, char *argv[], struct sigaction *sigac)
 {
     if (argc != 3) // 클라이언트 실행 시 2개의 인자인 server pid와 send message가 들어오지 않았을 때의 예외처리 부분
     {
@@ -55,7 +55,7 @@ void initializing_client(int argc, char *argv[], struct sigaction *sigac)
     g_cli.message = argv[2];
     sigac->sa_flags = SA_SIGINFO;
     sigemptyset(&(sigac->sa_mask));
-    sigac->__sigaction_u.__sa_sigaction = get_sig_client;
+    sigac->__sigaction_u.__sa_sigaction = get_sig;
 }
 
 void initial_connect()
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
     struct sigaction sigac;
     // siginfo_t siginfo;
 
-    initializing_client(argc, argv, &sigac);
+    initializing(argc, argv, &sigac);
     sigaction(SIGUSR1, &sigac, NULL); // server로부터 signal을 받았다는 신호가 오면 다음 signal 전송
     sigaction(SIGUSR2, &sigac, NULL); // server가 문자열을 끝까지 다 받고 마지막에 '\0'를 받았다는 signal
     initial_connect();        // at first
