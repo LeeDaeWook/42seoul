@@ -8,7 +8,7 @@ SRCS = 	ft_atoi.c	        ft_memset.c		ft_strlcpy.c		ft_bzero.c	    \
 	ft_strstr.c		ft_isprint.c  		ft_memchr.c		ft_strdup.c         \
 	ft_strtrim.c		ft_itoa.c	   	ft_memcmp.c		ft_striteri.c  	    \
 	ft_substr.c      	ft_memcpy.c   		ft_strjoin.c		ft_tolower.c        \
-	ft_memmove.c		ft_strlcat.c  		ft_toupper.c
+	ft_memmove.c		ft_strlcat.c  		ft_toupper.c		ft_strcmp.c
 
 SRCS_B = ft_lstclear.c		ft_lstdelone.c		ft_lstiter.c		ft_lstlast.c	    \
 	 ft_lstmap.c		ft_lstnew.c		ft_lstsize.c     	ft_lstadd_back.c    \

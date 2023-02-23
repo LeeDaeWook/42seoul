@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 18:22:25 by daewoole          #+#    #+#             */
-/*   Updated: 2023/02/23 18:25:15 by daewoole         ###   ########.fr       */
+/*   Created: 2023/02/23 19:34:26 by daewoole          #+#    #+#             */
+/*   Updated: 2023/02/23 19:34:47 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
 # include <signal.h>
 # include <stdlib.h>

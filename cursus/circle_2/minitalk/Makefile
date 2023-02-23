@@ -36,17 +36,17 @@ FTPRINTFDIR = ./ft_printf
 
 FTPRINTF = $(FTPRINTFDIR)/libftprintf.a
 
-$(LIBFT) :
-	make -C $(LIBFTDIR)
-
-$(FTPRINTF) :
-	make -C $(FTPRINTFDIR)
-
 $(NAME_S) : $(OBJS_S) $(LIBFT) $(FTPRINTF)
 	$(CC) $^ -o $@
 
 $(NAME_C) : $(OBJS_C) $(LIBFT) $(FTPRINTF)
 	$(CC) $^ -o $@
+
+$(LIBFT) :
+	make -C $(LIBFTDIR)
+
+$(FTPRINTF) :
+	make -C $(FTPRINTFDIR)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@ -I $(INC)
@@ -54,14 +54,14 @@ $(NAME_C) : $(OBJS_C) $(LIBFT) $(FTPRINTF)
 all : $(NAME_S) $(NAME_C)
 
 clean :
-	$(RM) $(OBJS_S) $(OBJS_C) $(OBJS_S_BONUS) $(OBJS_C_BONUS)
+	$(RM) $(OBJS_S) $(OBJS_C) $(OBJS_S_BONUS) $(OBJS_C_BONUS) $(LIBFTDIR)/*.o $(FTPRINTFDIR)/*.o
 
 fclean : clean
-	$(RM) $(NAME_S) $(NAME_C)
+	$(RM) $(NAME_S) $(NAME_C) $(LIBFT) $(FTPRINTF)
 
 re : fclean all
 
 bonus :
-	make SRCS_S="$(SRCS_S_BONUS)" SRCS_C="$(SRCS_C_BONUS)" all
+	make SRCS_S="$(SRCS_S_BONUS)" SRCS_C="$(SRCS_C_BONUS)" INC="minitalk_bonus.h" all
 
 .PHONY : all clean fclean re bonus
