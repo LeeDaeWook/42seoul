@@ -30,12 +30,12 @@ void fill_count(t_node *node, t_deque *from, t_deque *to, int *count)
         ra_rra(node, from, count, RA);
     else if (idx > (from->size / 2))
         ra_rra(node, from, count, RRA);
-
     idx = find_location(node, to);
     if (idx <= (to->size / 2))
         rb_rrb(idx, count, RB);
     else if (idx > (to->size / 2))
         rb_rrb(idx, count, RRB);
+    rr_rrr(count);
     idx = 0;
     while (idx < TOTAL_IDX)
     {
@@ -113,19 +113,21 @@ void rb_rrb(int idx, int *count, int flag)
     }
 }
 
-void rr_rrr(t_node *node, t_deque *stack, int *count, int flag)
+void rr_rrr(int *count)
 {
-    t_node *temp;
+    if (count[RA] >= count[RB])
+        count[RR] = count[RB];
+    else if (count[RA] < count[RB])
+        count[RR] = count[RA];
+    count[RA] -= count[RR];
+    count[RB] -= count[RR];
 
-    temp = node;
-    while (temp && temp->num != stack->top->num)
-    {
-        if (flag == STACK_A)
-            count[RRA] += 1;
-        if (flag == STACK_B)
-            count[RRB] += 1;
-        temp = temp->next;
-    }
+    if (count[RRA] >= count[RRB])
+        count[RRR] = count[RRB];
+    else if (count[RRA] < count[RRB])
+        count[RRR] = count[RRA];
+    count[RRA] -= count[RRR];
+    count[RRB] -= count[RRR];
 }
 
 int find_min_instructions(int **count, int size)
@@ -158,11 +160,18 @@ void execute_instructions(int *count, t_deque *deque_a, t_deque *deque_b)
         recursion_r_rr(count, deque_b, RB);
     else if (count[RRB])
         recursion_r_rr(count, deque_b, RRB);
-    // if (count[RR])
-    // {
-    //     recursion_r_rr(count, deque_a, RR);
-    //     recursion_r_rr(count, deque_b, RR);
-    // }
+    if (count[RR])
+    {
+        recursion_r_rr(count, deque_a, RR);
+        count[RR] += 1;
+        recursion_r_rr(count, deque_b, RR);
+    }
+    else if (count[RRR])
+    {
+        recursion_r_rr(count, deque_a, RRR);
+        count[RRR] += 1;
+        recursion_r_rr(count, deque_b, RRR);
+    }
     push(deque_b, deque_a);
 }
 
@@ -171,6 +180,10 @@ void recursion_r_rr(int *count, t_deque *deque, int idx)
     if (idx == RA || idx == RB)
         rotate(deque);
     else if (idx == RRA || idx == RRB)
+        reverse_rotate(deque);
+    else if (idx == RR)
+        rotate(deque);
+    else if (idx == RRR)
         reverse_rotate(deque);
     count[idx] -= 1;
     if (count[idx] > 0)

@@ -40,6 +40,8 @@ typedef struct s_deque
 
 t_node  *add_node(void);
 void    from_a_to_b(t_deque *deque_a, t_deque *deque_b);
+void    from_b_to_a(t_deque *deque_b, t_deque *deque_a);
+
 void    is_integer(char *argv);
 void    validate_overlap_sorting(t_deque *deque, int num, int *flag);
 int     make_linkedlist(char *argv[], int stack_size, t_deque *deque);
@@ -50,7 +52,7 @@ int     find_location(t_node *node, t_deque *deque);
 int     find_idx(t_node *node, t_deque *stack);
 void    ra_rra(t_node *node, t_deque *stack, int *count, int flag);
 void    rb_rrb(int idx, int *count, int flag);
-void    rr_rrr(t_node *node, t_deque *stack, int *count, int flag);
+void    rr_rrr(int *count);
 int     find_min_instructions(int **count, int size);
 void    execute_instructions(int *count, t_deque *deque_a, t_deque *deque_b);
 void    recursion_r_rr(int *count, t_deque *deque, int idx);

@@ -42,15 +42,40 @@ void from_a_to_b(t_deque *deque_a, t_deque *deque_b)
             count = greedy(deque_a, deque_b);
             min_idx = find_min_instructions(count, deque_a->size);
             execute_instructions(count[min_idx], deque_a, deque_b);
+            // int i = 0;
+            // while (i < deque_a->size)
+            // {
+            //     ft_printf("RA : %d RB : %d RR : %d RRA : %d RRB : %d RRR : %d total: %d\n", count[i][RA], count[i][RB], count[i][RR], count[i][RRA], count[i][RRB], count[i][RRR],  count[i][TOTAL_IDX]);
+            //     i++;
+            // }
+            // ft_printf("\n");
             free_count(count, (deque_a->size + 1)); // 이 부분에서 count를 free 해줘야 함
+        }
+    }
+}
 
-            int i = 0;
-            while (i < deque_a->size)
-            {
-                ft_printf("RA : %d RB : %d RRA : %d RRB : %d total: %d\n", count[i][RA], count[i][RB], count[i][RRA], count[i][RRB], count[i][TOTAL_IDX]);
-                i++;
-            }
-            ft_printf("\n");
+void from_b_to_a(t_deque *deque_b, t_deque *deque_a)
+{
+    int **count;
+    int min_idx;
+
+    while (deque_b->size > 0)
+    {
+        if (deque_a->size < 2)
+            push(deque_a, deque_b);
+        else
+        {
+            count = greedy(deque_b, deque_a);
+            min_idx = find_min_instructions(count, deque_b->size);
+            execute_instructions(count[min_idx], deque_a, deque_b);
+            // int i = 0;
+            // while (i < deque_a->size)
+            // {
+            //     ft_printf("RA : %d RB : %d RR : %d RRA : %d RRB : %d RRR : %d total: %d\n", count[i][RA], count[i][RB], count[i][RR], count[i][RRA], count[i][RRB], count[i][RRR],  count[i][TOTAL_IDX]);
+            //     i++;
+            // }
+            // ft_printf("\n");
+            free_count(count, (deque_b->size + 1)); // 이 부분에서 count를 free 해줘야 함
         }
     }
 }

@@ -45,7 +45,13 @@ void just_test(char *argv[])
     deque_b.bottom = NULL;
 
     from_a_to_b(&deque_a, &deque_b);
+    ft_printf("---------------stack A--------------\n");
+    just_print(&deque_a, deque_a.size);
+    ft_printf("---------------stack B--------------\n");
+    just_print(&deque_b, deque_b.size);
+    // ft_printf("stack a info : %p %p %p %p %d\n", deque_a.top, deque_a.bottom, deque_a.max, deque_a.min, deque_a.size);
 
+    from_b_to_a(&deque_b, &deque_a);
     ft_printf("---------------stack A--------------\n");
     just_print(&deque_a, deque_a.size);
     ft_printf("---------------stack B--------------\n");
