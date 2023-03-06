@@ -27,14 +27,14 @@ void fill_count(t_node *node, t_deque *from, t_deque *to, int *count)
     ft_bzero((void *)count, sizeof(int) * 7);
     idx = find_idx(node, from);
     if (idx <= (from->size / 2))
-        ra_rra(node, from, count, RA);
+        r_rr_from(node, from, count, ROTATE);
     else if (idx > (from->size / 2))
-        ra_rra(node, from, count, RRA);
-    idx = find_location(node, to);
+        r_rr_from(node, from, count, REVERSE_ROTATE);
+    idx = find_location_b(node, to);
     if (idx <= (to->size / 2))
-        rb_rrb(idx, count, RB);
+        r_rr_to(idx, to, count, ROTATE);
     else if (idx > (to->size / 2))
-        rb_rrb(idx, count, RRB);
+        r_rr_to(idx, to, count, REVERSE_ROTATE);
     rr_rrr(count);
     idx = 0;
     while (idx < TOTAL_IDX)
@@ -44,7 +44,7 @@ void fill_count(t_node *node, t_deque *from, t_deque *to, int *count)
     }
 }
 
-int find_location(t_node *node, t_deque *deque)
+int find_location_b(t_node *node, t_deque *deque)
 {
     int idx;
     t_node *temp;
@@ -53,7 +53,7 @@ int find_location(t_node *node, t_deque *deque)
     temp = deque->top;
     if (node->num > deque->max->num || node->num < deque->min->num)
         idx = find_idx(deque->max, deque);
-    else
+    else if (deque->stack == STACK_B)
     {
         while (idx < deque->size)
         {
@@ -62,6 +62,31 @@ int find_location(t_node *node, t_deque *deque)
             idx++;
             temp = temp->next;
         }
+    }
+    return (idx);
+}
+
+int find_location_a(t_node *node, t_deque *deque)
+{
+    int idx;
+    t_node *temp;
+
+    idx = 1;
+    temp = deque->top;
+    if (node->num < deque->min->num)
+        idx = find_idx(deque->min, deque);
+    else if (node->num > deque->max->num)
+        idx = find_idx(deque->max, deque) + 1;
+    else
+    {
+        while (idx < deque->size) // segfault 원인
+        {
+            if (node->num > temp->num && node->num < temp->next->num)
+                return (idx);
+            idx++;
+            temp = temp->next;
+        }
+        idx = 0;
     }
     return (idx);
 }
@@ -81,35 +106,52 @@ int find_idx(t_node *node, t_deque *stack)
     return (idx);
 }
 
-void ra_rra(t_node *node, t_deque *stack, int *count, int flag)
+void r_rr_from(t_node *node, t_deque *stack, int *count, int flag)
 {
     t_node *temp;
 
     temp = node;
     while (temp && temp->num != stack->top->num)
     {
-        if (flag == RA)
+        if (flag == ROTATE)
         {
-            count[RA] += 1;
+            if (stack->stack == STACK_A)
+                count[RA] += 1;
+            else if (stack->stack == STACK_B)
+                count[RB] += 1;
             temp = temp->pre;
         }
-        else if (flag == RRA)
+        else if (flag == REVERSE_ROTATE)
         {
-            count[RRA] += 1;
+            if (stack->stack == STACK_A)
+                count[RRA] += 1;
+            else if (stack->stack == STACK_B)
+                count[RRB] += 1;
             temp = temp->next;
         }
     }
 }
 
-void rb_rrb(int idx, int *count, int flag)
+void r_rr_to(int idx, t_deque *stack, int *count, int flag)
 {
-    while (idx > 0)
+    while ((flag == ROTATE && idx > 0) || (flag == REVERSE_ROTATE && idx < stack->size))
     {
-        if (flag == RB)
-            count[RB] += 1;
-        else if (flag == RRB)
-            count[RRB] += 1;
-        idx--;
+        if (flag == ROTATE)
+        {
+            if (stack->stack == STACK_A)
+                count[RA] += 1;
+            else if (stack->stack == STACK_B)
+                count[RB] += 1;
+            idx--;
+        }
+        else if (flag == REVERSE_ROTATE)
+        {
+            if (stack->stack == STACK_A)
+                count[RRA] += 1;
+            else if (stack->stack == STACK_B)
+                count[RRB] += 1;
+            idx++;
+        }
     }
 }
 
@@ -150,72 +192,59 @@ int find_min_instructions(int **count, int size)
     return (min_idx);
 }
 
-void execute_instructions(int *count, t_deque *deque_a, t_deque *deque_b)
+void execute_instructions(int *count, t_deque *from, t_deque *to)
 {
-    if (count[RA])
-        recursion_r_rr(count, deque_a, RA);
-    else if (count[RRA])
-        recursion_r_rr(count, deque_a, RRA);
-    if (count[RB])
-        recursion_r_rr(count, deque_b, RB);
-    else if (count[RRB])
-        recursion_r_rr(count, deque_b, RRB);
+    if (count[RA] && from->stack == STACK_A)
+        recursion_r_rr(count, from, RA);
+    else if (count[RA] && to->stack == STACK_A)
+        recursion_r_rr(count, to, RA);
+    if (count[RRA] && from->stack == STACK_A)
+        recursion_r_rr(count, from, RRA);
+    else if (count[RRA] && to->stack == STACK_A)
+        recursion_r_rr(count, to, RRA);
+    if (count[RB] && from->stack == STACK_B)
+        recursion_r_rr(count, from, RB);
+    else if (count[RB] && to->stack == STACK_B)
+        recursion_r_rr(count, to, RB);
+    if (count[RRB] && from->stack == STACK_B)
+        recursion_r_rr(count, from, RRB);
+    else if (count[RRB] && to->stack == STACK_B)
+        recursion_r_rr(count, to, RRB);
     if (count[RR])
-    {
-        recursion_r_rr(count, deque_a, RR);
-        count[RR] += 1;
-        recursion_r_rr(count, deque_b, RR);
-    }
+        recursion_rr_rrr(count, from, to, RR);
     else if (count[RRR])
-    {
-        recursion_r_rr(count, deque_a, RRR);
-        count[RRR] += 1;
-        recursion_r_rr(count, deque_b, RRR);
-    }
-    push(deque_b, deque_a);
+        recursion_rr_rrr(count, from, to, RRR);
+    push(to, from);
 }
 
 void recursion_r_rr(int *count, t_deque *deque, int idx)
 {
+    if (!count[idx])
+        return;
     if (idx == RA || idx == RB)
         rotate(deque);
     else if (idx == RRA || idx == RRB)
         reverse_rotate(deque);
-    else if (idx == RR)
-        rotate(deque);
-    else if (idx == RRR)
-        reverse_rotate(deque);
+    print_instructions(idx, NULL);
     count[idx] -= 1;
     if (count[idx] > 0)
         recursion_r_rr(count, deque, idx);
 }
 
-// void r(t_node *node, t_deque *stack, int *count, int flag)
-// {
-//     t_node *temp;
-
-//     temp = node;
-//     while (temp && temp->num != stack->top->num)
-//     {
-//         if (flag == STACK_A)
-//             count[RA] += 1;
-//         else if (flag == STACK_B)
-//             count[RB] += 1;
-//         temp = temp->pre;
-//     }
-// }
-
-// void rr(t_node *node, t_deque *stack, int *count, int flag)
-// {
-//     t_node *temp;
-
-//     temp = node;
-//     while (temp && temp->num != stack->top->num)
-//     {
-//         if (flag == STACK_A)
-//             count[RRA] += 1;
-//         if (flag == STACK_B)
-//             count[RRB] += 1;
-//         temp = temp->next;
-//     }
-// }
+void recursion_rr_rrr(int *count, t_deque *from, t_deque *to, int idx)
+{
+    if (idx == RR)
+    {
+        rotate(from);
+        rotate(to);
+    }
+    else if (idx == RRR)
+    {
+        reverse_rotate(from);
+        reverse_rotate(to);
+    }
+    print_instructions(idx, NULL);
+    count[idx] -= 1;
+    if (count[idx] > 0)
+        recursion_rr_rrr(count, from, to, idx);
+}

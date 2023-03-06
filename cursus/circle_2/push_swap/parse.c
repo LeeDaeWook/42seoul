@@ -39,15 +39,11 @@ void validate_overlap_sorting(t_deque *deque, int num, int *flag)
     }
 }
 
-int make_linkedlist(char *argv[], int stack_size, t_deque *deque)
+void make_linkedlist(char *argv[], t_deque *deque, int flag, t_node *temp)
 {
-    t_node  *temp;
-    char    **arguments;
-    int     flag;
+    char **arguments;
 
-    temp = deque->top;
     argv++;
-    flag = 0;
     while (*argv)
     {
         arguments = ft_split(*argv, ' ');
@@ -63,12 +59,11 @@ int make_linkedlist(char *argv[], int stack_size, t_deque *deque)
                 temp = temp->next;
             }
             arguments++;
-            stack_size++;
+            (deque->size)++;
         }
         argv++;
     }
-    if (flag == 0)
+    if (!flag)
         exit(EXIT_FAILURE);
     deque->bottom = temp;
-    return (stack_size);
 }
