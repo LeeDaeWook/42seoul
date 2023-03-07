@@ -15,24 +15,10 @@ t_node *add_node(void)
     return (new_node);
 }
 
-void free_count(int **count, int size)
-{
-    int i;
-
-    i = 0;
-    while (i < size)
-    {
-        free(count[i]);
-        i++;
-    }
-    free(count);
-}
-
-void push_swap1(t_deque *from, t_deque *to)
+void push_swap_first(t_deque *from, t_deque *to)
 {
     int **count;
     int min_idx;
-    int idx;
 
     while (from->size > 0)
     {
@@ -54,34 +40,8 @@ void push_swap1(t_deque *from, t_deque *to)
     }
 }
 
-void push_swap2(t_deque *from, t_deque *to)
-{
-    int *count;
-    int idx;
-
-    while (from->size > 0)
-    {
-        count = (int *)malloc(sizeof(int) * 7);
-        ft_bzero((void *)count, sizeof(int) * 7);
-        idx = find_location_a(from->top, to);
-        if (idx <= (to->size / 2))
-        {
-            count[RA] = idx;
-            recursion_r_rr(count, to, RA);
-        }
-        else if (idx > (to->size / 2))
-        {
-            count[RRA] = to->size - idx;
-            recursion_r_rr(count, to, RRA);
-        }
-        push(to, from);
-        free(count);
-    }
-}
-
 void last_three(t_deque *stack)
 {
-    static int flag;
     t_node *temp;
 
     temp = find_min_node(stack);
@@ -98,27 +58,6 @@ void last_three(t_deque *stack)
         }
         temp = temp->next;
     }
-}
-
-t_node *find_min_node(t_deque *stack)
-{
-    t_node *temp;
-    t_node *node;
-    int min_idx;
-    int min_num;
-
-    temp = stack->top;
-    min_num = INTEGER_MAX;
-    while (temp)
-    {
-        if (temp->num < min_num)
-        {
-            min_num = temp->num;
-            node = temp;
-        }
-        temp = temp->next;
-    }
-    return (node);
 }
 
 void final_sort(t_deque *stack, t_node *node)
@@ -153,9 +92,9 @@ int main(int argc, char *argv[])
     }
     ft_bzero((void*)&deque_b, sizeof(t_deque));
     deque_b.stack = STACK_B;
-    push_swap1(&deque_a, &deque_b);
-    push_swap2(&deque_b, &deque_a);
+    push_swap_first(&deque_a, &deque_b);
+    push_swap_second(&deque_b, &deque_a);
     final_sort(&deque_a, deque_a.min);
-    just_print(&deque_a, deque_a.size);
+    // just_print(&deque_a, deque_a.size);
     return (EXIT_SUCCESS);
 }

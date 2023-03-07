@@ -44,45 +44,45 @@ typedef struct s_deque
 } t_deque;
 
 t_node  *add_node(void);
-
-void    push_swap1(t_deque *from, t_deque *to);
-void    push_swap2(t_deque *from, t_deque *to);
+void    push_swap_first(t_deque *from, t_deque *to);
 void    last_three(t_deque *stack);
-t_node  *find_min_node(t_deque *stack);
 void    final_sort(t_deque *stack, t_node *node);
 
+void    push_swap_second(t_deque *from, t_deque *to);
+
+void    free_count(int **count, int size);
+
+long long   ft_atoi_ll(const char *s);
 void    is_integer(char *argv);
 void    validate_overlap_sorting(t_deque *deque, int num, int *flag);
-// void    make_linkedlist(char *argv[], t_deque *deque);
 void    make_linkedlist(char *argv[], t_deque *deque, int flag, t_node *temp);
-int     **greedy(t_deque *from, t_deque *to);
-void    fill_count(t_node *node, t_deque *from, t_deque *to, int *count);
+
 int     find_location_b(t_node *node, t_deque *deque);
 int     find_location_a(t_node *node, t_deque *deque);
-
 int     find_idx(t_node *node, t_deque *stack);
+int     find_min_instructions(int **count, int size);
+t_node  *find_min_node(t_deque *stack);
+
+void    fill_count(t_node *node, t_deque *from, t_deque *to, int *count);
 void    r_rr_from(t_node *node, t_deque *stack, int *count, int flag);
 void    r_rr_to(int idx, t_deque *stack, int *count, int flag);
 void    rr_rrr(int *count);
 
-int     find_min_instructions(int **count, int size);
+int     **greedy(t_deque *from, t_deque *to);
 void    execute_instructions(int *count, t_deque *from, t_deque *to);
-void    execute_instructions2(int *count, t_deque *from, t_deque *to);
-
 void    recursion_r_rr(int *count, t_deque *deque, int idx);
-void    recursion_r_rr2(int *count, t_deque *deque, int idx);
 void    recursion_rr_rrr(int *count, t_deque *from, t_deque *to, int idx);
 
 void    just_print(t_deque *deque, int stack_size);
-void    just_test(char *argv[]);
 
-long long   ft_atoi_ll(const char *s);
-
-void    swap(t_deque *deque);
 void    push(t_deque *to, t_deque *from);
 void    compare_max_min(t_deque *to);
+
 void    rotate(t_deque *deque);
+
 void    reverse_rotate(t_deque *deque);
+
+void    swap(t_deque *deque);
 
 void    print_instructions(int flag, t_deque *stack);
 

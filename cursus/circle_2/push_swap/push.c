@@ -1,18 +1,5 @@
 #include "push_swap.h"
 
-void compare_max_min(t_deque *to)
-{
-    if (!to->max && !to->min)
-    {
-        to->max = to->top;
-        to->min = to->top;
-    }
-    else if (to->max && to->top->num > to->max->num)
-        to->max = to->top;
-    else if (to->min && to->top->num < to->min->num)
-        to->min = to->top;
-}
-
 void push(t_deque *to, t_deque *from)
 {
     t_node *temp;
@@ -36,4 +23,17 @@ void push(t_deque *to, t_deque *from)
         ft_bzero((void*)from, sizeof(t_deque));
     compare_max_min(to);
     print_instructions(PUSH, to);
+}
+
+void compare_max_min(t_deque *to)
+{
+    if (!to->max && !to->min)
+    {
+        to->max = to->top;
+        to->min = to->top;
+    }
+    else if (to->max && to->top->num > to->max->num)
+        to->max = to->top;
+    else if (to->min && to->top->num < to->min->num)
+        to->min = to->top;
 }
