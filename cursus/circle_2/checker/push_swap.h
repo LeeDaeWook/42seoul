@@ -3,8 +3,8 @@
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "libft/libft.h"
-#include "ft_printf/ft_printf.h"
+#include "../libft/libft.h"
+#include "../ft_printf/ft_printf.h"
 
 #define STANDARD_ERROR 2
 #define INTEGER_MAX 2147483647

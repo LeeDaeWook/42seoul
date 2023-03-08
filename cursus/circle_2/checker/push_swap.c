@@ -97,6 +97,6 @@ int main(int argc, char *argv[])
     push_swap_first(&deque_a, &deque_b);
     push_swap_second(&deque_b, &deque_a);
     final_sort(&deque_a, deque_a.min);
-    just_print(&deque_a, deque_a.size);
+    // just_print(&deque_a, deque_a.size);
     return (EXIT_SUCCESS);
 }

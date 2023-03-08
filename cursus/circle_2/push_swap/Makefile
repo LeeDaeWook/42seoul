@@ -2,7 +2,8 @@ NAME = push_swap
 
 SRCS =	push_swap.c		push_swap_second.c	parse.c		push.c\
 		rotate.c		reverse_rotate.c	swap.c		print.c\
-		greedy.c		fill_count.c		find.c		free.c
+		greedy.c		fill_count.c		find.c		free.c\
+		utils.c 		just.c
 
 # SRCS_BONUS
 
