@@ -13,5 +13,6 @@ void reverse_rotate(t_deque *deque, int idx)
     deque->bottom->next = NULL;
     deque->top = original_bottom;
     deque->top->pre = NULL;
-    print_instructions(idx, NULL);
+    if (idx != RR && idx != RRR)
+        print_instructions(idx, NULL);
 }

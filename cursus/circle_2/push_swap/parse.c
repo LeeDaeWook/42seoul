@@ -31,16 +31,16 @@ void is_integer(char *argv)
     int i;
 
     i = 0;
-    while (argv[i]) // step1. 인자가 숫자인지 확인
+    while (argv[i])
     {
-        if (!ft_isdigit(argv[i]) && argv[i] != '-') // 숫자가 아니면
+        if (!ft_isdigit(argv[i]) && argv[i] != '-')
         {
             write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
             exit(EXIT_FAILURE);
         }
         i++;
     }
-    if (ft_atoi_ll(argv) > INTEGER_MAX || ft_atoi_ll(argv) < INTEGER_MIN) // step2. 인자가 int 범위내에 있는지 확인
+    if (ft_atoi_ll(argv) > INTEGER_MAX || ft_atoi_ll(argv) < INTEGER_MIN)
     {
         write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
         exit(EXIT_FAILURE);

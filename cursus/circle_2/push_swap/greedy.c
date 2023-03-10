@@ -25,14 +25,14 @@ void execute_instructions(int *count, t_deque *from, t_deque *to)
         recursion_r_rr(count, from, RA);
     else if (count[RA] && to->stack == STACK_A)
         recursion_r_rr(count, to, RA);
-    if (count[RRA] && from->stack == STACK_A)
-        recursion_r_rr(count, from, RRA);
-    else if (count[RRA] && to->stack == STACK_A)
-        recursion_r_rr(count, to, RRA);
     if (count[RB] && from->stack == STACK_B)
         recursion_r_rr(count, from, RB);
     else if (count[RB] && to->stack == STACK_B)
         recursion_r_rr(count, to, RB);
+    if (count[RRA] && from->stack == STACK_A)
+        recursion_r_rr(count, from, RRA);
+    else if (count[RRA] && to->stack == STACK_A)
+        recursion_r_rr(count, to, RRA);
     if (count[RRB] && from->stack == STACK_B)
         recursion_r_rr(count, from, RRB);
     else if (count[RRB] && to->stack == STACK_B)
@@ -69,40 +69,8 @@ void recursion_rr_rrr(int *count, t_deque *from, t_deque *to, int idx)
         reverse_rotate(from, idx);
         reverse_rotate(to, idx);
     }
+    print_instructions(idx, NULL);
     count[idx] -= 1;
     if (count[idx] > 0)
         recursion_rr_rrr(count, from, to, idx);
 }
-
-
-// void recursion_r_rr(int *count, t_deque *deque, int idx)
-// {
-//     if (!count[idx])
-//         return;
-//     if (idx == RA || idx == RB)
-//         rotate(deque);
-//     else if (idx == RRA || idx == RRB)
-//         reverse_rotate(deque);
-//     print_instructions(idx, NULL);
-//     count[idx] -= 1;
-//     if (count[idx] > 0)
-//         recursion_r_rr(count, deque, idx);
-// }
-
-// void recursion_rr_rrr(int *count, t_deque *from, t_deque *to, int idx)
-// {
-//     if (idx == RR)
-//     {
-//         rotate(from);
-//         rotate(to);
-//     }
-//     else if (idx == RRR)
-//     {
-//         reverse_rotate(from);
-//         reverse_rotate(to);
-//     }
-//     print_instructions(idx, NULL);
-//     count[idx] -= 1;
-//     if (count[idx] > 0)
-//         recursion_rr_rrr(count, from, to, idx);
-// }

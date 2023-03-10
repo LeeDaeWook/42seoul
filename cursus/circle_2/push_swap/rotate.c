@@ -13,6 +13,7 @@ void rotate(t_deque *deque, int idx)
     deque->bottom = original_top;
     deque->bottom->pre = original_bottom;
     deque->bottom->next = NULL;
-    print_instructions(idx, NULL);
+    if (idx != RR && idx != RRR)
+        print_instructions(idx, NULL);
 }
 

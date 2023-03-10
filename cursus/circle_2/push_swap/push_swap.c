@@ -29,7 +29,7 @@ void push_swap_first(t_deque *from, t_deque *to)
             count = greedy(from, to);
             min_idx = find_min_instructions(count, from->size);
             execute_instructions(count[min_idx], from, to);
-            free_count(count, (from->size + 1)); // 이 부분에서 count를 free 해줘야 함
+            free_count(count, (from->size + 1));
         }
         if (from->stack == STACK_A && from->size == 3)
         {
@@ -97,6 +97,5 @@ int main(int argc, char *argv[])
     push_swap_first(&deque_a, &deque_b);
     push_swap_second(&deque_b, &deque_a);
     final_sort(&deque_a, deque_a.min);
-    just_print(&deque_a, deque_a.size);
     return (EXIT_SUCCESS);
 }
