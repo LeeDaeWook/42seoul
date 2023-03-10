@@ -9,7 +9,8 @@
 /*   Updated: 2023/01/19 14:36:19 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+// #include "get_next_line.h"
+#include "../checker.h"
 
 char	*get_next_line(int fd)
 {
@@ -22,7 +23,7 @@ char	*get_next_line(int fd)
 		return (0);
 	if (!find_node(fd, &head, &cur, &before))
 	{
-		if (!add_node(&head, &cur, &before))
+		if (!adding(&head, &cur, &before))
 			return (0);
 	}
 	cur->fd = fd;
@@ -59,7 +60,7 @@ int	find_node(int fd, t_n **head, t_n **cur, t_n **before)
 	return (0);
 }
 
-int	add_node(t_n **head, t_n **cur, t_n **before)
+int	add_node_gnl(t_n **head, t_n **cur, t_n **before)
 {
 	t_n	*new;
 	t_n	*temp;
@@ -103,7 +104,7 @@ char	*read_file(t_n **head, t_n **cur, t_n **before)
 			break ;
 		buf[read_size] = '\0';
 		temp = (*cur)->backup;
-		(*cur)->backup = ft_strjoin((*cur)->backup, buf);
+		(*cur)->backup = ft_strjoin_gnl((*cur)->backup, buf);
 		free(temp);
 		if (!(*cur)->backup)
 		{

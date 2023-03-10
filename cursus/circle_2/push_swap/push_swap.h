@@ -86,6 +86,4 @@ void    print_instructions(int flag, t_deque *stack);
 
 void    under_three(t_deque *stack);
 
-void    just_print(t_deque *deque, int stack_size);
-
 #endif

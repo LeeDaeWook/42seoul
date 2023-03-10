@@ -1,21 +1,26 @@
 NAME = push_swap
 
-SRCS =	push_swap.c		push_swap_second.c	parse.c		push.c\
-		rotate.c		reverse_rotate.c	swap.c		print.c\
-		greedy.c		fill_count.c		find.c		free.c\
-		utils.c 		just.c
+NAME_BONUS = checker
 
-# SRCS_BONUS
+SRCS =	push_swap.c			push_swap_second.c	parse.c				push.c\
+		rotate.c			reverse_rotate.c	swap.c				print.c\
+		greedy.c			fill_count.c		find.c				free.c\
+		utils.c
+
+SRCS_BONUS =	checker.c			get_next_line/get_next_line.c	get_next_line/get_next_line_utils.c\
+				parse.c				checker_utils.c					
 
 OBJS = $(SRCS:.c=.o)
 
-# OBJS_BONUS = $(SRCS_S_BONUS:.c=.o)
+OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 
 AR = ar -rcs
 
 RM = rm -f
 
 INC = push_swap.h
+
+INC_BONUS = checker.h
 
 CC = gcc
 
@@ -30,6 +35,9 @@ FTPRINTFDIR = ./ft_printf
 FTPRINTF = $(FTPRINTFDIR)/libftprintf.a
 
 $(NAME) : $(OBJS) $(LIBFT) $(FTPRINTF)
+	$(CC) $^ -o $@
+
+$(NAME_BONUS) : $(OBJS_BONUS) $(LIBFT) $(FTPRINTF)
 	$(CC) $^ -o $@
 
 $(LIBFT) :
@@ -51,7 +59,7 @@ fclean : clean
 
 re : fclean all
 
-# bonus :
-	# make SRCS_S="$(SRCS_BONUS)" INC="push_swap_bonus.h" all
+bonus : $(NAME_BONUS)
+	make INC="$(INC_BONUS)" all
 
 .PHONY : all clean fclean re bonus

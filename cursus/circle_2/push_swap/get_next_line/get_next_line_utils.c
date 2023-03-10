@@ -9,7 +9,8 @@
 /*   Updated: 2023/01/19 14:14:34 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "get_next_line.h"
+// #include "get_next_line.h"
+#include "../checker.h"
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -36,7 +37,7 @@ char	*ft_strdup(char *src)
 	int		src_len;
 	char	*dest;
 
-	src_len = ft_strlen(src);
+	src_len = ft_strlen_gnl(src);
 	dest = malloc(sizeof(char) * (src_len + 1));
 	if (!dest)
 		return (0);
@@ -47,7 +48,7 @@ char	*ft_strdup(char *src)
 	return (dest);
 }
 
-unsigned int	ft_strlen(const char *str)
+unsigned int	ft_strlen_gnl(const char *str)
 {
 	unsigned int	i;
 
@@ -59,14 +60,14 @@ unsigned int	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	char			*str;
 	unsigned int	len;
 	unsigned int	i;
 	unsigned int	j;
 
-	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
+	len = ft_strlen_gnl((char *)s1) + ft_strlen_gnl((char *)s2);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)
 		return (0);
