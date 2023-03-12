@@ -1,31 +1,5 @@
 #include "push_swap.h"
 
-long long ft_atoi_ll(const char *s)
-{
-	long long		result;
-	int		sign;
-	char	*str;
-
-	str = (char *)s;
-	result = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-' || *str == '+')
-	{
-		if (*str == '-')
-			sign *= -1;
-		str++;
-	}
-	while (*str >= '0' && *str <= '9')
-	{
-		result = result * 10 + (*str - '0');
-		str++;
-	}
-	result *= sign;
-	return (result);
-}
-
 void is_integer(char *argv)
 {
     int i;
@@ -34,62 +8,73 @@ void is_integer(char *argv)
     while (argv[i])
     {
         if (!ft_isdigit(argv[i]) && argv[i] != '-')
-        {
-            write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
-            exit(EXIT_FAILURE);
-        }
+            print_error();
         i++;
     }
     if (ft_atoi_ll(argv) > INTEGER_MAX || ft_atoi_ll(argv) < INTEGER_MIN)
-    {
-        write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
-        exit(EXIT_FAILURE);
-    }
+        print_error();
 }
 
-void validate_overlap_sorting(t_deque *deque, int num, int *flag)
+void validate_overlap_sorting(t_deque *stack, int num, int *flag)
 {
     t_node *temp;
 
-    temp = deque->top;
+    temp = stack->top;
     while (temp->next)
     {
         if (temp->num == num)
-        {
-            write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
-            exit(EXIT_FAILURE);
-        }
+            print_error();
         if (temp->num > num)
             *flag = 1;
         temp = temp->next;
     }
 }
 
-void make_linkedlist(char *argv[], t_deque *deque, int flag, t_node *temp)
+t_node *add_node(void)
+{
+    t_node *new_node;
+
+    new_node = (t_node *)malloc(sizeof(t_node));
+    if (!new_node)
+        print_error();
+    new_node->pre = NULL;
+    new_node->next = NULL;
+    return (new_node);
+}
+
+t_node *create_node(t_node *temp)
+{
+    temp->next = add_node();
+    temp->next->pre = temp;
+    temp = temp->next;
+    return (temp);
+}
+
+void make_linkedlist(char *argv[], t_deque *stack, int flag, t_node *temp)
 {
     char **arguments;
+    char **arguments_temp;
 
-    argv++;
     while (*argv)
     {
         arguments = ft_split(*argv, ' ');
+        if (!*arguments)
+            print_error();
+        arguments_temp = arguments;
         while (*arguments)
         {
             is_integer(*arguments);
             temp->num = ft_atoi(*arguments);
-            validate_overlap_sorting(deque, temp->num, &flag);
+            validate_overlap_sorting(stack, temp->num, &flag);
             if (*(arguments + 1) || *(argv + 1))
-            {
-                temp->next = add_node();
-                temp->next->pre = temp;
-                temp = temp->next;
-            }
+                temp = create_node(temp);
             arguments++;
-            (deque->size)++;
+            (stack->size)++;
         }
+        double_free(arguments_temp);
         argv++;
     }
     if (!flag)
         exit(EXIT_FAILURE);
-    deque->bottom = temp;
+    stack->bottom = temp;
 }

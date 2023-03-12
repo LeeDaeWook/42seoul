@@ -44,17 +44,17 @@ void execute_instructions(int *count, t_deque *from, t_deque *to)
     push(to, from);
 }
 
-void recursion_r_rr(int *count, t_deque *deque, int idx)
+void recursion_r_rr(int *count, t_deque *stack, int idx)
 {
     if (!count[idx])
         return;
     if (idx == RA || idx == RB)
-        rotate(deque, idx);
+        rotate(stack, idx);
     else if (idx == RRA || idx == RRB)
-        reverse_rotate(deque, idx);
+        reverse_rotate(stack, idx);
     count[idx] -= 1;
     if (count[idx] > 0)
-        recursion_r_rr(count, deque, idx);
+        recursion_r_rr(count, stack, idx);
 }
 
 void recursion_rr_rrr(int *count, t_deque *from, t_deque *to, int idx)

@@ -1,15 +1,33 @@
 #include "checker.h"
 
+void    double_instructions(t_deque *deque_a, t_deque *deque_b, int flag)
+{
+    if (flag == RR)
+    {
+        rotate_checker(deque_a);
+        rotate_checker(deque_b);
+    }
+    else if (flag == RRR)
+    {
+        reverse_rotate_checker(deque_a);
+        reverse_rotate_checker(deque_b);
+    }
+}
+
 void ft_instructions(char *instruction, t_deque *deque_a, t_deque *deque_b)
 {
     if (!ft_strcmp(instruction, "ra\n"))
         rotate_checker(deque_a);
     else if (!ft_strcmp(instruction, "rb\n"))
         rotate_checker(deque_b);
+    else if (!ft_strcmp(instruction, "rr\n"))
+        double_instructions(deque_a, deque_b, RR);
     else if (!ft_strcmp(instruction, "rra\n"))
         reverse_rotate_checker(deque_a);
     else if (!ft_strcmp(instruction, "rrb\n"))
         reverse_rotate_checker(deque_b);
+    else if (!ft_strcmp(instruction, "rrr\n"))
+        double_instructions(deque_a, deque_b, RRR);
     else if (!ft_strcmp(instruction, "pa\n"))
         push_checker(deque_a, deque_b);
     else if (!ft_strcmp(instruction, "pb\n"))
@@ -24,13 +42,10 @@ void init(char *argv[], t_deque *deque_a, t_deque *deque_b)
 {
     ft_bzero((void *)deque_a, sizeof(t_deque));
     deque_a->top = add_node();
-    make_linkedlist(argv, deque_a, 0, deque_a->top);
+    make_linkedlist(++argv, deque_a, 0, deque_a->top);
     deque_a->stack = STACK_A;
     if (!deque_a->size)
-    {
-        write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
-        exit(EXIT_FAILURE);
-    }
+        print_error();
     ft_bzero((void *)deque_b, sizeof(t_deque));
     deque_b->stack = STACK_B;
 }
@@ -53,7 +68,7 @@ int main(int argc, char *argv[])
 {
     t_deque deque_a;
     t_deque deque_b;
-    char    *instruction;
+    char *instruction;
 
     (void)argc;
     init(argv, &deque_a, &deque_b);
@@ -63,10 +78,12 @@ int main(int argc, char *argv[])
         if (!instruction)
             break;
         ft_instructions(instruction, &deque_a, &deque_b);
+        free(instruction);
     }
     if (validate_sort(&deque_a))
         ft_printf("OK\n");
     else
         ft_printf("KO\n");
+    free_linked_list(&deque_a);
     return (EXIT_SUCCESS);
 }

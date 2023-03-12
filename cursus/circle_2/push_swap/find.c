@@ -1,17 +1,17 @@
 #include "push_swap.h"
 
-int find_location_b(t_node *node, t_deque *deque)
+int find_location_b(t_node *node, t_deque *stack)
 {
     int idx;
     t_node *temp;
 
     idx = 1;
-    temp = deque->top;
-    if (node->num > deque->max->num || node->num < deque->min->num)
-        idx = find_idx(deque->max, deque);
-    else if (deque->stack == STACK_B)
+    temp = stack->top;
+    if (node->num > stack->max->num || node->num < stack->min->num)
+        idx = find_idx(stack->max, stack);
+    else if (stack->stack == STACK_B)
     {
-        while (idx < deque->size)
+        while (idx < stack->size)
         {
             if (node->num < temp->num && node->num > temp->next->num)
                 break;
@@ -22,20 +22,20 @@ int find_location_b(t_node *node, t_deque *deque)
     return (idx);
 }
 
-int find_location_a(t_node *node, t_deque *deque)
+int find_location_a(t_node *node, t_deque *stack)
 {
     int idx;
     t_node *temp;
 
     idx = 1;
-    temp = deque->top;
-    if (node->num < deque->min->num)
-        idx = find_idx(deque->min, deque);
-    else if (node->num > deque->max->num)
-        idx = find_idx(deque->max, deque) + 1;
+    temp = stack->top;
+    if (node->num < stack->min->num)
+        idx = find_idx(stack->min, stack);
+    else if (node->num > stack->max->num)
+        idx = find_idx(stack->max, stack) + 1;
     else
     {
-        while (idx < deque->size)
+        while (idx < stack->size)
         {
             if (node->num > temp->num && node->num < temp->next->num)
                 return (idx);

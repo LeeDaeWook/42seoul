@@ -5,10 +5,11 @@ NAME_BONUS = checker
 SRCS =	push_swap.c			push_swap_second.c	parse.c				push.c\
 		rotate.c			reverse_rotate.c	swap.c				print.c\
 		greedy.c			fill_count.c		find.c				free.c\
-		utils.c
+		ft_atoi_ll.c
 
 SRCS_BONUS =	checker.c			get_next_line/get_next_line.c	get_next_line/get_next_line_utils.c\
-				parse.c				checker_utils.c					
+				parse.c				checker_utils.c					free.c\
+				ft_atoi_ll.c		print.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -52,14 +53,13 @@ $(FTPRINTF) :
 all : $(NAME)
 
 clean :
-	$(RM) $(OBJS) $(LIBFTDIR)/*.o $(FTPRINTFDIR)/*.o
+	$(RM) $(OBJS) $(OBJS_BONUS) $(LIBFTDIR)/*.o $(FTPRINTFDIR)/*.o
 
 fclean : clean
-	$(RM) $(NAME) $(LIBFT) $(FTPRINTF)
+	$(RM) $(NAME) $(NAME_BONUS) $(LIBFT) $(FTPRINTF)
 
 re : fclean all
 
 bonus : $(NAME_BONUS)
-	make INC="$(INC_BONUS)" all
 
 .PHONY : all clean fclean re bonus

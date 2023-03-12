@@ -1,20 +1,5 @@
 #include "push_swap.h"
 
-t_node *add_node(void)
-{
-    t_node *new_node;
-
-    new_node = (t_node *)malloc(sizeof(t_node));
-    if (!new_node)
-    {
-        write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
-        exit(EXIT_FAILURE);
-    }
-    new_node->pre = NULL;
-    new_node->next = NULL;
-    return (new_node);
-}
-
 void push_swap_first(t_deque *from, t_deque *to)
 {
     int **count;
@@ -74,6 +59,12 @@ void final_sort(t_deque *stack, t_node *node)
     }
 }
 
+void under_three(t_deque *stack)
+{
+    last_three(stack);
+    exit(EXIT_SUCCESS);
+}
+
 int main(int argc, char *argv[])
 {
     t_deque deque_a;
@@ -83,19 +74,17 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     ft_bzero((void *)&deque_a, sizeof(t_deque));
     deque_a.top = add_node();
-    make_linkedlist(argv, &deque_a, 0, deque_a.top);
+    make_linkedlist(++argv, &deque_a, 0, deque_a.top);
     if (deque_a.size <= 3)
         under_three(&deque_a);
     deque_a.stack = STACK_A;
     if (!deque_a.size)
-    {
-        write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
-        exit(EXIT_FAILURE);
-    }
+        print_error();
     ft_bzero((void *)&deque_b, sizeof(t_deque));
     deque_b.stack = STACK_B;
     push_swap_first(&deque_a, &deque_b);
     push_swap_second(&deque_b, &deque_a);
     final_sort(&deque_a, deque_a.min);
+    free_linked_list(&deque_a);
     return (EXIT_SUCCESS);
 }

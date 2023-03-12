@@ -43,7 +43,6 @@ typedef struct s_deque
     int stack;
 } t_deque;
 
-t_node  *add_node(void);
 void    push_swap_first(t_deque *from, t_deque *to);
 void    last_three(t_deque *stack);
 void    final_sort(t_deque *stack, t_node *node);
@@ -51,14 +50,16 @@ void    final_sort(t_deque *stack, t_node *node);
 void    push_swap_second(t_deque *from, t_deque *to);
 
 void    free_count(int **count, int size);
+void    double_free(char **str);
+void    free_linked_list(t_deque *stack);
 
-long long   ft_atoi_ll(const char *s);
 void    is_integer(char *argv);
-void    validate_overlap_sorting(t_deque *deque, int num, int *flag);
-void    make_linkedlist(char *argv[], t_deque *deque, int flag, t_node *temp);
+void    validate_overlap_sorting(t_deque *stack, int num, int *flag);
+t_node  *add_node(void);
+void    make_linkedlist(char *argv[], t_deque *stack, int flag, t_node *temp);
 
-int     find_location_b(t_node *node, t_deque *deque);
-int     find_location_a(t_node *node, t_deque *deque);
+int     find_location_b(t_node *node, t_deque *stack);
+int     find_location_a(t_node *node, t_deque *stack);
 int     find_idx(t_node *node, t_deque *stack);
 int     find_min_instructions(int **count, int size);
 t_node  *find_min_node(t_deque *stack);
@@ -70,20 +71,23 @@ void    rr_rrr(int *count);
 
 int     **greedy(t_deque *from, t_deque *to);
 void    execute_instructions(int *count, t_deque *from, t_deque *to);
-void    recursion_r_rr(int *count, t_deque *deque, int idx);
+void    recursion_r_rr(int *count, t_deque *stack, int idx);
 void    recursion_rr_rrr(int *count, t_deque *from, t_deque *to, int idx);
 
 void    push(t_deque *to, t_deque *from);
 void    compare_max_min(t_deque *to);
 
-void    rotate(t_deque *deque, int idx);
+void    rotate(t_deque *stack, int idx);
 
-void    reverse_rotate(t_deque *deque, int idx);
+void    reverse_rotate(t_deque *stack, int idx);
 
-void    swap(t_deque *deque);
+void    swap(t_deque *stack);
 
 void    print_instructions(int flag, t_deque *stack);
 
 void    under_three(t_deque *stack);
+void    print_error(void);
+
+long long   ft_atoi_ll(const char *s);
 
 #endif

@@ -23,3 +23,9 @@ void print_instructions(int flag, t_deque *stack)
     else if (!stack && flag == RRR)
         ft_printf("rrr\n");
 }
+
+void print_error(void)
+{
+    write(STANDARD_ERROR, "Error\n", ft_strlen("Error\n"));
+    exit(EXIT_FAILURE);
+}

@@ -19,19 +19,19 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-typedef struct s_n {
+typedef struct s_node {
 	int				fd;
 	char			*backup;
-	struct s_n	*next;
+	struct s_node	*next;
 }	t_n;
 
 char			*get_next_line(int fd);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(char *src);
-unsigned int	ft_strlen_gnl(const char *str);
-char			*ft_strjoin_gnl(char *s1, char *s2);
+unsigned int	ft_strlen(const char *str);
+char			*ft_strjoin(char *s1, char *s2);
 int				find_node(int fd, t_n **head, t_n **cur, t_n **before);
-int				adding(t_n **head, t_n **cur, t_n **before);
+int				add_node(t_n **head, t_n **cur, t_n **before);
 char			*read_file(t_n **head, t_n **cur, t_n **before);
 char			*make_str(t_n **head, t_n **cur, t_n **before);
 void			remove_node(t_n **head, t_n **cur, t_n **before);

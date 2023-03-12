@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 #include "libft.h"
 
-int	not_charset(char c, char charset)
+int not_charset(char c, char charset)
 {
 	if (c == charset)
 		return (0);
@@ -20,10 +20,10 @@ int	not_charset(char c, char charset)
 	return (1);
 }
 
-int	word_count(char const *s, char c)
+int word_count(char const *s, char c)
 {
-	int	i;
-	int	wordcount;
+	int i;
+	int wordcount;
 
 	i = 0;
 	wordcount = 0;
@@ -36,7 +36,7 @@ int	word_count(char const *s, char c)
 	return (wordcount);
 }
 
-void	ft_memfree(char **result, int word)
+void ft_memfree(char **result, int word)
 {
 	while (word >= 0)
 	{
@@ -46,10 +46,10 @@ void	ft_memfree(char **result, int word)
 	}
 }
 
-void	excute_ft_split(char **result, char const *s, char c, int i)
+void excute_ft_split(char **result, char const *s, char c, int i)
 {
-	int	j;
-	int	word;
+	int j;
+	int word;
 
 	word = 0;
 	while (s[i] != '\0')
@@ -65,7 +65,7 @@ void	excute_ft_split(char **result, char const *s, char c, int i)
 			if (!result[word])
 			{
 				ft_memfree(result, --word);
-				return ;
+				return;
 			}
 			ft_strlcpy(result[word], s + i, j + 1);
 			i += j;
@@ -74,10 +74,10 @@ void	excute_ft_split(char **result, char const *s, char c, int i)
 	}
 }
 
-char	**ft_split(char const *s, char c)
+char **ft_split(char const *s, char c)
 {
-	char	**result;
-	int		word;
+	char **result;
+	int word;
 
 	word = word_count(s, c);
 	result = (char **)malloc(sizeof(char *) * (word + 1));
