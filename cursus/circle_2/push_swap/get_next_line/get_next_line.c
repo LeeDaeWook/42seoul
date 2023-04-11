@@ -6,10 +6,10 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:38:08 by daewoole          #+#    #+#             */
-/*   Updated: 2023/01/19 14:36:19 by daewoole         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:32:48 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-// #include "get_next_line.h"
+
 #include "../checker.h"
 
 char	*get_next_line(int fd)

@@ -6,10 +6,10 @@
 /*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 10:37:33 by daewoole          #+#    #+#             */
-/*   Updated: 2023/01/19 14:14:34 by daewoole         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:39:53 by daewoole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-// #include "get_next_line.h"
+
 #include "../checker.h"
 
 char	*ft_strchr(const char *s, int c)
@@ -49,7 +49,6 @@ char	*ft_strdup(char *src)
 }
 
 size_t	ft_strlen(const char *str)
-// unsigned int	ft_strlen(const char *str)
 {
 	unsigned int	i;
 
@@ -62,12 +61,11 @@ size_t	ft_strlen(const char *str)
 }
 
 char	*ft_strjoin(const char *s1, const char *s2)
-// char	*ft_strjoin(char *s1, char *s2)
 {
 	char			*str;
-	size_t	len;
-	size_t	i;
-	size_t	j;
+	size_t			len;
+	size_t			i;
+	size_t			j;
 
 	len = ft_strlen((char *)s1) + ft_strlen((char *)s2);
 	str = (char *)malloc(sizeof(char) * (len + 1));

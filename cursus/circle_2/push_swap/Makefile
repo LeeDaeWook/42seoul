@@ -9,7 +9,7 @@ SRCS =	push_swap.c			push_swap_second.c	parse.c				push.c\
 
 SRCS_BONUS =	checker.c			get_next_line/get_next_line.c	get_next_line/get_next_line_utils.c\
 				parse.c				checker_utils.c					free.c\
-				ft_atoi_ll.c		print.c
+				ft_atoi_ll.c		print.c							checker_validate.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -53,7 +53,8 @@ $(FTPRINTF) :
 all : $(NAME)
 
 clean :
-	$(RM) $(OBJS) $(OBJS_BONUS) $(LIBFTDIR)/*.o $(FTPRINTFDIR)/*.o
+	$(RM) $(OBJS) $(OBJS_BONUS) $(LIBFTDIR)/*.o $(FTPRINTFDIR)/*.o \
+		$(FTPRINTFDIR)/$(LIBFTDIR)/*.o
 
 fclean : clean
 	$(RM) $(NAME) $(NAME_BONUS) $(LIBFT) $(FTPRINTF)
