@@ -19,12 +19,10 @@ unsigned char	*ft_check(unsigned char *s1, unsigned char *s2)
 int	ft_strcmp(char *s1, char *s2)
 {
 	int				i;
-	int				flag;
 	unsigned char	*un_s1;
 	unsigned char	*un_s2;
 
 	i = 0;
-	flag = 0;
 	un_s1 = (unsigned char *) s1;
 	un_s2 = (unsigned char *) s2;
 	while (*(ft_check(un_s1, un_s2) + i) != '\0')

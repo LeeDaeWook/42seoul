@@ -1,64 +1,14 @@
 #include "philosopher.h"
 
-int	print_error(char *error_message, int ret_val)
-{
-	printf("%s\n", error_message);
-	return (ret_val);
-}
-
-int	set_arg(int argc, char *argv[], t_arg *args)
-{
-	memset(args, 0, sizeof(t_arg));
-	args->num_of_philo = ft_atoi(argv[1]);
-	args->time_to_die = ft_atoi(argv[2]);
-	args->time_to_eat = ft_atoi(argv[3]);
-	args->time_to_sleep = ft_atoi(argv[4]);
-	if (args->num_of_philo <= 0 || args->time_to_die < 0 \
-	|| args->time_to_eat < 0 || args->time_to_sleep < 0)
-		return (1);
-	if (argc == 6)
-	{
-		args->must_eat = ft_atoi(argv[5]);
-		if (args->must_eat <= 0)
-			return (1);
-	}
-	args->start_time = get_time();
-	args->last_eat_time = args->start_time;
-	if (args->start_time == -1)
-		return (1);
-	args->forks = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t) * args->num_of_philo);
-	return (0);
-}
-
-int	set_philo(t_philo **philo, int num_of_philo, t_arg *args)
-{
-	int	i;
-
-	*philo = (t_philo *)malloc(sizeof(t_philo) * num_of_philo);
-	if (!philo)
-		return (1);
-	i = 0;
-	while (i < num_of_philo)
-	{
-		(*philo)[i].args = args;
-		(*philo)[i].id = i + 1;
-		(*philo)[i].left = i + 1;
-		(*philo)[i].right = (i + 1) % num_of_philo + 1;
-		(*philo)[i].eat_times = 0;
-		i++;
-	}
-	return (0);
-}
-
 void	*philosopher(void *philo) // 철학자들이 할 일을 수행하는 함수
 {	
 	t_philo	*philosopher;
 
 	philosopher = (t_philo*)philo;
-	while (!philosopher->args->is_died)
+	while (!philosopher->args->is_finished)
 	{
 		eating(philosopher);
-		if (philosopher->eat_times == philosopher->args->must_eat)
+		if (philosopher->args->must_eat && philosopher->eat_times == philosopher->args->must_eat)
 			(philosopher->args->num_of_finished)++;
 		sleeping(philosopher);
 		thinking(philosopher);
@@ -66,37 +16,64 @@ void	*philosopher(void *philo) // 철학자들이 할 일을 수행하는 함수
 	return (NULL);
 }
 
-void	start_thread(t_philo *philo, int num_of_philo)
+void	eating(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
-	while (i < num_of_philo)
+	if (philo->id % 2)
+		pthread_mutex_lock(&(philo->args->forks[philo->left]));
+	else
+		pthread_mutex_lock(&(philo->args->forks[philo->right]));
+	print_state(philo, "has taken a fork");
+	if (philo->args->num_of_philo > 1)
 	{
-		pthread_create(&(philo[i].thread), NULL, philosopher, (void*)(philo + i));
-		i++;
+		if (philo->id % 2)
+			pthread_mutex_lock(&(philo->args->forks[philo->right]));
+		else
+			pthread_mutex_lock(&(philo->args->forks[philo->left]));
+		print_state(philo, "has taken a fork");
+		print_state(philo, "is eating");
+		usleep(philo->args->time_to_eat * 1000);
+		philo->eat_times++;
+		pthread_mutex_unlock(&(philo->args->forks[philo->right]));
 	}
-	is_died(philo);
-	i = 0;
-	while (i < num_of_philo)
-		pthread_join((philo[i++]).thread, NULL);
+	pthread_mutex_unlock(&(philo->args->forks[philo->left]));
 }
 
-int	main(int argc, char *argv[])
+void	sleeping(t_philo *philo)
 {
-	t_arg			args;
-	t_philo			*philo;
+	if (philo->args->is_finished)
+		return ;
+	print_state(philo, "is sleeping");
+	usleep(philo->args->time_to_sleep * 1000);
+}
 
-	if (argc != 5 && argc != 6)
-		return (print_error("Error : Argument count", 1));
+void	thinking(t_philo *philo)
+{
+	if (philo->args->is_finished)
+		return ;
+	print_state(philo, "is thinking");
+}
 
-	if (set_arg(argc, argv, &args))
-		return (print_error("Error : Argument setting", 1));
+void	is_finished(t_philo *philo)
+{
+	long long	now;
+	int		i;
 
-	if (set_philo(&philo, args.num_of_philo, &args))
-		return (print_error("Error : Memory allocation failed", 1));
+	while (!philo->args->is_finished)
+	{
+		i = 0;
+		while (i < philo->args->num_of_philo)
+		{
+			now = get_time();
+			if ((now - philo[i].last_eat_time) >= philo->args->time_to_die)
+			{
+				philo->args->is_finished = 1;
+				print_state(philo, "died");
+				break ;
+			}
+			i++;
 
-	start_thread(philo, args.num_of_philo);
-
-	return (0);
+		}
+		if (philo->args->num_of_finished == philo->args->num_of_philo)
+			philo->args->is_finished = 1;
+	}
 }
