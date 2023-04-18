@@ -13,7 +13,10 @@ int	main(int argc, char *argv[])
 
 	philo = set_philo(args.num_of_philo, &args);
 	if (!philo)
+	{
+		free(args.forks);
 		return (print_error("Error : Memory allocation failed", 1));
+	}
 
 	thread(philo, args.num_of_philo);
 

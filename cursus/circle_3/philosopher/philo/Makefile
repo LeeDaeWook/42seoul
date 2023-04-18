@@ -1,4 +1,4 @@
-NAME = philosopher
+NAME = philo
 
 SRCS = 	$(wildcard ./*.c)
 

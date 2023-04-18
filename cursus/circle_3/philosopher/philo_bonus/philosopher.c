@@ -18,24 +18,18 @@ void	*philosopher(void *philo) // 철학자들이 할 일을 수행하는 함수
 
 void	eating(t_philo *philo)
 {
-	if (philo->id % 2)
-		pthread_mutex_lock(&(philo->args->forks[philo->left]));
-	else
-		pthread_mutex_lock(&(philo->args->forks[philo->right]));
+	sem_wait(philo->args->forks);
 	print_state(philo, "has taken a fork");
 	if (philo->args->num_of_philo > 1)
 	{
-		if (philo->id % 2)
-			pthread_mutex_lock(&(philo->args->forks[philo->right]));
-		else
-			pthread_mutex_lock(&(philo->args->forks[philo->left]));
+		sem_wait(philo->args->forks);
 		print_state(philo, "has taken a fork");
 		print_state(philo, "is eating");
 		usleep(philo->args->time_to_eat * 1000);
 		philo->eat_times++;
-		pthread_mutex_unlock(&(philo->args->forks[philo->right]));
+		sem_post(philo->args->forks);
 	}
-	pthread_mutex_unlock(&(philo->args->forks[philo->left]));
+	sem_post(philo->args->forks);
 }
 
 void	sleeping(t_philo *philo)
@@ -56,7 +50,7 @@ void	thinking(t_philo *philo)
 void	is_finished(t_philo *philo)
 {
 	long long	now;
-	int		i;
+	int			i;
 
 	while (!philo->args->is_finished)
 	{
@@ -66,8 +60,9 @@ void	is_finished(t_philo *philo)
 			now = get_time();
 			if ((now - philo[i].last_eat_time) >= philo->args->time_to_die)
 			{
-				philo->args->is_finished = 1;
-				print_state(philo, "died");
+				// philo->args->is_finished = 1;
+				kill();
+				print_state(philo + i, "died");
 				break ;
 			}
 			i++;
