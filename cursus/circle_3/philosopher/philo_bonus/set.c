@@ -20,6 +20,8 @@ int	set_arg(int argc, char *argv[], t_arg *args)
 	if (args->start_time == -1)
 		return (1);
 	args->forks = (sem_t*)malloc(sizeof(sem_t) * args->num_of_philo);
+	if (pthread_mutex_init(&(args->print), NULL))
+		return (1);
 	if (!args->forks)
 		return (1);
 	return (0);
@@ -36,9 +38,9 @@ t_philo	*set_philo(int num_of_philo, t_arg *args)
 	i = 0;
 	while (i < num_of_philo)
 	{
+		memset(&philo[i], 0, sizeof(t_philo));
 		philo[i].args = args;
 		philo[i].id = i + 1;
-		philo[i].eat_times = 0;
 		i++;
 	}
 	return (philo);

@@ -2,8 +2,8 @@
 
 int	main(int argc, char *argv[])
 {
-	t_arg			args;
-	t_philo			*philo;
+	t_arg	args;
+	t_philo	*philo;
 
 	if (argc != 5 && argc != 6)
 		return (print_error("Error : Only 4 or 5 argument required", 1));

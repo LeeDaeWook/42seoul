@@ -9,8 +9,8 @@
 # include <stdlib.h>
 # include <string.h>
 
-# define false 0
-# define true 1
+# define FALSE 0
+# define TRUE 1
 
 typedef struct s_arg
 {
@@ -46,9 +46,11 @@ void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
 void		is_finished(t_philo *philo);
 int			print_error(char *error_message, int ret_val);
+int			init_mutex(t_arg *args);
 int			set_arg(int argc, char *argv[], t_arg *args);
 t_philo		*set_philo(int num_of_philo, t_arg *args);
 void		*philosopher(void *philo);
+void		destroy_mutex(t_philo *philo);
 void		thread(t_philo *philo, int num_of_philo);
 
 #endif

@@ -1,5 +1,21 @@
 #include "philosopher.h"
 
+int	init_mutex(t_arg *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < args->num_of_philo)
+	{
+		if (pthread_mutex_init((args->forks + i), NULL))
+			return (1);
+		i++;
+	}
+	if (pthread_mutex_init(&(args->print), NULL))
+		return (1);
+	return (0);
+}
+
 int	set_arg(int argc, char *argv[], t_arg *args)
 {
 	memset(args, 0, sizeof(t_arg));
@@ -20,6 +36,8 @@ int	set_arg(int argc, char *argv[], t_arg *args)
 	if (args->start_time == -1)
 		return (1);
 	args->forks = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t) * args->num_of_philo);
+	if (init_mutex(args))
+		return (1);
 	if (!args->forks)
 		return (1);
 	return (0);
