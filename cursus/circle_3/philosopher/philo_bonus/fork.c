@@ -12,7 +12,7 @@ void	fork_process(t_philo *philo, int num_of_philo)
 		philo[i].last_eat_time = get_time();
 		if (pid < 0) // fork fail일 때 모든 프로세스를 종료시키는 것이 맞는가?
 		{
-			print_error("fork failed", 1);
+			print_error("Error : fork failed", 1);
 			kill_process(philo);
 			exit(EXIT_FAILURE);
 		}
@@ -23,6 +23,7 @@ void	fork_process(t_philo *philo, int num_of_philo)
 		i++;
 	}
 	is_finished(philo); // child process한테 신호를 보내줘야 함
+	clear_semaphore(philo);
 	free(philo);
 }
 

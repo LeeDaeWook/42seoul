@@ -3,6 +3,7 @@
 
 # include <unistd.h>
 # include <sys/time.h>
+# include <sys/wait.h>
 # include <pthread.h>
 # include <stdio.h>
 # include <errno.h>
@@ -26,8 +27,9 @@ typedef struct s_arg
 	int				must_eat;
 	long long		start_time;
 	int				num_of_finished;
-	pthread_mutex_t	print;
 	sem_t			*forks;
+	sem_t			*done;
+	sem_t			*print;
 }	t_arg;
 
 typedef struct s_philo
@@ -49,12 +51,14 @@ void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
 int			print_error(char *error_message, int ret_val);
+int			validate_arg(int argc, t_arg *args);
 int			set_arg(int argc, char *argv[], t_arg *args);
 t_philo		*set_philo(int num_of_philo, t_arg *args);
-void		philosopher(t_philo *philo);
+int			philosopher(t_philo *philo);
 void		*monitor_thread(void *philo);
 void		fork_process(t_philo *philo, int num_of_philo);
 void		kill_process(t_philo *philo);
 void		is_finished(t_philo *philo);
+void		clear_semaphore(t_philo *philo);
 
 #endif

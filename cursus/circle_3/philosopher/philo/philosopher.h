@@ -47,6 +47,7 @@ void		thinking(t_philo *philo);
 void		is_finished(t_philo *philo);
 int			print_error(char *error_message, int ret_val);
 int			init_mutex(t_arg *args);
+int			validate_arg(int argc, t_arg *args);
 int			set_arg(int argc, char *argv[], t_arg *args);
 t_philo		*set_philo(int num_of_philo, t_arg *args);
 void		*philosopher(void *philo);

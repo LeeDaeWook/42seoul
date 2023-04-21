@@ -13,6 +13,30 @@ void	destroy_mutex(t_philo *philo)
 	pthread_mutex_destroy(&(philo->args->print));
 }
 
+void	is_finished(t_philo *philo)
+{
+	long long	now;
+	int		i;
+
+	while (!philo->args->is_finished)
+	{
+		i = 0;
+		while (i < philo->args->num_of_philo)
+		{
+			now = get_time();
+			if ((now - philo[i].last_eat_time) >= philo->args->time_to_die)
+			{
+				print_state(philo + i, "died");
+				philo->args->is_finished = 1;
+				break ;
+			}
+			i++;
+		}
+		if (philo->args->num_of_finished == philo->args->num_of_philo)
+			philo->args->is_finished = 1;
+	}
+}
+
 void	thread(t_philo *philo, int num_of_philo)
 {
 	int	i;

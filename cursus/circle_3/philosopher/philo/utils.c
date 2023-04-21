@@ -5,8 +5,7 @@ long long	get_time()
 	struct timeval	tv;
 	
 	if (gettimeofday(&tv, NULL))
-		// return (print_error("Error : get time failed", -1));
-		return (-1);
+		return (print_error("Error : get time failed", -1));
 	
 	return ((tv.tv_sec + (double)tv.tv_usec / 1000000) * 1000);
 }
@@ -25,7 +24,8 @@ void	print_state(t_philo *philo, char *state)
 	if (now != -1)
 	{
 		pthread_mutex_lock(&(philo->args->print));
-		printf("%lldms %zd %s\n", now - philo->args->start_time, philo->id, state);
+		if (!philo->args->is_finished || !ft_strcmp(state, "died"))
+			printf("%lldms %zd %s\n", now - philo->args->start_time, philo->id, state);
 		if (!ft_strcmp(state, "is eating"))
 			philo->last_eat_time = now;
 		pthread_mutex_unlock(&(philo->args->print));

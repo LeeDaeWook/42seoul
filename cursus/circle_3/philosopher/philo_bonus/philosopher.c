@@ -8,43 +8,50 @@ void	*monitor_thread(void *philo)
 	philosopher = (t_philo*)philo;
 	while (!philosopher->is_died && !philosopher->is_done_eating)
 	{
+		sem_wait(philosopher->args->done);
+		sem_wait(philosopher->args->print);
 		now = get_time();
 		if ((now - philosopher->last_eat_time) >= philosopher->args->time_to_die)
 		{
+			sem_wait(philosopher->args->print);
 			philosopher->is_died = 1;
-			// print_state(philosopher, "died");
 			break ;
 		}
 		if (philosopher->args->must_eat && philosopher->eat_times == philosopher->args->must_eat)
 		{
 			philosopher->is_done_eating = 1;
+			sem_post(philosopher->args->done);
 			break ;
 		}
+		sem_post(philosopher->args->print);
+		sem_post(philosopher->args->done);
 	}
 	return (NULL);
 }
 
-void	philosopher(t_philo *philo) // 철학자들이 할 일을 수행하는 함수
-{	
+int	philosopher(t_philo *philo) // 철학자들이 할 일을 수행하는 함수
+{
 	pthread_t	thread;
 
 	pthread_create(&thread, NULL, monitor_thread, philo);
 	while (!philo->is_died && !philo->is_done_eating)
 	{
 		eating(philo);
-		if (philo->args->must_eat && philo->eat_times == philo->args->must_eat)
-			(philo->args->num_of_finished)++;
 		sleeping(philo);
 		thinking(philo);
 	}
 	pthread_join(thread, NULL);
 	if (philo->is_died)
 	{
-		print_state(philo, "died");
+		printf("%lldms %zd died\n", get_time() - philo->args->start_time, philo->id);
 		exit(IS_DIED);
 	}
 	else if (philo->is_done_eating)
+	{
+		// printf("Done eating\n");
 		exit(IS_DONE_EATING);
+	}
+	return (0);
 }
 
 void	eating(t_philo *philo)

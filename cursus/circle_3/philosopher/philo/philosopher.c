@@ -40,40 +40,13 @@ void	eating(t_philo *philo)
 
 void	sleeping(t_philo *philo)
 {
-	if (philo->args->is_finished)
-		return ;
 	print_state(philo, "is sleeping");
 	usleep(philo->args->time_to_sleep * 1000);
 }
 
 void	thinking(t_philo *philo)
 {
-	if (philo->args->is_finished)
-		return ;
 	print_state(philo, "is thinking");
 }
 
-void	is_finished(t_philo *philo)
-{
-	long long	now;
-	int		i;
 
-	while (!philo->args->is_finished)
-	{
-		i = 0;
-		while (i < philo->args->num_of_philo)
-		{
-			now = get_time();
-			if ((now - philo[i].last_eat_time) >= philo->args->time_to_die)
-			{
-				philo->args->is_finished = 1;
-				print_state(philo + i, "died");
-				break ;
-			}
-			i++;
-
-		}
-		if (philo->args->num_of_finished == philo->args->num_of_philo)
-			philo->args->is_finished = 1;
-	}
-}
