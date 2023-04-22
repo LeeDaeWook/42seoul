@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fork.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/22 18:01:51 by daewoole          #+#    #+#             */
+/*   Updated: 2023/04/22 18:01:53 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
 
 void	fork_process(t_philo *philo, int num_of_philo)
@@ -10,19 +22,19 @@ void	fork_process(t_philo *philo, int num_of_philo)
 	{
 		pid = fork();
 		philo[i].last_eat_time = get_time();
-		if (pid < 0) // fork fail일 때 모든 프로세스를 종료시키는 것이 맞는가?
+		if (pid < 0)
 		{
 			print_error("Error : fork failed", 1);
 			kill_process(philo);
 			exit(EXIT_FAILURE);
 		}
-		else if (!pid) // fork 함수의 반환값은 부모 프로세스에서는 child 프로세스의 pid, 자식 프로세스에서는 0이 반환된다.
+		else if (!pid)
 			philosopher(philo + i);
 		else if (pid)
 			philo[i].pid = pid;
 		i++;
 	}
-	is_finished(philo); // child process한테 신호를 보내줘야 함
+	is_finished(philo);
 	clear_semaphore(philo->args);
 	free(philo);
 }
@@ -62,7 +74,7 @@ void	is_finished(t_philo *philo)
 			{
 				(philo->args->num_of_finished)++;
 				if (philo->args->num_of_finished == philo->args->num_of_philo)
-					return ;
+					printf("All philosophers have eaten enough\n");
 			}
 		}
 	}

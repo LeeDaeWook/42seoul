@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   thread.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/22 18:01:31 by daewoole          #+#    #+#             */
+/*   Updated: 2023/04/22 18:01:32 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
 
 void	destroy_mutex(t_philo *philo)
@@ -26,14 +38,17 @@ void	is_finished(t_philo *philo)
 			now = get_time();
 			if ((now - philo[i].last_eat_time) >= philo->args->time_to_die)
 			{
-				print_state(philo + i, "died");
 				philo->args->is_finished = 1;
+				print_state(philo + i, "died");
 				break ;
 			}
 			i++;
 		}
 		if (philo->args->num_of_finished == philo->args->num_of_philo)
+		{
 			philo->args->is_finished = 1;
+			printf("All philosophers have eaten enough\n");
+		}
 	}
 }
 

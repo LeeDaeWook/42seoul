@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/22 18:02:19 by daewoole          #+#    #+#             */
+/*   Updated: 2023/04/22 18:02:21 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
 
 void	*monitor_thread(void *philo)
@@ -5,31 +17,29 @@ void	*monitor_thread(void *philo)
 	long long	now;
 	t_philo		*philosopher;
 
-	philosopher = (t_philo*)philo;
+	philosopher = (t_philo *)philo;
 	while (!philosopher->is_died && !philosopher->is_done_eating)
 	{
 		sem_wait(philosopher->args->done);
 		sem_wait(philosopher->args->print);
 		now = get_time();
-		if ((now - philosopher->last_eat_time) >= philosopher->args->time_to_die)
+		if ((now - philosopher->last_eat_time) >= \
+		philosopher->args->time_to_die)
 		{
-			sem_wait(philosopher->args->print);
 			philosopher->is_died = 1;
+			sem_wait(philosopher->args->print);
 			break ;
 		}
-		if (philosopher->args->must_eat && philosopher->eat_times == philosopher->args->must_eat)
-		{
+		if (philosopher->args->must_eat && \
+		philosopher->eat_times == philosopher->args->must_eat)
 			philosopher->is_done_eating = 1;
-			sem_post(philosopher->args->done);
-			break ;
-		}
 		sem_post(philosopher->args->print);
 		sem_post(philosopher->args->done);
 	}
 	return (NULL);
 }
 
-int	philosopher(t_philo *philo) // 철학자들이 할 일을 수행하는 함수
+int	philosopher(t_philo *philo)
 {
 	pthread_t	thread;
 
@@ -43,7 +53,8 @@ int	philosopher(t_philo *philo) // 철학자들이 할 일을 수행하는 함�
 	pthread_join(thread, NULL);
 	if (philo->is_died)
 	{
-		printf("%lldms %zd died\n", get_time() - philo->args->start_time, philo->id);
+		printf("%lldms %zd died\n", get_time() - \
+		philo->args->start_time, philo->id);
 		exit(IS_DIED);
 	}
 	else if (philo->is_done_eating)
@@ -53,6 +64,8 @@ int	philosopher(t_philo *philo) // 철학자들이 할 일을 수행하는 함�
 
 void	eating(t_philo *philo)
 {
+	if (philo->is_died || philo->is_done_eating)
+		return ;
 	sem_wait(philo->args->forks);
 	print_state(philo, "has taken a fork");
 	if (philo->args->num_of_philo > 1)

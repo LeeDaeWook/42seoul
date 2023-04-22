@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/22 18:02:24 by daewoole          #+#    #+#             */
+/*   Updated: 2023/04/22 18:02:26 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
@@ -6,7 +18,6 @@
 # include <sys/wait.h>
 # include <pthread.h>
 # include <stdio.h>
-# include <errno.h>
 # include <stdlib.h>
 # include <string.h>
 # include <signal.h>
@@ -45,7 +56,7 @@ typedef struct s_philo
 
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *s);
-long long	get_time();
+long long	get_time(void);
 void		print_state(t_philo *philo, char *state);
 void		custom_usleep(long long call_time, long long wait_time);
 void		eating(t_philo *philo);

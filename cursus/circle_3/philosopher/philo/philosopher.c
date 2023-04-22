@@ -1,15 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/22 18:01:09 by daewoole          #+#    #+#             */
+/*   Updated: 2023/04/22 18:01:10 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
 
-void	*philosopher(void *philo) // 철학자들이 할 일을 수행하는 함수
+void	*philosopher(void *philo)
 {	
 	t_philo	*philosopher;
 
-	philosopher = (t_philo*)philo;
+	philosopher = (t_philo *)philo;
 	while (!philosopher->args->is_finished)
 	{
 		eating(philosopher);
-		if (philosopher->args->must_eat && philosopher->eat_times == philosopher->args->must_eat)
+		if (philosopher->args->must_eat && \
+		philosopher->eat_times == philosopher->args->must_eat)
+		{
 			(philosopher->args->num_of_finished)++;
+			break ;
+		}
 		sleeping(philosopher);
 		thinking(philosopher);
 	}
@@ -48,5 +64,3 @@ void	thinking(t_philo *philo)
 {
 	print_state(philo, "is thinking");
 }
-
-

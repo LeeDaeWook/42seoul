@@ -1,6 +1,6 @@
 NAME = philo
 
-SRCS = 	$(wildcard ./*.c)
+SRCS = 	ft_atoi.c ft_strcmp.c main.c philosopher.c set.c thread.c utils.c 
 
 OBJS = $(SRCS:.c=.o)
 
@@ -8,7 +8,7 @@ RM = rm -rf
 
 INC = philosopher.h
 
-CC = gcc #-fsanitize=address
+CC = gcc
 
 CFLAGS = -c -Wall -Wextra -Werror
 

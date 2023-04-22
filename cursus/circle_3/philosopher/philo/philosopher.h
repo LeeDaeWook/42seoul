@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philosopher.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/22 18:01:14 by daewoole          #+#    #+#             */
+/*   Updated: 2023/04/22 18:01:17 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
@@ -38,7 +50,7 @@ typedef struct s_philo
 
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *s);
-long long	get_time();
+long long	get_time(void);
 int			print_error(char *error_message, int ret_val);
 void		print_state(t_philo *philo, char *state);
 void		custom_usleep(long long call_time, long long wait_time);

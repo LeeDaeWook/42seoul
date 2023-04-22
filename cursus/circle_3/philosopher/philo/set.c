@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: daewoole <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/22 18:01:23 by daewoole          #+#    #+#             */
+/*   Updated: 2023/04/22 18:01:25 by daewoole         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philosopher.h"
 
 int	init_mutex(t_arg *args)
@@ -40,7 +52,8 @@ int	set_arg(int argc, char *argv[], t_arg *args)
 	args->start_time = get_time();
 	if (args->start_time == -1)
 		return (1);
-	args->forks = (pthread_mutex_t*)malloc(sizeof(pthread_mutex_t) * args->num_of_philo);
+	args->forks = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t) * \
+	args->num_of_philo);
 	if (!args->forks)
 		return (1);
 	if (init_mutex(args))
