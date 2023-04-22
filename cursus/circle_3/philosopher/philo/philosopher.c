@@ -31,7 +31,7 @@ void	eating(t_philo *philo)
 			pthread_mutex_lock(&(philo->args->forks[philo->left]));
 		print_state(philo, "has taken a fork");
 		print_state(philo, "is eating");
-		usleep(philo->args->time_to_eat * 1000);
+		custom_usleep(get_time(), philo->args->time_to_eat);
 		philo->eat_times++;
 		pthread_mutex_unlock(&(philo->args->forks[philo->right]));
 	}
@@ -41,7 +41,7 @@ void	eating(t_philo *philo)
 void	sleeping(t_philo *philo)
 {
 	print_state(philo, "is sleeping");
-	usleep(philo->args->time_to_sleep * 1000);
+	custom_usleep(get_time(), philo->args->time_to_sleep);
 }
 
 void	thinking(t_philo *philo)

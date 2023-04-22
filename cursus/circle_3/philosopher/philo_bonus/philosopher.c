@@ -47,10 +47,7 @@ int	philosopher(t_philo *philo) // 철학자들이 할 일을 수행하는 함�
 		exit(IS_DIED);
 	}
 	else if (philo->is_done_eating)
-	{
-		// printf("Done eating\n");
 		exit(IS_DONE_EATING);
-	}
 	return (0);
 }
 
@@ -63,7 +60,7 @@ void	eating(t_philo *philo)
 		sem_wait(philo->args->forks);
 		print_state(philo, "has taken a fork");
 		print_state(philo, "is eating");
-		usleep(philo->args->time_to_eat * 1000);
+		custom_usleep(get_time(), philo->args->time_to_eat);
 		philo->eat_times++;
 		sem_post(philo->args->forks);
 	}
@@ -75,7 +72,7 @@ void	sleeping(t_philo *philo)
 	if (philo->is_died || philo->is_done_eating)
 		return ;
 	print_state(philo, "is sleeping");
-	usleep(philo->args->time_to_sleep * 1000);
+	custom_usleep(get_time(), philo->args->time_to_sleep);
 }
 
 void	thinking(t_philo *philo)

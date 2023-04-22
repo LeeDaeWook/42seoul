@@ -33,9 +33,22 @@ void	print_state(t_philo *philo, char *state)
 	}
 }
 
-void	clear_semaphore(t_philo *philo)
+void	custom_usleep(long long call_time, long long wait_time)
 {
-	if (sem_close(philo->args->forks) || sem_close(philo->args->done) || sem_close(philo->args->print))
+	long long	now;
+
+	while (TRUE)
+	{
+		now = get_time();
+		if (now - call_time >= wait_time)
+			return ;
+		usleep(10);
+	}
+}
+
+void	clear_semaphore(t_arg *args)
+{
+	if (sem_close(args->forks) || sem_close(args->done) || sem_close(args->print))
 	{
 		print_error("closing semaphore failed", 1);
 		exit(EXIT_FAILURE);

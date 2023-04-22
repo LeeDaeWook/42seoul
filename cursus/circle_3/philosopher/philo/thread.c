@@ -16,7 +16,7 @@ void	destroy_mutex(t_philo *philo)
 void	is_finished(t_philo *philo)
 {
 	long long	now;
-	int		i;
+	int			i;
 
 	while (!philo->args->is_finished)
 	{

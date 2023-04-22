@@ -23,7 +23,7 @@ void	fork_process(t_philo *philo, int num_of_philo)
 		i++;
 	}
 	is_finished(philo); // child process한테 신호를 보내줘야 함
-	clear_semaphore(philo);
+	clear_semaphore(philo->args);
 	free(philo);
 }
 
@@ -47,7 +47,7 @@ void	is_finished(t_philo *philo)
 	int	exit_status;
 
 	i = 0;
-	while (i < philo->args->num_of_philo)
+	while (i++ < philo->args->num_of_philo)
 	{
 		waitpid(-1, &status, 0);
 		if (WIFEXITED(status))
@@ -65,6 +65,5 @@ void	is_finished(t_philo *philo)
 					return ;
 			}
 		}
-		i++;
 	}
 }

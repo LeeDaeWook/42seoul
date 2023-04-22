@@ -5,7 +5,6 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <stdio.h>
-# include <errno.h>
 # include <stdlib.h>
 # include <string.h>
 
@@ -40,12 +39,13 @@ typedef struct s_philo
 int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *s);
 long long	get_time();
+int			print_error(char *error_message, int ret_val);
 void		print_state(t_philo *philo, char *state);
+void		custom_usleep(long long call_time, long long wait_time);
 void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
 void		is_finished(t_philo *philo);
-int			print_error(char *error_message, int ret_val);
 int			init_mutex(t_arg *args);
 int			validate_arg(int argc, t_arg *args);
 int			set_arg(int argc, char *argv[], t_arg *args);

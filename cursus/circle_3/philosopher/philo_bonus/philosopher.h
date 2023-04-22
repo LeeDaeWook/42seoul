@@ -47,6 +47,7 @@ int			ft_strcmp(char *s1, char *s2);
 int			ft_atoi(const char *s);
 long long	get_time();
 void		print_state(t_philo *philo, char *state);
+void		custom_usleep(long long call_time, long long wait_time);
 void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
@@ -59,6 +60,6 @@ void		*monitor_thread(void *philo);
 void		fork_process(t_philo *philo, int num_of_philo);
 void		kill_process(t_philo *philo);
 void		is_finished(t_philo *philo);
-void		clear_semaphore(t_philo *philo);
+void		clear_semaphore(t_arg *args);
 
 #endif

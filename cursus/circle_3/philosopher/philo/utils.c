@@ -31,3 +31,16 @@ void	print_state(t_philo *philo, char *state)
 		pthread_mutex_unlock(&(philo->args->print));
 	}
 }
+
+void	custom_usleep(long long call_time, long long wait_time)
+{
+	long long	now;
+
+	while (TRUE)
+	{
+		now = get_time();
+		if (now - call_time >= wait_time)
+			return ;
+		usleep(10);
+	}
+}
