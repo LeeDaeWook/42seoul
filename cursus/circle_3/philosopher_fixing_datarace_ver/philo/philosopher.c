@@ -29,16 +29,17 @@ void	*philosopher(void *philo)
 	t_philo	*philosopher;
 
 	philosopher = (t_philo *)philo;
-	// while (!philosopher->args->is_finished)
+	// if (!(philosopher->id % 2))
+	// 	usleep(500);
 	while (!temp(philosopher))
 	{
 		eating(philosopher);
 		if (philosopher->args->must_eat && \
 		philosopher->eat_times == philosopher->args->must_eat)
 		{
-			pthread_mutex_lock(&(philosopher->args->nof));
+			pthread_mutex_lock(&(philosopher->args->finish));
 			(philosopher->args->num_of_finished)++;
-			pthread_mutex_unlock(&(philosopher->args->nof));
+			pthread_mutex_unlock(&(philosopher->args->finish));
 			break ;
 		}
 		sleeping(philosopher);
@@ -49,14 +50,14 @@ void	*philosopher(void *philo)
 
 void	eating(t_philo *philo)
 {
-	if (philo->id % 2)
+	if (!(philo->id % 2))
 		pthread_mutex_lock(&(philo->args->forks[philo->left]));
 	else
 		pthread_mutex_lock(&(philo->args->forks[philo->right]));
 	print_state(philo, "has taken a fork");
 	if (philo->args->num_of_philo > 1)
 	{
-		if (philo->id % 2)
+		if (!(philo->id % 2))
 			pthread_mutex_lock(&(philo->args->forks[philo->right]));
 		else
 			pthread_mutex_lock(&(philo->args->forks[philo->left]));
@@ -64,9 +65,15 @@ void	eating(t_philo *philo)
 		print_state(philo, "is eating");
 		custom_usleep(get_time(), philo->args->time_to_eat);
 		philo->eat_times++;
-		pthread_mutex_unlock(&(philo->args->forks[philo->right]));
+		if (!(philo->id % 2))
+			pthread_mutex_unlock(&(philo->args->forks[philo->left]));
+		else
+			pthread_mutex_unlock(&(philo->args->forks[philo->right]));
 	}
-	pthread_mutex_unlock(&(philo->args->forks[philo->left]));
+	if (!(philo->id % 2))
+		pthread_mutex_unlock(&(philo->args->forks[philo->right]));
+	else
+		pthread_mutex_unlock(&(philo->args->forks[philo->left]));
 }
 
 void	sleeping(t_philo *philo)

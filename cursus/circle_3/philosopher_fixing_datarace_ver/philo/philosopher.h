@@ -34,8 +34,6 @@ typedef struct s_arg
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	finish;
-	pthread_mutex_t	time;
-	pthread_mutex_t	nof;
 	int				is_finished;
 	int				num_of_finished;
 }	t_arg;

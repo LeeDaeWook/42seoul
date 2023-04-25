@@ -27,10 +27,6 @@ int	init_mutex(t_arg *args)
 		return (1);
 	if (pthread_mutex_init(&(args->finish), NULL))
 		return (1);
-	if (pthread_mutex_init(&(args->time), NULL))
-		return (1);
-	if (pthread_mutex_init(&(args->nof), NULL))
-		return (1);
 	return (0);
 }
 

@@ -24,44 +24,47 @@ void	destroy_mutex(t_philo *philo)
 	}
 	pthread_mutex_destroy(&(philo->args->print));
 	pthread_mutex_destroy(&(philo->args->finish));
-	pthread_mutex_destroy(&(philo->args->time));
-	pthread_mutex_destroy(&(philo->args->nof));
+}
+
+int check_last_eat(t_philo *philo)
+{
+	int	flag;
+	long long	now;
+
+	flag = 0;
+	pthread_mutex_lock(&(philo->args->finish));
+	now = get_time();
+	if ((now - philo->last_eat_time) >= philo->args->time_to_die)
+		flag = 1;
+	pthread_mutex_unlock(&(philo->args->finish));
+	return (flag);
 }
 
 void	is_finished(t_philo *philo)
 {
-	long long	now;
-	int			i;
+	int	i;
 
-	// while (!philo->args->is_finished)
 	while (!temp(philo))
 	{
 		i = 0;
 		while (!temp(philo) && i < philo->args->num_of_philo)
 		{
-			now = get_time();
-			// pthread_mutex_lock(&(philo->args->time));
-			if ((now - philo[i].last_eat_time) >= philo->args->time_to_die)
+			if (check_last_eat(philo + i))
 			{
 				pthread_mutex_lock(&(philo->args->finish));
 				philo->args->is_finished = 1;
 				pthread_mutex_unlock(&(philo->args->finish));
 				print_state(philo + i, "died");
-				// break ;
-				// pthread_mutex_unlock(&(philo->args->finish));
-				// return ;
 			}
-			// pthread_mutex_unlock(&(philo->args->time));
 			i++;
 		}
+		pthread_mutex_lock(&(philo->args->finish));
 		if (philo->args->num_of_finished == philo->args->num_of_philo)
 		{
-			pthread_mutex_lock(&(philo->args->finish));
 			philo->args->is_finished = 1;
-			pthread_mutex_unlock(&(philo->args->finish));
 			printf("All philosophers have eaten enough\n");
-			// break;
 		}
+		pthread_mutex_unlock(&(philo->args->finish));
 	}
 }
 
