@@ -21,20 +21,17 @@ void	*monitor_thread(void *philo)
 	while (!is_loop(philosopher))
 	{
 		sem_wait(philosopher->args->done);
-		// sem_wait(philosopher->args->print);
 		now = get_time();
 		if ((now - philosopher->last_eat_time) >= \
 		philosopher->args->time_to_die)
 		{
 			philosopher->is_died = 1;
-			// sem_wait(philosopher->args->print);
 			sem_post(philosopher->args->done);
 			break ;
 		}
 		if (philosopher->args->must_eat && \
 		philosopher->eat_times == philosopher->args->must_eat)
 			philosopher->is_done_eating = 1;
-		// sem_post(philosopher->args->print);
 		sem_post(philosopher->args->done);
 	}
 	return (NULL);
