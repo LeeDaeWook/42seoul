@@ -8,9 +8,9 @@ RM = rm -rf
 
 INC = philosopher.h
 
-CC = cc -fsanitize=thread -g
+CC = cc
 
-CFLAGS = -c -Wall -Wextra -Werror
+CFLAGS = -c -Wall -Wextra -Werror 
 
 $(NAME) : $(OBJS)
 	$(CC) $^ -o $@

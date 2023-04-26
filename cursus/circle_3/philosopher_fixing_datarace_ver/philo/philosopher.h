@@ -58,7 +58,7 @@ void		custom_usleep(long long call_time, long long wait_time);
 void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
-int 		is_died(t_philo *philo);
+int			is_died(t_philo *philo);
 void		is_finished(t_philo *philo);
 int			init_mutex(t_arg *args);
 int			validate_arg(int argc, t_arg *args);

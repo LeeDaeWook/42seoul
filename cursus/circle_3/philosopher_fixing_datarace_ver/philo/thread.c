@@ -26,7 +26,7 @@ void	destroy_mutex(t_philo *philo)
 	pthread_mutex_destroy(&(philo->args->finish));
 }
 
-int is_died(t_philo *philo)
+int	is_died(t_philo *philo)
 {
 	int			flag;
 	long long	now;
