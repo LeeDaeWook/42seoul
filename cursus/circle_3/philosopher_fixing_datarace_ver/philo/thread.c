@@ -26,9 +26,9 @@ void	destroy_mutex(t_philo *philo)
 	pthread_mutex_destroy(&(philo->args->finish));
 }
 
-int check_last_eat(t_philo *philo)
+int is_died(t_philo *philo)
 {
-	int	flag;
+	int			flag;
 	long long	now;
 
 	flag = 0;
@@ -44,12 +44,12 @@ void	is_finished(t_philo *philo)
 {
 	int	i;
 
-	while (!temp(philo))
+	while (!is_loop(philo))
 	{
 		i = 0;
-		while (!temp(philo) && i < philo->args->num_of_philo)
+		while (!is_loop(philo) && i < philo->args->num_of_philo)
 		{
-			if (check_last_eat(philo + i))
+			if (is_died(philo + i))
 			{
 				pthread_mutex_lock(&(philo->args->finish));
 				philo->args->is_finished = 1;

@@ -8,7 +8,7 @@ RM = rm -rf
 
 INC = philosopher.h
 
-CC = cc -fsanitize=thread -g
+CC = cc #-fsanitize=address #-fsanitize=thread -g
 
 CFLAGS = -c -Wall -Wextra -Werror
 

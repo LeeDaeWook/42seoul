@@ -33,10 +33,10 @@ void	print_state(t_philo *philo, char *state)
 
 	pthread_mutex_lock(&(philo->args->finish));
 	now = get_time();
-	if (!ft_strcmp(state, "is eating"))
-		philo->last_eat_time = now;
 	if (now == -1)
 		return ;
+	if (!ft_strcmp(state, "is eating"))
+		philo->last_eat_time = now;
 	if (!philo->args->is_finished || !ft_strcmp(state, "died"))
 	{
 		pthread_mutex_lock(&(philo->args->print));
@@ -50,10 +50,8 @@ void	print_state(t_philo *philo, char *state)
 void	custom_usleep(long long call_time, long long wait_time)
 {
 	long long	now;
-	// double		wait_time_d;
 
-	// wait_time_d = (double)wait_time * 1000 * 0.8;
-	// usleep(wait_time_d);
+	usleep(wait_time * 1000 * 0.8);
 	while (TRUE)
 	{
 		now = get_time();

@@ -12,7 +12,7 @@
 
 #include "philosopher.h"
 
-int	temp(t_philo *philo)
+int	is_loop(t_philo *philo)
 {
 	int	flag;
 
@@ -29,9 +29,9 @@ void	*philosopher(void *philo)
 	t_philo	*philosopher;
 
 	philosopher = (t_philo *)philo;
-	// if (!(philosopher->id % 2))
-	// 	usleep(500);
-	while (!temp(philosopher))
+	if (!(philosopher->id % 2))
+		usleep(200);
+	while (!is_loop(philosopher))
 	{
 		eating(philosopher);
 		if (philosopher->args->must_eat && \

@@ -32,44 +32,45 @@ void	print_state(t_philo *philo, char *state)
 	long long	now;
 
 	now = get_time();
-	if (now != -1)
+	if (now == -1)
+		return ;
+	sem_wait(philo->args->done);
+	if (!ft_strcmp(state, "is eating"))
+		philo->last_eat_time = now;
+	if (philo->is_died || philo->is_done_eating)
 	{
-		if (philo->is_died || philo->is_done_eating)
-			return ;
-		sem_wait(philo->args->print);
-		printf("%lldms %zd %s\n", \
-		now - philo->args->start_time, philo->id, state);
-		if (!ft_strcmp(state, "is eating"))
-			philo->last_eat_time = now;
-		sem_post(philo->args->print);
+		sem_post(philo->args->done);
+		return ;
 	}
+	sem_post(philo->args->done);
+	sem_wait(philo->args->print);
+	printf("%lldms %zd %s\n", \
+	now - philo->args->start_time, philo->id, state);
+	sem_post(philo->args->print);
 }
 
 void	custom_usleep(long long call_time, long long wait_time)
 {
 	long long	now;
 
+	usleep(wait_time * 1000 * 0.8);
 	while (TRUE)
 	{
 		now = get_time();
 		if (now - call_time >= wait_time)
 			return ;
-		usleep(10);
+		usleep(200);
 	}
 }
 
-void	clear_semaphore(t_arg *args)
+int	is_loop(t_philo *philo)
 {
-	if (sem_close(args->forks) || \
-	sem_close(args->done) || sem_close(args->print))
-	{
-		print_error("closing semaphore failed", 1);
-		exit(EXIT_FAILURE);
-	}
-	if (sem_unlink("sem_forks") || \
-	sem_unlink("sem_done") || sem_unlink("sem_print"))
-	{
-		print_error("closing semaphore failed", 1);
-		exit(EXIT_FAILURE);
-	}
+	int	flag;
+
+	flag = 0;
+	sem_wait(philo->args->done);
+	if (philo->is_died || philo->is_done_eating)
+		flag = 1;
+	sem_post(philo->args->done);
+	return (flag);
 }
