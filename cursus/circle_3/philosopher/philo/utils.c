@@ -31,28 +31,32 @@ void	print_state(t_philo *philo, char *state)
 {
 	long long	now;
 
+	pthread_mutex_lock(&(philo->args->finish));
 	now = get_time();
-	if (now != -1)
+	if (now == -1)
+		return ;
+	if (!ft_strcmp(state, "is eating"))
+		philo->last_eat_time = now;
+	if (!philo->args->is_finished || !ft_strcmp(state, "died"))
 	{
 		pthread_mutex_lock(&(philo->args->print));
-		if (!philo->args->is_finished || !ft_strcmp(state, "died"))
-			printf("%lldms %zd %s\n", \
-			now - philo->args->start_time, philo->id, state);
-		if (!ft_strcmp(state, "is eating"))
-			philo->last_eat_time = now;
+		printf("%lld %zd %s\n", \
+		now - philo->args->start_time, philo->id, state);
 		pthread_mutex_unlock(&(philo->args->print));
 	}
+	pthread_mutex_unlock(&(philo->args->finish));
 }
 
 void	custom_usleep(long long call_time, long long wait_time)
 {
 	long long	now;
 
+	usleep(wait_time * 1000 * 0.8);
 	while (TRUE)
 	{
 		now = get_time();
 		if (now - call_time >= wait_time)
 			return ;
-		usleep(10);
+		usleep(200);
 	}
 }

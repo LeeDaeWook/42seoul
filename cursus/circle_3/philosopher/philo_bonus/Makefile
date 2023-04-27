@@ -1,6 +1,6 @@
 NAME = philo_bonus
 
-SRCS = 	fork.c ft_atoi.c ft_strcmp.c main.c philosopher.c set.c utils.c 
+SRCS = 	fork.c ft_atoi.c ft_strcmp.c main.c philosopher.c set.c utils.c monitor.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -8,7 +8,7 @@ RM = rm -rf
 
 INC = philosopher.h
 
-CC = gcc
+CC = cc
 
 CFLAGS = -c -Wall -Wextra -Werror
 

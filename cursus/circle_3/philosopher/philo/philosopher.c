@@ -12,46 +12,75 @@
 
 #include "philosopher.h"
 
+int	is_loop(t_philo *philo)
+{
+	int	flag;
+
+	flag = 0;
+	pthread_mutex_lock(&(philo->args->finish));
+	if (philo->args->is_finished)
+		flag = 1;
+	pthread_mutex_unlock(&(philo->args->finish));
+	return (flag);
+}
+
 void	*philosopher(void *philo)
 {	
 	t_philo	*philosopher;
 
 	philosopher = (t_philo *)philo;
-	while (!philosopher->args->is_finished)
+	if (!(philosopher->id % 2))
+		usleep(200);
+	while (!is_loop(philosopher))
 	{
 		eating(philosopher);
 		if (philosopher->args->must_eat && \
 		philosopher->eat_times == philosopher->args->must_eat)
 		{
+			pthread_mutex_lock(&(philosopher->args->finish));
 			(philosopher->args->num_of_finished)++;
+			pthread_mutex_unlock(&(philosopher->args->finish));
 			break ;
 		}
-		sleeping(philosopher);
-		thinking(philosopher);
+		if (philosopher->args->num_of_philo > 1)
+		{
+			sleeping(philosopher);
+			thinking(philosopher);
+		}
+		else
+			custom_usleep(get_time(), 1);
+			// usleep(500);
 	}
 	return (NULL);
 }
 
 void	eating(t_philo *philo)
 {
-	if (philo->id % 2)
+	if (!(philo->id % 2))
 		pthread_mutex_lock(&(philo->args->forks[philo->left]));
 	else
 		pthread_mutex_lock(&(philo->args->forks[philo->right]));
 	print_state(philo, "has taken a fork");
 	if (philo->args->num_of_philo > 1)
 	{
-		if (philo->id % 2)
+		if (!(philo->id % 2))
 			pthread_mutex_lock(&(philo->args->forks[philo->right]));
 		else
 			pthread_mutex_lock(&(philo->args->forks[philo->left]));
 		print_state(philo, "has taken a fork");
 		print_state(philo, "is eating");
 		custom_usleep(get_time(), philo->args->time_to_eat);
-		philo->eat_times++;
-		pthread_mutex_unlock(&(philo->args->forks[philo->right]));
+		if (philo->args->must_eat)
+			philo->eat_times++;
+		if (!(philo->id % 2))
+			pthread_mutex_unlock(&(philo->args->forks[philo->left]));
+		else
+			pthread_mutex_unlock(&(philo->args->forks[philo->right]));
 	}
-	pthread_mutex_unlock(&(philo->args->forks[philo->left]));
+	if (!(philo->id % 2))
+		pthread_mutex_unlock(&(philo->args->forks[philo->right]));
+	else
+		pthread_mutex_unlock(&(philo->args->forks[philo->left]));
 }
 
 void	sleeping(t_philo *philo)

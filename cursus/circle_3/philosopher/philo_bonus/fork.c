@@ -79,3 +79,19 @@ void	is_finished(t_philo *philo)
 		}
 	}
 }
+
+void	clear_semaphore(t_arg *args)
+{
+	if (sem_close(args->forks) || \
+	sem_close(args->done) || sem_close(args->print))
+	{
+		print_error("closing semaphore failed", 1);
+		exit(EXIT_FAILURE);
+	}
+	if (sem_unlink("sem_forks") || \
+	sem_unlink("sem_done") || sem_unlink("sem_print"))
+	{
+		print_error("closing semaphore failed", 1);
+		exit(EXIT_FAILURE);
+	}
+}

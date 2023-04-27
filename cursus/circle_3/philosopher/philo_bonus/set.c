@@ -41,7 +41,7 @@ int	set_arg(int argc, char *argv[], t_arg *args)
 	sem_unlink("sem_print");
 	args->forks = sem_open("sem_forks", O_CREAT, 0644, args->num_of_philo);
 	args->done = sem_open("sem_done", O_CREAT, 0644, 1);
-	args->print = sem_open("sem_print", O_CREAT, 0644, 2);
+	args->print = sem_open("sem_print", O_CREAT, 0644, 1);
 	return (0);
 }
 

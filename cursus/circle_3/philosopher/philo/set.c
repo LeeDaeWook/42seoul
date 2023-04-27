@@ -25,6 +25,8 @@ int	init_mutex(t_arg *args)
 	}
 	if (pthread_mutex_init(&(args->print), NULL))
 		return (1);
+	if (pthread_mutex_init(&(args->finish), NULL))
+		return (1);
 	return (0);
 }
 
@@ -74,8 +76,8 @@ t_philo	*set_philo(int num_of_philo, t_arg *args)
 	{
 		philo[i].args = args;
 		philo[i].id = i + 1;
-		philo[i].left = i + 1;
-		philo[i].right = (i + 1) % num_of_philo + 1;
+		philo[i].left = i;
+		philo[i].right = (i + 1) % num_of_philo;
 		philo[i].eat_times = 0;
 		i++;
 	}

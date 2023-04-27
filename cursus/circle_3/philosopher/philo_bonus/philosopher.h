@@ -67,6 +67,7 @@ int			validate_arg(int argc, t_arg *args);
 int			set_arg(int argc, char *argv[], t_arg *args);
 t_philo		*set_philo(int num_of_philo, t_arg *args);
 int			philosopher(t_philo *philo);
+int			is_loop(t_philo *philo);
 void		*monitor_thread(void *philo);
 void		fork_process(t_philo *philo, int num_of_philo);
 void		kill_process(t_philo *philo);

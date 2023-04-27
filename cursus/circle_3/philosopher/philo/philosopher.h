@@ -33,6 +33,7 @@ typedef struct s_arg
 	long long		start_time;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
+	pthread_mutex_t	finish;
 	int				is_finished;
 	int				num_of_finished;
 }	t_arg;
@@ -57,6 +58,7 @@ void		custom_usleep(long long call_time, long long wait_time);
 void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
 void		thinking(t_philo *philo);
+int			is_died(t_philo *philo);
 void		is_finished(t_philo *philo);
 int			init_mutex(t_arg *args);
 int			validate_arg(int argc, t_arg *args);
@@ -65,5 +67,6 @@ t_philo		*set_philo(int num_of_philo, t_arg *args);
 void		*philosopher(void *philo);
 void		destroy_mutex(t_philo *philo);
 void		thread(t_philo *philo, int num_of_philo);
+int			is_loop(t_philo *philo);
 
 #endif
