@@ -80,7 +80,7 @@ void	thread(t_philo *philo, int num_of_philo)
 	i = 0;
 	while (i < num_of_philo)
 	{
-		philo[i].last_eat_time = get_time();
+		philo[i].last_eat_time = philo->args->start_time;
 		pthread_create(&(philo[i].thread), NULL, philosopher, (philo + i));
 		i++;
 	}

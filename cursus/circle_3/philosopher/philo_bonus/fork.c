@@ -21,7 +21,7 @@ void	fork_process(t_philo *philo, int num_of_philo)
 	while (i < num_of_philo)
 	{
 		pid = fork();
-		philo[i].last_eat_time = get_time();
+		philo[i].last_eat_time = philo->args->start_time;
 		if (pid < 0)
 		{
 			print_error("Error : fork failed", 1);

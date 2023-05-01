@@ -36,7 +36,11 @@ void	print_state(t_philo *philo, char *state)
 	if (now == -1)
 		return ;
 	if (!ft_strcmp(state, "is eating"))
+	{
 		philo->last_eat_time = now;
+		if (philo->args->must_eat)
+			philo->eat_times++;
+	}
 	if (!philo->args->is_finished || !ft_strcmp(state, "died"))
 	{
 		pthread_mutex_lock(&(philo->args->print));
