@@ -20,8 +20,8 @@ void	philo_action(t_philo *philo)
 		sleeping(philo);
 		thinking(philo);
 	}
-	// else
-	// 	custom_usleep(get_time(), 1);
+	else
+		custom_usleep(get_time(), philo->args->time_to_die);
 }
 
 int	philosopher(t_philo *philo)
@@ -54,11 +54,7 @@ void	eating(t_philo *philo)
 		return ;
 	sem_wait(philo->args->forks);
 	print_state(philo, "has taken a fork");
-	if (philo->args->num_of_philo <= 1)
-		custom_usleep(get_time(), philo->args->time_to_die);
-		// usleep(philo->args->time_to_die * 1000);
-	// if (philo->args->num_of_philo > 1)
-	else
+	if (philo->args->num_of_philo > 1)
 	{
 		sem_wait(philo->args->forks);
 		print_state(philo, "has taken a fork");
@@ -86,4 +82,5 @@ void	thinking(t_philo *philo)
 	if (is_loop(philo))
 		return ;
 	print_state(philo, "is thinking");
+	usleep(200);
 }

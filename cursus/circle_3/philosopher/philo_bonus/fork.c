@@ -47,7 +47,10 @@ void	kill_process(t_philo *philo)
 	while (i < philo->args->num_of_philo)
 	{
 		if (philo[i].pid)
+		{
 			kill(philo[i].pid, SIGKILL);
+			waitpid(philo[i].pid, NULL, 0);
+		}
 		i++;
 	}
 }
