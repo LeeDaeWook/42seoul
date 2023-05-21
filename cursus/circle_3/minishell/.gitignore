@@ -1,0 +1,10 @@
+.vscode
+a.out*
+/study
+a.out
+data.txt
+test.c
+chatgpt's code.c
+/testcase
+test_utils.c
+test_utils.h
