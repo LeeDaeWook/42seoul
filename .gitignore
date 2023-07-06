@@ -53,14 +53,23 @@ dkms.conf
 
 .vscode
 
+<<<<<<< HEAD
 miniRT
+=======
+>>>>>>> 9ae0b27e82346ffd1f1950acc1ee56e44a382e98
 *test*
 mlx/*
 libft/*
 *.swp
+<<<<<<< HEAD
 *.DS
 
 megaphone
 phoneBook
 *.log
 *out*
+=======
+
+.DS_Store
+*.log
+>>>>>>> 9ae0b27e82346ffd1f1950acc1ee56e44a382e98
