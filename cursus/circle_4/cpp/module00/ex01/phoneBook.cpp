@@ -1,4 +1,4 @@
-#include "phoneBook.hpp"
+#include "PhoneBook.hpp"
 
 Contact::Contact()
 {
@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 
 	std::getline(std::cin, command);
 	phoneBook.idx = 0;
-	while (true)
+	while (!command.empty())
 	{
 		if (!command.length())
 			exit(EXIT_FAILURE);
@@ -99,9 +99,9 @@ int main(int argc, char *argv[])
 				phoneBook.search();
 			else if (!command.compare("EXIT"))
 				exit(EXIT_SUCCESS);
+			std::cout << "input command: ";
+			std::getline(std::cin, command);
 		}
-		std::cout << "input command: ";
-		std::getline(std::cin, command);
 	}
 	return 0;
 }
