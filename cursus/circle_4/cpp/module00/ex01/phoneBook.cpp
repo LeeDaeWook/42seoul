@@ -37,6 +37,7 @@ void PhoneBook::add(Contact &new_contact)
 void PhoneBook::search(void)
 {
 	int i;
+	std::string j;
 
 	i = 0;
 	if (!idx)
@@ -53,7 +54,8 @@ void PhoneBook::search(void)
 		i++;
 	}
 	std::cout << "input index: ";
-	std::cin >> i;
+	std::getline(std::cin, j);
+	i = std::stoi(j);
 	if (i < idx)
 	{
 		std::cout << i << std::endl;
@@ -69,35 +71,37 @@ int main(int argc, char *argv[])
 {
 	PhoneBook phoneBook;
 	Contact	contact;
+	std::string command;
 
+	std::getline(std::cin, command);
 	phoneBook.idx = 0;
 	while (true)
 	{
-		if (argc <= 1)
+		if (!command.length())
 			exit(EXIT_FAILURE);
 		else
 		{
-			if (!std::strcmp(argv[1], "ADD"))
+			if (!command.compare("ADD"))
 			{
 				std::cout << "first name : ";
-				std::cin >> contact.first_name;
+				std::getline(std::cin, contact.first_name);
 				std::cout << "last name : ";
-				std::cin >> contact.last_name;
+				std::getline(std::cin, contact.last_name);
 				std::cout << "nickname : ";
-				std::cin >> contact.nick_name;
+				std::getline(std::cin, contact.nick_name);
 				std::cout << "phone number : ";
-				std::cin >> contact.phone_number;
+				std::getline(std::cin, contact.phone_number);
 				std::cout << "darkest secret : ";
-				std::cin >> contact.darkest_secret;
+				std::getline(std::cin, contact.darkest_secret);
 				phoneBook.add(contact);
 			}
-			else if (!std::strcmp(argv[1], "SEARCH"))
+			else if (!command.compare("SEARCH"))
 				phoneBook.search();
-			else if (!std::strcmp(argv[1], "EXIT"))
+			else if (!command.compare("EXIT"))
 				exit(EXIT_SUCCESS);
 		}
 		std::cout << "input command: ";
-		std::cin >> argv[1];
+		std::getline(std::cin, command);
 	}
 	return 0;
 }
