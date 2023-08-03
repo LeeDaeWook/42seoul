@@ -46,11 +46,6 @@ Account::Account(int initial_deposit)
     std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";created" << std::endl;
 }
 
-Account::Account(void)
-{
-    
-}
-
 Account::~Account(void)
 {
     _nbAccounts--;
@@ -106,6 +101,12 @@ int     Account::checkAmount(void) const
     return 1;
 }
 
+void    Account::displayStatus(void) const // read-only function
+{
+    _displayTimestamp();
+    std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";deposits:" << _nbDeposits << ";withdrawals:" << _nbWithdrawals << std::endl;
+}
+
 void    Account::_displayTimestamp(void)
 {
     char timeString[100];
@@ -113,12 +114,6 @@ void    Account::_displayTimestamp(void)
     std::time_t currentTime = std::time(nullptr);
     std::strftime(timeString, sizeof(timeString), "%Y%m%d_%H%M%S", std::localtime(&currentTime));
     std::cout << "[" << timeString << "] ";
-}
-
-void    Account::displayStatus(void) const // read-only function
-{
-    _displayTimestamp();
-    std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";deposits:" << _nbDeposits << ";withdrawals:" << _nbWithdrawals << std::endl;
 }
 
 #include <vector>
