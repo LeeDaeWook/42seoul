@@ -13,7 +13,6 @@
 #define __ACCOUNT_H__
 
 #include <iostream>
-// #include <cstring>
 #include <ctime>
 
 // ************************************************************************** //
