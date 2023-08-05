@@ -54,13 +54,10 @@ void PhoneBook::printCol(int i)
 	std::cout << std::setw(10);
 	std::cout << i << "|";
 	std::cout << std::setw(10);
-	// std::cout << contact[i].first_name << "|";
 	std::cout << checkLen(contact[i].first_name) << "|";
 	std::cout << std::setw(10);
-	// std::cout << contact[i].last_name << "|";
 	std::cout << checkLen(contact[i].last_name) << "|";
 	std::cout << std::setw(10);
-	// std::cout << contact[i].nick_name << "|";
 	std::cout << checkLen(contact[i].nick_name) << "|";
 	std::cout << std::endl;
 }
@@ -90,6 +87,8 @@ int PhoneBook::atoi(const std::string& str)
         result = result * 10 + (str[i] - '0');
         i++;
     }
+	if (result == 0 && str != "0")
+		return 2147483647;
     return sign * result;
 }
 
