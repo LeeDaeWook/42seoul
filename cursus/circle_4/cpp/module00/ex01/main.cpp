@@ -2,8 +2,8 @@
 
 int main(int argc, char *argv[])
 {
-	PhoneBook phoneBook;
-	Contact	contact;
+	PhoneBook 	phoneBook;
+	Contact		contact;
 	std::string command;
 
 	phoneBook.input(command, "None");
