@@ -11,8 +11,8 @@ class Contact
 		std::string	nick_name;
 		std::string	phone_number;
 		std::string	darkest_secret;
+		
 		Contact();
-		Contact(Contact &new_contact);
 };
 
 #endif

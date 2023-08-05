@@ -1,23 +1,25 @@
 #pragma once
 #ifndef __PHONEBOOK_H__
 # define __PHONEBOOK_H__
-# include <iostream>
+# include <iomanip>
+# include <string>
 # include "Contact.hpp"
-
-# define NEWLINE 1
 
 class PhoneBook
 {
 	private:
 		Contact	contact[8];
+
+		void		printCol(int i);
+		int			atoi(const std::string& str);
+		std::string checkLen(std::string str);
+	
 	public:
 		int		idx;
-
-	void	add();
-	void	search();
-	void	printCol(std::string target);
-	void 	input(std::string &container, std::string msg);
-	int		atoi(const std::string& str);
+		
+		void	add();
+		void	search();
+		void 	input(std::string &input, std::string msg);
 };
 
 #endif

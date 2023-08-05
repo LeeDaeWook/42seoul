@@ -15,7 +15,7 @@ void PhoneBook::add()
 	while (i < idx)
 	{
 		if ((contact[i]).phone_number == newContact.phone_number)
-			return;
+			return ;
 		i++;
 	}
 	contact[idx % 8] = newContact;
@@ -34,59 +34,44 @@ void PhoneBook::search()
 		std::cout << "There are no contacts in phone book" << std::endl;
 		return;
 	}
-	// while (i < idx)
-	// {
-	// 	std::cout << i << " | ";
-	// 	std::cout << contact[i].first_name << " | ";
-	// 	std::cout << contact[i].last_name << " | ";
-	// 	std::cout << contact[i].nick_name << std::endl;
-	// 	i++;
-	// }
 	while (i < limit)
-	{
-		std::cout << i << " | ";
-		printCol(contact[i].first_name);
-		printCol(contact[i].last_name);
-		printCol(contact[i].nick_name);
-		std::cout << std::endl;
-		i++;
-	}
-	input(index, "input index: ");
+		printCol(i++);
+	input(index, "Input index: ");
 	i = atoi(index);
 	if (i < limit)
 	{
-		std::cout << i << std::endl;
-		std::cout << contact[i].first_name << std::endl;
-		std::cout << contact[i].last_name << std::endl;
-		std::cout << contact[i].nick_name << std::endl;
+		std::cout << "Index: " << i << std::endl;
+		std::cout << "First name: " << contact[i].first_name << std::endl;
+		std::cout << "Last name: " << contact[i].last_name << std::endl;
+		std::cout << "Nick name: " << contact[i].nick_name << std::endl;
 	}
 	else
 		std::cout << "There is no contact in that index" << std::endl;
 }
 
-void PhoneBook::printCol(std::string target)
+void PhoneBook::printCol(int i)
 {
-	int len;
+	std::cout << std::setw(10);
+	std::cout << i << "|";
+	std::cout << std::setw(10);
+	// std::cout << contact[i].first_name << "|";
+	std::cout << checkLen(contact[i].first_name) << "|";
+	std::cout << std::setw(10);
+	// std::cout << contact[i].last_name << "|";
+	std::cout << checkLen(contact[i].last_name) << "|";
+	std::cout << std::setw(10);
+	// std::cout << contact[i].nick_name << "|";
+	std::cout << checkLen(contact[i].nick_name) << "|";
+	std::cout << std::endl;
+}
 
-	len = target.length();
-	if (len >= 10)
-	{
-		target.resize(9);
-		std::cout << target << ".";
+std::string PhoneBook::checkLen(std::string str)
+{
+	if (str.size() >= 10) {
+		str.resize(9);
+		str.append(".");
 	}
-	else
-	{
-		std::cout << target;
-		while (len < 10) {
-			std::cout << " ";
-			len++;
-		}
-	}
-	// if (flag == NEWLINE)
-	// 	std::cout << std::endl;
-	// else
-	// 	std::cout << "|";
-
+	return str;
 }
 
 int PhoneBook::atoi(const std::string& str)
@@ -108,15 +93,21 @@ int PhoneBook::atoi(const std::string& str)
     return sign * result;
 }
 
-void PhoneBook::input(std::string &container, std::string msg)
+void PhoneBook::input(std::string &input, std::string msg)
 {
-	if (msg.compare("None"))
-		std::cout << msg;
-	std::getline(std::cin, container);
+	std::cout << msg;
+	std::getline(std::cin, input);
 	if (std::cin.eof()) {
 		std::cin.clear();
-		std::clearerr(stdin);
-		std::cout << std::endl;
+		std::cout << "Program finished by reaching EOF" << std::endl;
 		exit(EXIT_FAILURE);
+	}
+	else if (input.empty())
+	{
+		while (input.empty())
+		{
+			std::cout << "You entered nothing, try again: ";
+			std::getline(std::cin, input);
+		}
 	}
 }
