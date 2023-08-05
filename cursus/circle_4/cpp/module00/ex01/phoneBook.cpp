@@ -18,18 +18,14 @@ void PhoneBook::add()
 			return;
 		i++;
 	}
-	if (idx == 8)
-		contact[0] = Contact(newContact);
-	else
-	{
-		contact[idx] = Contact(newContact);
-		idx++;
-	}
+	contact[idx % 8] = newContact;
+	idx++;
 }
 
 void PhoneBook::search()
 {
-	int i;
+	int i = 0;
+	int limit = idx < 8 ? idx : 8;
 	std::string index;
 
 	i = 0;
@@ -38,17 +34,26 @@ void PhoneBook::search()
 		std::cout << "There are no contacts in phone book" << std::endl;
 		return;
 	}
-	while (i < idx)
+	// while (i < idx)
+	// {
+	// 	std::cout << i << " | ";
+	// 	std::cout << contact[i].first_name << " | ";
+	// 	std::cout << contact[i].last_name << " | ";
+	// 	std::cout << contact[i].nick_name << std::endl;
+	// 	i++;
+	// }
+	while (i < limit)
 	{
-		std::cout << i << std::endl;
-		std::cout << contact[i].first_name << std::endl;
-		std::cout << contact[i].last_name << std::endl;
-		std::cout << contact[i].nick_name << std::endl;
+		std::cout << i << " | ";
+		printCol(contact[i].first_name);
+		printCol(contact[i].last_name);
+		printCol(contact[i].nick_name);
+		std::cout << std::endl;
 		i++;
 	}
 	input(index, "input index: ");
 	i = atoi(index);
-	if (i < idx)
+	if (i < limit)
 	{
 		std::cout << i << std::endl;
 		std::cout << contact[i].first_name << std::endl;
@@ -57,6 +62,31 @@ void PhoneBook::search()
 	}
 	else
 		std::cout << "There is no contact in that index" << std::endl;
+}
+
+void PhoneBook::printCol(std::string target)
+{
+	int len;
+
+	len = target.length();
+	if (len >= 10)
+	{
+		target.resize(9);
+		std::cout << target << ".";
+	}
+	else
+	{
+		std::cout << target;
+		while (len < 10) {
+			std::cout << " ";
+			len++;
+		}
+	}
+	// if (flag == NEWLINE)
+	// 	std::cout << std::endl;
+	// else
+	// 	std::cout << "|";
+
 }
 
 int PhoneBook::atoi(const std::string& str)

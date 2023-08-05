@@ -4,6 +4,8 @@
 # include <iostream>
 # include "Contact.hpp"
 
+# define NEWLINE 1
+
 class PhoneBook
 {
 	private:
@@ -13,6 +15,7 @@ class PhoneBook
 
 	void	add();
 	void	search();
+	void	printCol(std::string target);
 	void 	input(std::string &container, std::string msg);
 	int		atoi(const std::string& str);
 };
