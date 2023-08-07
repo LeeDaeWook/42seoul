@@ -13,6 +13,7 @@ class PhoneBook
 		void		printCol(int i);
 		int			atoi(const std::string& str);
 		std::string checkLen(std::string str);
+		void		checkInput();
 	
 	public:
 		int		idx;

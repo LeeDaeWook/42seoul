@@ -111,7 +111,7 @@ void    Account::_displayTimestamp(void)
 {
     char timeString[100];
 
-    std::time_t currentTime = std::time(nullptr);
+    std::time_t currentTime = std::time(NULL);
     std::strftime(timeString, sizeof(timeString), "%Y%m%d_%H%M%S", std::localtime(&currentTime));
     std::cout << "[" << timeString << "] ";
 }

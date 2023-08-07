@@ -96,17 +96,24 @@ void PhoneBook::input(std::string &input, std::string msg)
 {
 	std::cout << msg;
 	std::getline(std::cin, input);
-	if (std::cin.eof()) {
-		std::cin.clear();
-		std::cout << "Program finished by reaching EOF" << std::endl;
-		exit(EXIT_FAILURE);
-	}
-	else if (input.empty())
+	checkInput();
+	if (input.empty())
 	{
 		while (input.empty())
 		{
 			std::cout << "You entered nothing, try again: ";
 			std::getline(std::cin, input);
+			checkInput();
 		}
+	}
+}
+
+void PhoneBook::checkInput()
+{
+	if (!std::cin.good()) {
+		std::cin.clear();
+		std::cin.ignore();
+		std::cout << "Program finished by reaching EOF" << std::endl;
+		exit(EXIT_FAILURE);
 	}
 }
