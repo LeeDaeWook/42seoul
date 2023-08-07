@@ -1,12 +1,10 @@
-NAME = ZombieHorde
+NAME = ex03
 
-SRCS = 	main.cpp Zombie.cpp zombieHorde.cpp
+SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 RM = rm -rf
-
-INC = Zombie.hpp
 
 CC = c++
 
@@ -16,7 +14,7 @@ $(NAME) : $(OBJS)
 	$(CC) $^ -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -o $@ -I $(INC)
+	$(CC) $(CFLAGS) $< -o $@
 
 all : $(NAME)
 

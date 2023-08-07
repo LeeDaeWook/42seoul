@@ -1,10 +1,5 @@
 #include "Zombie.hpp"
 
-// void	check_leak()
-// {
-// 	system("leaks ZombieHorde");
-// }
-
 int main()
 {
 	Zombie *horde = zombieHorde(5, "horde");
@@ -12,6 +7,5 @@ int main()
 		horde[i].announce();
 	delete[] horde;
 
-	// atexit(check_leak);
 	return 0;
 }
