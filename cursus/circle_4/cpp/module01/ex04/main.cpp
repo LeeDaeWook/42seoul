@@ -30,6 +30,10 @@ int main(int argc, char* argv[])
 			fout << std::endl;
 		}
 	}
+	else {
+		std::cout << "Failed to open file" << std::endl;
+		exit(EXIT_FAILURE);
+	}
 
 	fin.close();
 	fout.close();
