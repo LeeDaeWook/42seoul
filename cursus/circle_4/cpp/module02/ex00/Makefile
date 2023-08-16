@@ -6,15 +6,15 @@ OBJS = $(SRCS:.cpp=.o)
 
 RM = rm -rf
 
-CC = c++
+CXX = c++
 
-CFLAGS = -c -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -c -Wall -Wextra -Werror -std=c++98
 
 $(NAME) : $(OBJS)
-	$(CC) $^ -o $@
+	$(CXX) $^ -o $@
 
-%.o: %.c
-	$(CC) $(CFLAGS) $< -o $@
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
 
 all : $(NAME)
 
