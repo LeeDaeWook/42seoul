@@ -4,7 +4,7 @@
 # include <string>
 
 class ClapTrap {
-    private:
+    protected:
         std::string name;
         unsigned int hitPoints;
         unsigned int energyPoints;
@@ -13,11 +13,11 @@ class ClapTrap {
     public:
         ClapTrap();
         ClapTrap(std::string name);
-        ~ClapTrap();
+        virtual ~ClapTrap();
         ClapTrap(const ClapTrap& claptrap);
         ClapTrap& operator=(const ClapTrap& claptrap);
 
-        void attack(const std::string& target);
+        virtual void attack(const std::string& target);
         void takeDamage(unsigned int amount);
         void beRepaired(unsigned int amount);
 
