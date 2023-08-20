@@ -26,5 +26,11 @@ int	main(void)
 	wrongCat->makeSound();
 	wrongMeta->makeSound();
 
+	// Animal a;
+	// Animal b(a);
+
+	// std::cout << a.getType() << std::endl;
+	// std::cout << b.getType() << std::endl;
+	
 	return 0;
 }
