@@ -1,7 +1,5 @@
 #ifndef __IMATERIASOURCE_HPP__
 # define __IMATERIASOURCE_HPP__
-# include <iostream>
-# include <string>
 # include "AMateria.hpp"
 
 class IMateriaSource {

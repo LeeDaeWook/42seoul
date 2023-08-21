@@ -55,8 +55,10 @@ std::string const& Character::getName() const
 void Character::equip(AMateria* m)
 {
     for (int i = 0; i < 4; i++) {
-        if (this->inventory[i] == NULL)
+        if (this->inventory[i] == NULL) {
             this->inventory[i] = m;
+            return ;
+        }
     }
 }
 

@@ -30,8 +30,10 @@ MateriaSource& MateriaSource::operator=(const MateriaSource& materiaSource)
 void MateriaSource::learnMateria(AMateria* aMateria)
 {
     for (int i = 0; i < 4; i++) {
-        if (this->inventory[i] == NULL)
+        if (this->inventory[i] == NULL) {
             this->inventory[i] = aMateria;
+            return;
+        }
     }
 }
 

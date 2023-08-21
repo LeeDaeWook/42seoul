@@ -32,3 +32,8 @@ std::string const& AMateria::getType() const
 {
     return type;
 }
+
+void AMateria::use(ICharacter& target)
+{
+    std::cout << "* AMateria is targeting " << target.name << " *" << std::endl; 
+}
