@@ -19,11 +19,8 @@ Animal::Animal(const Animal& animal)
 Animal& Animal::operator=(const Animal& animal)
 {
     std::cout << "Animal Copy assignment operator called" << std::endl;
-    // Animal newAnimal;
-    // newAnimal.type = animal.type;
     this->type = animal.type;
     return *this;
-    // return newAnimal;
 }
 
 void Animal::makeSound() const
