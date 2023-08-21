@@ -9,7 +9,11 @@ MateriaSource::MateriaSource()
 
 MateriaSource::~MateriaSource()
 {
-    std::cout << "Default MateriaSource destructor called" << std::endl;   
+    std::cout << "Default MateriaSource destructor called" << std::endl;
+    for (int i = 0; i < 4; i++) {
+        if (this->inventory[i])
+            delete this->inventory[i];
+    }
 }
 
 MateriaSource::MateriaSource(const MateriaSource& materiaSource)

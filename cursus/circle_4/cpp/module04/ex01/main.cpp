@@ -4,10 +4,10 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-void check_leaks()
-{
-	system("leaks Brain");
-}
+// void check_leaks()
+// {
+// 	system("leaks Brain");
+// }
 
 int	main(void)
 {
@@ -27,22 +27,7 @@ int	main(void)
 		delete animal[i];
 	}
 
-	Dog dog1;
-	for (int i = 0; i < 100; i++) {
-		dog1.brain->ideas[i] = "a";
-	}
-	
-	Dog dog2(dog1);
-	for (int i = 0; i < 100; i++) {
-		std::cout << dog2.brain->ideas[i] << " ";
-	}
-
-	Dog dog3;
-	Dog dog4;
-
-	dog3 = dog4;
-
-	atexit(check_leaks);
+	// atexit(check_leaks);
 
 	return 0;
 }

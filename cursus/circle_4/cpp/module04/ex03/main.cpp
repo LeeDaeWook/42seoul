@@ -5,7 +5,7 @@
 
 // void check_leaks()
 // {
-// 	system("leaks Brain");
+// 	system("leaks Character");
 // }
 
 int	main(void)
@@ -30,6 +30,8 @@ int	main(void)
 	delete bob;
 	delete me;
 	delete src;
+
+	// atexit(check_leaks);
 	
 	return 0;
 }
