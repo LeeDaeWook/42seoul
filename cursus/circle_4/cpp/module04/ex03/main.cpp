@@ -27,6 +27,10 @@ int	main(void)
 	me->use(0, *bob);
 	me->use(1, *bob);
 	
+	if (me->addressDB)
+		delete me->addressDB;
+	me->unequip(0);
+
 	delete bob;
 	delete me;
 	delete src;

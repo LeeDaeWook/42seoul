@@ -5,6 +5,7 @@
 
 class Dog : public Animal {
     private:
+        Brain* brain;
 
     public:
         Dog();
@@ -14,7 +15,6 @@ class Dog : public Animal {
 
         void makeSound() const;
 
-        Brain* brain;
 
 };
 
