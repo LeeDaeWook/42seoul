@@ -22,10 +22,12 @@ Dog::Dog(const Dog& dog)
 Dog& Dog::operator=(const Dog& dog)
 {
     std::cout << "Dog Copy assignment operator called" << std::endl;
-    this->type = dog.type;
-    if (this->brain != NULL)
-        delete this->brain;
-    this->brain = new Brain(*dog.brain);
+    if (this != &dog) {
+        this->type = dog.type;
+        if (this->brain != NULL)
+            delete this->brain;
+        this->brain = new Brain(*dog.brain);
+    }
     return *this;
 }
 

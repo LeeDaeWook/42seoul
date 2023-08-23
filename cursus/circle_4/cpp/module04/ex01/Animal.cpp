@@ -19,7 +19,8 @@ Animal::Animal(const Animal& animal)
 Animal& Animal::operator=(const Animal& animal)
 {
     std::cout << "Animal Copy assignment operator called" << std::endl;
-    this->type = animal.type;
+    if (this != &animal)
+        this->type = animal.type;
     return *this;
 }
 

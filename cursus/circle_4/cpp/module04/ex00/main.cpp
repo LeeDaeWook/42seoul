@@ -4,6 +4,11 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
+// void check_leaks()
+// {
+// 	system("leaks Animal");
+// }
+
 int	main(void)
 {
 	const Animal* meta = new Animal();
@@ -17,6 +22,10 @@ int	main(void)
 	j->makeSound();
 	meta->makeSound();
 
+	delete meta;
+	delete j;
+	delete i;
+
 	std::cout << "-------------------" << std::endl;
 
 	const WrongAnimal* wrongMeta = new WrongAnimal();
@@ -26,12 +35,12 @@ int	main(void)
 	wrongCat->makeSound();
 	wrongMeta->makeSound();
 
-	Animal a;
-	Animal b(a);
+	delete wrongMeta;
+	delete wrongCat;
 
-	std::cout << a.getType() << std::endl;
-	std::cout << b.getType() << std::endl;
-	
+	std::cout << "-------------------" << std::endl;
+
+	// atexit(check_leaks);
 	
 	return 0;
 }

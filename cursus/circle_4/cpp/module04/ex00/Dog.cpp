@@ -20,7 +20,8 @@ Dog::Dog(const Dog& dog)
 Dog& Dog::operator=(const Dog& dog)
 {
     std::cout << "Dog Copy assignment operator called" << std::endl;
-    this->type = dog.type;
+    if (this != &dog)
+        this->type = dog.type;
     return *this;
 }
 
