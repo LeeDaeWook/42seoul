@@ -27,6 +27,13 @@ int	main(void)
 		delete animal[i];
 	}
 
+	Cat cat1;
+	cat1.getBrain()->setIdeas("aaa", 0);
+	cat1.getBrain()->setIdeas("bbb", 1);
+
+	std::cout << cat1.getBrain()->getIdeas(0) << std::endl; 
+	std::cout << cat1.getBrain()->getIdeas(1) << std::endl; 
+
 	// atexit(check_leaks);
 
 	return 0;
