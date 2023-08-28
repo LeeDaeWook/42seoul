@@ -3,9 +3,6 @@
 # include "AMateria.hpp"
 
 class IMateriaSource {
-    protected:
-        AMateria* inventory[4];
-
     public:
         virtual ~IMateriaSource() {};
         virtual void learnMateria(AMateria*) = 0;

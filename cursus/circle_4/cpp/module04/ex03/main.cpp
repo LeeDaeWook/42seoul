@@ -3,10 +3,10 @@
 #include "Character.hpp"
 #include "MateriaSource.hpp"
 
-// void check_leaks()
-// {
-// 	system("leaks Character");
-// }
+void check_leaks()
+{
+	system("leaks Character");
+}
 
 int	main(void)
 {
@@ -27,15 +27,14 @@ int	main(void)
 	me->use(0, *bob);
 	me->use(1, *bob);
 	
-	if (me->addressDB)
-		delete me->addressDB;
 	me->unequip(0);
+	me->unequip(1);
 
 	delete bob;
 	delete me;
 	delete src;
 
-	// atexit(check_leaks);
+	atexit(check_leaks);
 	
 	return 0;
 }

@@ -24,7 +24,8 @@ AMateria::AMateria(const AMateria& aMateria)
 AMateria& AMateria::operator=(const AMateria& aMateria)
 {
     std::cout << "AMateria Copy assignment operator called" << std::endl;
-    this->type = aMateria.type;
+    if (this != &aMateria)
+        this->type = aMateria.type;
     return *this;
 }
 
@@ -35,5 +36,5 @@ std::string const& AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-    std::cout << "* AMateria is targeting " << target.name << " *" << std::endl; 
+    std::cout << "* AMateria is targeting " << target.getName() << " *" << std::endl; 
 }

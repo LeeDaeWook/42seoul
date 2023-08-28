@@ -66,11 +66,13 @@ void Character::equip(AMateria* m)
             return ;
         }
     }
+    delete m;
 }
 
 void Character::unequip(int idx)
 {
     if (idx >= 0 && idx <= 3) {
+        checkAddress();
         this->addressDB = this->inventory[idx];
         this->inventory[idx] = NULL;
     }
@@ -78,5 +80,12 @@ void Character::unequip(int idx)
 
 void Character::use(int idx, ICharacter& target)
 {
-    (this->inventory[idx])->use(target);
+    if (idx >= 0 && idx <= 3)
+        (this->inventory[idx])->use(target);
+}
+
+void Character::checkAddress()
+{
+    if (this->addressDB)
+        delete this->addressDB;
 }

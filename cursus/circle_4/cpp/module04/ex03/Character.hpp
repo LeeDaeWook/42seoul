@@ -3,6 +3,13 @@
 # include "ICharacter.hpp"
 
 class Character : public ICharacter {
+    private:
+        std::string name;
+        AMateria *inventory[4];
+        AMateria *addressDB;
+
+        void checkAddress();
+        
     public:
         Character();
         Character(std::string const& name);
