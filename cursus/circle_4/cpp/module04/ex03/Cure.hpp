@@ -1,12 +1,8 @@
 #ifndef __CURE_HPP__
 # define __CURE_HPP__
-# include <iostream>
-# include <string>
 # include "AMateria.hpp"
 
 class Cure : public AMateria {
-    protected:
-
     public:
         Cure();
         Cure(std::string const& type);

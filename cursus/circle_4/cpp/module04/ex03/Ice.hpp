@@ -1,12 +1,8 @@
 #ifndef __ICE_HPP__
 # define __ICE_HPP__
-# include <iostream>
-# include <string>
 # include "AMateria.hpp"
 
 class Ice : public AMateria {
-    protected:
-
     public:
         Ice();
         Ice(std::string const& type);

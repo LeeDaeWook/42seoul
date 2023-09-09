@@ -1,13 +1,11 @@
-#include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
-#include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-// void check_leaks()
-// {
-// 	system("leaks Abstract");
-// }
+void check_leaks()
+{
+	system("leaks Abstract");
+}
 
 int	main(void)
 {
@@ -34,7 +32,7 @@ int	main(void)
 	std::cout << cat1.getBrain()->getIdeas(0) << std::endl; 
 	std::cout << cat1.getBrain()->getIdeas(1) << std::endl; 
 
-	// atexit(check_leaks);
+	atexit(check_leaks);
 
 	return 0;
 }
