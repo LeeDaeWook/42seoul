@@ -1,0 +1,10 @@
+version : "3"
+
+services:
+  mariadb:
+    image_name : mariadb
+    container_name: mariadb
+    env_file : .env
+    build:
+      context: requirements/mariadb
+    restart: always
