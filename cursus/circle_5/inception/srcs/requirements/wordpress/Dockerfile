@@ -1,7 +1,6 @@
-FROM alpine:3.18.0
+FROM alpine:3.16.3
 
-# need to mysql is connectable check
-HEALTHCHECK --interval=1s --timeout=2s --start-period=7s --retries=30 \
+HEALTHCHECK --interval=1s --timeout=2s --start-period=10s --retries=20 \
 	CMD wp core is-installed --allow-root --path=/var/www || exit 1
 
 RUN apk update && apk upgrade \
@@ -33,8 +32,8 @@ RUN apk update && apk upgrade \
 	php8-zip \
 	libmcrypt-dev \
 	libltdl \
-	&& apk add lighttpd curl \
-	&& apk update
+	lighttpd \
+	curl 
 
 RUN adduser -u 82 -D -S -G www-data www-data
 RUN chown -R www-data:www-data /var/www
@@ -43,7 +42,7 @@ COPY ./conf/www.conf /etc/php8/php-fpm.d/www.conf
 COPY ./conf/wp-config.php /tmp/wp-config.php
 COPY ./tools/wordpress_entry.sh /tmp/wordpress_entry.sh
 
-RUN chmod +x /tmp/run_wordpress.sh
+RUN chmod +x /tmp/wordpress_entry.sh
 
 ENTRYPOINT [ "sh", "/tmp/wordpress_entry.sh" ]
 
