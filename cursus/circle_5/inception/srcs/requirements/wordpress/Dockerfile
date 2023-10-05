@@ -1,6 +1,6 @@
 FROM alpine:3.16.3
 
-HEALTHCHECK --interval=1s --timeout=2s --start-period=10s --retries=20 \
+HEALTHCHECK --interval=1s --timeout=3s --start-period=10s --retries=20 \
 	CMD wp core is-installed --allow-root --path=/var/www || exit 1
 
 RUN apk update && apk upgrade \

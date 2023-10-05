@@ -12,7 +12,7 @@ down :
 	docker compose -f srcs/docker-compose.yml down
 	
 clean : down
-	docker system prune -f
+	docker system prune -f -all
 
 fclean : clean
 	sudo rm -rf $(HOST_VOLUME)/db/*
