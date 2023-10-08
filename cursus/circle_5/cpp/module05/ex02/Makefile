@@ -4,6 +4,8 @@ SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyReque
 
 OBJS = $(SRCS:.cpp=.o)
 
+TEXTS = *_shrubbery
+
 RM = rm -rf
 
 CXX = c++
@@ -22,7 +24,7 @@ clean :
 	$(RM) $(OBJS)
 
 fclean : clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(TEXTS)
 
 re : fclean all
 
