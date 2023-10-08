@@ -15,7 +15,7 @@ int	main(void)
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		Bureaucrat bureaucrat("bureaucrat", 1);
 		std::cout << shrubberyCreationForm << std::endl;
-		bureaucrat.signForm(&shrubberyCreationForm);
+		bureaucrat.signForm(shrubberyCreationForm);
 		bureaucrat.executeForm(shrubberyCreationForm);
 	}
 	catch (AForm::GradeTooHighException &e) {
@@ -38,7 +38,7 @@ int	main(void)
 		ShrubberyCreationForm shrubberyCreationForm("home");
 		Bureaucrat bureaucrat("bureaucrat", 1);
 		std::cout << shrubberyCreationForm << std::endl;
-		bureaucrat.signForm(&shrubberyCreationForm);
+		bureaucrat.signForm(shrubberyCreationForm);
 		Bureaucrat bureaucrat1("bureaucrat1", 138);
 		bureaucrat1.executeForm(shrubberyCreationForm);
 	}
@@ -62,7 +62,7 @@ int	main(void)
 		RobotomyRequestForm robotomyRequestForm("Jason");
 		Bureaucrat bureaucrat("bureaucrat", 1);
 		std::cout << robotomyRequestForm << std::endl;
-		bureaucrat.signForm(&robotomyRequestForm);
+		bureaucrat.signForm(robotomyRequestForm);
 		bureaucrat.executeForm(robotomyRequestForm);
 	}
 	catch (AForm::GradeTooHighException &e) {
@@ -85,7 +85,7 @@ int	main(void)
 		RobotomyRequestForm robotomyRequestForm("home");
 		Bureaucrat bureaucrat("bureaucrat", 1);
 		std::cout << robotomyRequestForm << std::endl;
-		bureaucrat.signForm(&robotomyRequestForm);
+		bureaucrat.signForm(robotomyRequestForm);
 		Bureaucrat bureaucrat1("bureaucrat1", 46);
 		bureaucrat1.executeForm(robotomyRequestForm);
 	}
@@ -109,7 +109,7 @@ int	main(void)
 		PresidentialPardonForm presidentialPardonForm("Jason");
 		Bureaucrat bureaucrat("bureaucrat", 1);
 		std::cout << presidentialPardonForm << std::endl;
-		bureaucrat.signForm(&presidentialPardonForm);
+		bureaucrat.signForm(presidentialPardonForm);
 		bureaucrat.executeForm(presidentialPardonForm);
 	}
 	catch (AForm::GradeTooHighException &e) {
@@ -132,7 +132,7 @@ int	main(void)
 		PresidentialPardonForm presidentialPardonForm("home");
 		Bureaucrat bureaucrat("bureaucrat", 1);
 		std::cout << presidentialPardonForm << std::endl;
-		bureaucrat.signForm(&presidentialPardonForm);
+		bureaucrat.signForm(presidentialPardonForm);
 		Bureaucrat bureaucrat1("bureaucrat1", 6);
 		bureaucrat1.executeForm(presidentialPardonForm);
 	}
