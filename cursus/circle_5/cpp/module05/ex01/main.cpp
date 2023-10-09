@@ -84,7 +84,7 @@ int	main(void)
 	try {
 		Form form = Form("form5", 75, 75);
 		Bureaucrat bureaucrat = Bureaucrat("bureaucrat2", 1);
-		bureaucrat.signForm(&form);
+		bureaucrat.signForm(form);
 		std::cout << form << std::endl;
 	}
 	catch (Form::GradeTooHighException &e) {
@@ -100,7 +100,7 @@ int	main(void)
 	try {
 		Form form = Form("form6", 75, 75);
 		Bureaucrat bureaucrat = Bureaucrat("bureaucrat2", 150);
-		bureaucrat.signForm(&form);
+		bureaucrat.signForm(form);
 		std::cout << form << std::endl;
 	}
 	catch (Form::GradeTooHighException &e) {
@@ -111,6 +111,8 @@ int	main(void)
 	}
 
 	std::cout << "\n==========================\n" << std::endl;
+
+	// atexit(check_leaks);
 
 	return 0;
 }

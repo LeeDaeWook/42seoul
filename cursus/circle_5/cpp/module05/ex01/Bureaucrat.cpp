@@ -79,12 +79,12 @@ void Bureaucrat::decGrade()
     this->grade++;
 }
 
-void Bureaucrat::signForm(Form *form)
+void Bureaucrat::signForm(Form &form)
 {
-    if (this->getGrade() <= form->getSignGrade()) {
-        form->beSigned(*this);
-        std::cout << this->getName() << " signed " << form->getName() << std::endl;
+    if (this->getGrade() <= form.getSignGrade()) {
+        form.beSigned(*this);
+        std::cout << this->getName() << " signed " << form.getName() << std::endl;
     }
     else
-        std::cout << this->getName() << " couldn’t sign " << form->getName() << " because bureaucrat's grade is lower than form's grade to sign" << std::endl;
+        std::cout << this->getName() << " couldn’t sign " << form.getName() << " because bureaucrat's grade is lower than form's grade to sign" << std::endl;
 }

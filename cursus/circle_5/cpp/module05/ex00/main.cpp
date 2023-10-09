@@ -76,5 +76,7 @@ int	main(void)
 		std::cout << e.what() << std::endl;
 	}
 
+	// atexit(check_leaks);
+
 	return 0;
 }

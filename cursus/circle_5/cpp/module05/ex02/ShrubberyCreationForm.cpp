@@ -53,7 +53,8 @@ std::string ShrubberyCreationForm::getTarget() const
 void ShrubberyCreationForm::action() const
 {
     std::ofstream fout;
-    fout.open(this->getTarget() + "_shrubbery");
+    std::string asciiTree = this->getTarget() + "_shrubbery";
+    fout.open(asciiTree.c_str());
     this->writeTree(fout);
 }
 
