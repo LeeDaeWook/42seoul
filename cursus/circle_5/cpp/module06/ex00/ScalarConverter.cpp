@@ -2,24 +2,24 @@
 
 ScalarConverter::ScalarConverter()
 {
-    std::cout << "Default ScalarConverter constructor called" << std::endl;
+    // std::cout << "Default ScalarConverter constructor called" << std::endl;
 }
 
 ScalarConverter::~ScalarConverter()
 {
-    std::cout << "Default ScalarConverter destructor called" << std::endl;
+    // std::cout << "Default ScalarConverter destructor called" << std::endl;
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter& scalarConverter)
 {
-    std::cout << "ScalarConverter Copy constructor called" << std::endl;
+    // std::cout << "ScalarConverter Copy constructor called" << std::endl;
     (void)scalarConverter;
     *this = scalarConverter;
 }
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& scalarConverter)
 {
-    std::cout << "ScalarConverter Copy assignment operator called" << std::endl;
+    // std::cout << "ScalarConverter Copy assignment operator called" << std::endl;
     (void)scalarConverter;
     return *this;
 }
@@ -50,9 +50,7 @@ void ScalarConverter::convert(std::string data)
         std::cout << e.what() << std::endl;
         return ;
     }
-    // std::cout << "value : " << value << std::endl;
     applyToChar(data, value);
-    std::cout << "value : " << value << std::endl;
     applyToInt(data, value);
     applyToFloat(data, value, &end);
     applyToDouble(data, value, &end);
@@ -71,7 +69,6 @@ void ScalarConverter::applyToFloat(std::string data, double &value, char **end)
 
 void ScalarConverter::isFloat(std::string data, double &value, char **end)
 {
-    // if ((value == 0 && data.compare("0") && data.find("0.0") == std::string::npos) || (isChar(data) && (data.at(0) < '0' || data.at(0) > '9')))
     if (isChar(data) && (data.at(0) < '0' || data.at(0) > '9'))
         throw ImpossibleToConvertException();
     else if (isPseudoLiteral(data) || (!isZeroAfterDot(data, end) && data.find(".") != std::string::npos))
@@ -124,7 +121,7 @@ void ScalarConverter::applyToInt(std::string data, double &value)
 
 void ScalarConverter::isInt(std::string data, double &value)
 {
-    if (isPseudoLiteral(data) || isChar(data))
+    if (isPseudoLiteral(data) || (isChar(data) && (data.at(0) < '0' || data.at(0) > '9')))
         throw ImpossibleToConvertException();
     std::cout << static_cast<int>(value) << std::endl;
 }
@@ -145,9 +142,9 @@ void ScalarConverter::isPrintable(std::string data, double &value)
     // 제어 문자인 경우 (출력 불가)
     if (isPseudoLiteral(data))
         throw ImpossibleToConvertException();
-    else if (isChar(data))
+    else if (isChar(data) && (data.at(0) < '0' || data.at(0) > '9'))
         std::cout << static_cast<char>(data.at(0)) << std::endl;
-    else if (data.length() > 1 && (value < 32 || value >= 127))
+    else if ((data.length() > 1 && (value < 32 || value >= 127)) || (data.length() == 1 && (data.at(0) >= '0' && data.at(0) <= '9')))
         throw NotDisplayableException();
     else
         std::cout << static_cast<char>(value) << std::endl;
