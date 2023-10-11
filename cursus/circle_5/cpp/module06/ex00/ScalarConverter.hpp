@@ -24,10 +24,12 @@ class ScalarConverter {
         void applyToFloat(std::string data, double &value, char **end);
         void isFloat(std::string data, double &value, char **end);
 
-        void applyToDouble(std::string data, double &value);
-        void isDouble(std::string data, double &value);
+        void applyToDouble(std::string data, double &value, char **end);
+        void isDouble(std::string data, double &value, char **end);
 
         bool isPseudoLiteral(std::string data);
+
+        bool isZeroAfterDot(std::string data, char **end);
 
         class NotDisplayableException : public std::exception {
             public:
