@@ -8,14 +8,15 @@ typedef struct s_data {
 }   Data;
 
 class Serializer {
-    public:
+    private:
         Serializer();
         virtual ~Serializer();
         Serializer(const Serializer& serializer);
         Serializer& operator=(const Serializer& serializer);
-
-        uintptr_t serialize(Data* ptr);
-        Data* deserialize(uintptr_t raw);
+    
+    public:
+        static uintptr_t serialize(Data* ptr);
+        static Data* deserialize(uintptr_t raw);
 };
 
 #endif

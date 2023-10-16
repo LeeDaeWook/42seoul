@@ -5,31 +5,32 @@
 # include <cstdlib>
 
 class ScalarConverter {
-    public:
+    private:
         ScalarConverter();
         virtual ~ScalarConverter();
         ScalarConverter(const ScalarConverter& scalarConverter);
         ScalarConverter& operator=(const ScalarConverter& scalarConverter);
 
-        void convert(std::string scalarType);
-        void isApplicable(std::string &data, double &value, char **end);
+    public:
+        static void convert(std::string scalarType);
+        static void isApplicable(std::string &data, double &value, char **end);
 
-        void applyToChar(std::string data, double &value);
-        void isPrintable(std::string data, double &value);
-        bool isChar(std::string data);
+        static void applyToChar(std::string data, double &value);
+        static void isPrintable(std::string data, double &value);
+        static bool isChar(std::string data);
 
-        void applyToInt(std::string data, double &value);
-        void isInt(std::string data, double &value);
+        static void applyToInt(std::string data, double &value);
+        static void isInt(std::string data, double &value);
 
-        void applyToFloat(std::string data, double &value, char **end);
-        void isFloat(std::string data, double &value, char **end);
+        static void applyToFloat(std::string data, double &value, char **end);
+        static void isFloat(std::string data, double &value, char **end);
 
-        void applyToDouble(std::string data, double &value, char **end);
-        void isDouble(std::string data, double &value, char **end);
+        static void applyToDouble(std::string data, double &value, char **end);
+        static void isDouble(std::string data, double &value, char **end);
 
-        bool isPseudoLiteral(std::string data);
+        static bool isPseudoLiteral(std::string data);
 
-        bool isZeroAfterDot(std::string data, char **end);
+        static bool isZeroAfterDot(std::string data, char **end);
 
         class NotDisplayableException : public std::exception {
             public:
