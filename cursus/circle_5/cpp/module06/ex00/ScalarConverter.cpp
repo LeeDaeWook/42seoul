@@ -2,24 +2,24 @@
 
 ScalarConverter::ScalarConverter()
 {
-    // std::cout << "Default ScalarConverter constructor called" << std::endl;
+    std::cout << "Default ScalarConverter constructor called" << std::endl;
 }
 
 ScalarConverter::~ScalarConverter()
 {
-    // std::cout << "Default ScalarConverter destructor called" << std::endl;
+    std::cout << "Default ScalarConverter destructor called" << std::endl;
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter& scalarConverter)
 {
-    // std::cout << "ScalarConverter Copy constructor called" << std::endl;
+    std::cout << "ScalarConverter Copy constructor called" << std::endl;
     (void)scalarConverter;
     *this = scalarConverter;
 }
 
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter& scalarConverter)
 {
-    // std::cout << "ScalarConverter Copy assignment operator called" << std::endl;
+    std::cout << "ScalarConverter Copy assignment operator called" << std::endl;
     (void)scalarConverter;
     return *this;
 }
@@ -95,7 +95,6 @@ void ScalarConverter::isDouble(std::string data, double &value, char **end)
     else if ((isChar(data) && data.at(0) >= '0' && data.at(0) <= '9') \
         || (!isChar(data) && !isPseudoLiteral(data) && (data.find(".") == std::string::npos || isZeroAfterDot(data, end))))
         std::cout << static_cast<double>(value) << ".0" << std::endl;
-    // else if (!isChar(data) && (isPseudoLiteral(data) || data.find(".") != std::string::npos))
     else
         std::cout << static_cast<double>(value) << std::endl;
 }
@@ -171,4 +170,3 @@ bool ScalarConverter::isZeroAfterDot(std::string data, char **end)
         return true;
     return false;
 }
-
