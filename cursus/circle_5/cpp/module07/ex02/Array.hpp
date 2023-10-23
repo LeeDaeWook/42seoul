@@ -6,7 +6,7 @@
 template <typename T>
 class Array {
     private:
-        T *e;
+        T* arr;
         unsigned int n;
 
     public:
@@ -15,8 +15,11 @@ class Array {
         virtual ~Array();
         Array(const Array& array);
         Array& operator=(const Array& array);
+        T& operator[](unsigned int idx);
 
         unsigned int size();
 };
+
+#include "Array.tpp"
 
 #endif
