@@ -11,7 +11,8 @@ Array<T>::Array(unsigned int n)
 {
     std::cout << "Parameter Array constructor called" << std::endl;
     this->arr = new T[n];
-    this->arr[0] = n;
+    for (unsigned int i = 0; i < n; i++)
+        this->arr[i] = 0;
     this->n = n;
 }
 
@@ -36,8 +37,9 @@ Array<T>& Array<T>::operator=(const Array& array)
     std::cout << "Array Copy assignment operator called" << std::endl;
     if (this != &array) {
         this->n = array.n;
+        if (this->arr)
+            delete[] this->arr;
         this->arr = new T[this->n];
-        this->arr[0] = this->n;
         for (unsigned int i = 0; i < this->n; i++)
             this->arr[i] = array.arr[i];
     }
