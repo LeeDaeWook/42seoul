@@ -1,43 +1,41 @@
 #include "MutantStack.hpp"
 
-// void check_leaks()
-// {
-// 	system("leaks MutantStack");
-// }
+void check_leaks()
+{
+	system("leaks MutantStack");
+}
 
-#include <stack>
 #include <list>
 
 int	main()
 {
-	std::stack<int> s;
-	s.push(5);
-	s.push(17);
+	// std::stack<int> s;
+	// s.push(5);
+	// s.push(17);
 
-	MutantStack<int> mstack;
-	mstack.push(1);
-	mstack.push(2);
-	mstack.push(3);
+	// MutantStack<int> mstack;
+	// mstack.push(1);
+	// mstack.push(2);
+	// mstack.push(3);
 
-	MutantStack<int>::iterator it = mstack.begin();
+	// MutantStack<int>::iterator it = mstack.begin();
 
-	// Iterator<int> it;
 
-	MutantStack<int> mstack2(mstack);
+	// MutantStack<int> mstack2(mstack);
 
-	for (int i = 0; i < 3; i++)
-	{
-		std::cout << "mstack : " << mstack.top() << std::endl;
-		mstack.pop();
-	}
+	// for (int i = 0; i < 3; i++)
+	// {
+	// 	std::cout << "mstack : " << mstack.top() << std::endl;
+	// 	mstack.pop();
+	// }
 
-	std::cout << "====================" << std::endl;
+	// std::cout << "====================" << std::endl;
 
-	for (int i = 0; i < 3; i++)
-	{
-		std::cout << "mstack2 : " <<  mstack2.top() << std::endl;
-		mstack2.pop();
-	}
+	// for (int i = 0; i < 3; i++)
+	// {
+	// 	std::cout << "mstack2 : " <<  mstack2.top() << std::endl;
+	// 	mstack2.pop();
+	// }
 
 
 
@@ -61,39 +59,71 @@ int	main()
 	// 	l.pop_front();
 	// }
 
+	{	
+		MutantStack<int> mstack;
 
+		mstack.push(5);
+		mstack.push(17);
 
-	// MutantStack<int> mstack;
+		std::cout << mstack.top() << std::endl;
 
-	// mstack.push(5);
-	// mstack.push(17);
+		mstack.pop();
 
-	// std::cout << mstack.top() << std::endl;
+		std::cout << mstack.size() << std::endl;
 
-	// mstack.pop();
+		mstack.push(3);
+		mstack.push(5);
+		mstack.push(737);
+		mstack.push(0);
 
-	// std::cout << mstack.size() << std::endl;
+		MutantStack<int>::iterator it = mstack.begin();
+		MutantStack<int>::iterator ite = mstack.end();
 
-	// mstack.push(3);
-	// mstack.push(5);
-	// mstack.push(737);
-	// mstack.push(0);
+		++it;
+		--it;
 
-	// MutantStack<int>::iterator it = mstack.begin();
-	// MutantStack<int>::iterator ite = mstack.end();
+		while (it != ite)
+		{
+			std::cout << *it << std::endl;
+			++it;
+		}
 
-	// ++it;
-	// --it;
+		std::stack<int> s(mstack);
+	}
 
-	// while (it != ite)
-	// {
-	// 	std::cout << *it << std::endl;
-	// 	++it;
-	// }
+	std::cout << "\n=====================\n" << std::endl;
 
-	// std::stack<int> s(mstack);
+	{
+		std::list<int> lst;
 
-	// atexit(check_leaks);
+		lst.push_front(5);
+		lst.push_front(17);
+
+		std::cout << lst.front() << std::endl;
+
+		lst.pop_front();
+
+		std::cout << lst.size() << std::endl;
+
+		lst.push_front(3);
+		lst.push_front(5);
+		lst.push_front(737);
+		lst.push_front(0);
+
+		std::list<int>::iterator it = lst.begin();
+		std::list<int>::iterator ite = lst.end();
+
+		++it;
+		--it;
+
+		while (it != ite)
+		{
+			std::cout << *it << std::endl;
+			++it;
+		}
+	}
+
+	atexit(check_leaks);
 
 	return 0;
 }

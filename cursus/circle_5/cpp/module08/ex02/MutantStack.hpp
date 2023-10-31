@@ -2,6 +2,7 @@
 # define __MutantStack_HPP__
 # include <iostream>
 # include <string>
+# include <stack>
 
 template <typename T>
 struct Node {
@@ -27,13 +28,17 @@ class Iterator {
         T& operator*();
         bool operator==(const Iterator& iterator);
         bool operator!=(const Iterator& iterator);
+
+        void setCur(Node<T> *ptr);
 };
 
 template <typename T>
-class MutantStack {
+class MutantStack : public std::stack<T> {
     private:
         Node<T> *head;
         int stackSize;
+        Iterator<T>* itBegin;
+        Iterator<T>* itEnd;
 
     public:
         MutantStack();
@@ -51,15 +56,19 @@ class MutantStack {
         bool empty();
         
         typedef Iterator<T> iterator;
+        // typedef typename MutantStack<T>::container_type::iterator iterator;
 
-        iterator begin() {
-            std::cout << "MutantStack begin() called" << std::endl;
-            return iterator(head);
+        iterator& begin() {
+            // std::cout << "MutantStack begin() called" << std::endl;
+            // return this->c.begin();
+            itBegin->setCur(head);
+            return *itBegin;
         }
 
-        iterator end() {
-            std::cout << "MutantStack end() called" << std::endl;
-            return iterator(NULL);
+        iterator& end() {
+            // std::cout << "MutantStack end() called" << std::endl;
+            // return this->c.end();
+            return *itEnd;
         }
 };
 
