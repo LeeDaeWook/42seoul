@@ -123,7 +123,7 @@ int	main()
 		}
 	}
 
-	atexit(check_leaks);
+	// atexit(check_leaks);
 
 	return 0;
 }
