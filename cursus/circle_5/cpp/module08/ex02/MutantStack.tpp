@@ -3,32 +3,32 @@
 template <typename T>
 Iterator<T>::Iterator() : cur(NULL)
 {
-    // std::cout << "Default Iterator constructor called" << std::endl;
+    std::cout << "Default Iterator constructor called" << std::endl;
 }
 
 template <typename T>
 Iterator<T>::Iterator(Node<T> *ptr) : cur(ptr)
 {
-    // std::cout << "Parameter Iterator constructor called" << std::endl;
+    std::cout << "Parameter Iterator constructor called" << std::endl;
 }
 
 template <typename T>
 Iterator<T>::~Iterator()
 {
-    // std::cout << "Default Iterator destructor called" << std::endl;
+    std::cout << "Default Iterator destructor called" << std::endl;
 }
 
 template <typename T>
 Iterator<T>::Iterator(Iterator &iterator)
 {
-    // std::cout << "Iterator Copy constructor called" << std::endl;
+    std::cout << "Iterator Copy constructor called" << std::endl;
     *this = iterator;
 }
 
 template <typename T>
 Iterator<T> &Iterator<T>::operator=(Iterator &iterator)
 {
-    // std::cout << "Iterator Copy assignment operator called" << std::endl;
+    std::cout << "Iterator Copy assignment operator called" << std::endl;
 
     if (this != &iterator)
     {
@@ -40,7 +40,7 @@ Iterator<T> &Iterator<T>::operator=(Iterator &iterator)
 template <typename T>
 Iterator<T> &Iterator<T>::operator++()
 {
-    // std::cout << "Iterator ++ operator called" << std::endl;
+    std::cout << "Iterator ++ operator called" << std::endl;
     cur = cur->next;
     return *this;
 }
@@ -48,7 +48,7 @@ Iterator<T> &Iterator<T>::operator++()
 template <typename T>
 Iterator<T> &Iterator<T>::operator--()
 {
-    // std::cout << "Iterator -- operator called" << std::endl;
+    std::cout << "Iterator -- operator called" << std::endl;
     cur = cur->prev;
     return *this;
 }
@@ -56,42 +56,41 @@ Iterator<T> &Iterator<T>::operator--()
 template <typename T>
 T &Iterator<T>::operator*()
 {
-    // std::cout << "Iterator * operator called" << std::endl;
+    std::cout << "Iterator * operator called" << std::endl;
     return cur->data;
 }
 
 template <typename T>
 bool Iterator<T>::operator==(const Iterator &iterator)
 {
-    // std::cout << "Iterator == operator called" << std::endl;
+    std::cout << "Iterator == operator called" << std::endl;
     return cur == iterator.cur;
 }
 
 template <typename T>
 bool Iterator<T>::operator!=(const Iterator &iterator)
 {
-    // std::cout << "Iterator != operator called" << std::endl;
+    std::cout << "Iterator != operator called" << std::endl;
     return cur != iterator.cur;
 }
 
 template <typename T>
 void Iterator<T>::setCur(Node<T> *ptr)
 {
-    // std::cout << "Iterator setCur() called" << std::endl;
+    std::cout << "Iterator setCur() called" << std::endl;
     cur = ptr;
 }
-
 
 template <typename T>
 MutantStack<T>::MutantStack() : head(NULL), stackSize(0), itBegin(new Iterator<T>(NULL)), itEnd(new Iterator<T>(NULL))
 {
-    // std::cout << "Default MutantStack constructor called" << std::endl;
+    std::cout << "Default MutantStack constructor called" << std::endl;
 }
 
 template <typename T>
 MutantStack<T>::~MutantStack()
 {
-    // std::cout << "Default MutantStack destructor called" << std::endl;
+    std::cout << "Default MutantStack destructor called" << std::endl;
     deleteStack();
     delete itBegin;
     delete itEnd;
@@ -100,14 +99,14 @@ MutantStack<T>::~MutantStack()
 template <typename T>
 MutantStack<T>::MutantStack(MutantStack &mutantStack) : head(NULL), stackSize(0)
 {
-    // std::cout << "MutantStack Copy constructor called" << std::endl;
+    std::cout << "MutantStack Copy constructor called" << std::endl;
     *this = mutantStack;
 }
 
 template <typename T>
 MutantStack<T> &MutantStack<T>::operator=(MutantStack &mutantStack)
 {
-    // std::cout << "MutantStack Copy assignment operator called" << std::endl;
+    std::cout << "MutantStack Copy assignment operator called" << std::endl;
 
     if (this != &mutantStack)
     {
@@ -124,7 +123,7 @@ MutantStack<T> &MutantStack<T>::operator=(MutantStack &mutantStack)
 template <typename T>
 void MutantStack<T>::deleteStack()
 {
-    // std::cout << "MutantStack deleteStack() called" << std::endl;
+    std::cout << "MutantStack deleteStack() called" << std::endl;
     Node<T> *tmp = head;
     while (tmp)
     {
@@ -137,7 +136,7 @@ void MutantStack<T>::deleteStack()
 template <typename T>
 void MutantStack<T>::copyStack(MutantStack &mutantStack)
 {
-    // std::cout << "MutantStack copyStack() called" << std::endl;
+    std::cout << "MutantStack copyStack() called" << std::endl;
     Node<T> *bottom = mutantStack.head;
     for (int i = 0; i < mutantStack.stackSize - 1; i++)
         bottom = bottom->next;
@@ -163,7 +162,7 @@ void MutantStack<T>::copyStack(MutantStack &mutantStack)
 template <typename T>
 void MutantStack<T>::push(T data)
 {
-    // std::cout << "MutantStack push() called" << std::endl;
+    std::cout << "MutantStack push() called" << std::endl;
     Node<T> *newNode = new Node<T>;
     newNode->data = data;
     newNode->next = head;
@@ -176,7 +175,7 @@ void MutantStack<T>::push(T data)
 template <typename T>
 void MutantStack<T>::pop()
 {
-    // std::cout << "MutantStack pop() called" << std::endl;
+    std::cout << "MutantStack pop() called" << std::endl;
     Node<T> *tmp = head;
     head = head->next;
     if (head)
@@ -188,20 +187,27 @@ void MutantStack<T>::pop()
 template <typename T>
 T MutantStack<T>::top()
 {
-    // std::cout << "MutantStack top() called" << std::endl;
+    std::cout << "MutantStack top() called" << std::endl;
     return head->data;
 }
 
 template <typename T>
 unsigned int MutantStack<T>::size()
 {
-    // std::cout << "MutantStack size() called" << std::endl;
+    std::cout << "MutantStack size() called" << std::endl;
     return stackSize;
 }
 
 template <typename T>
 bool MutantStack<T>::empty()
 {
-    // std::cout << "MutantStack empty() called" << std::endl;
+    std::cout << "MutantStack empty() called" << std::endl;
     return stackSize == 0;
+}
+
+template <typename T>
+typename MutantStack<T>::iterator& MutantStack<T>::begin() {
+    std::cout << "MutantStack begin() called" << std::endl;
+    itBegin->setCur(this->head);
+    return *itBegin;
 }

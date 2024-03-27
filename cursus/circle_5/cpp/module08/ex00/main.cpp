@@ -17,9 +17,17 @@ int	main()
 	arr.push_back(7);
 
 	try {
-		easyfind(arr, 5);
+		std::cout << *(easyfind(arr, 5)) << std::endl;
 	}
 	catch (std::exception &e) {
+		std::cout << "Not found!" << std::endl;
+	}
+
+	try {
+		std::cout << *(easyfind(arr, 100)) << std::endl;
+	}
+	catch (std::exception &e) {
+		std::cout << "Not found!" << std::endl;
 	}
 
 	atexit(check_leaks);

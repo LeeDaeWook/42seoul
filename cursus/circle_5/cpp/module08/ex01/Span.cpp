@@ -86,10 +86,9 @@ int Span::longestSpan()
     return copyLt.back() - copyLt.front();
 }
 
-
 void Span::addNumbers(unsigned int size, std::list<int>::iterator begin, std::list<int>::iterator end)
 {
-    if (this->n > this->list.size() + size)
+    if (this->n >= this->list.size() + size)
         this->list.insert(this->list.end(), begin, end);
     else
         throw std::exception();

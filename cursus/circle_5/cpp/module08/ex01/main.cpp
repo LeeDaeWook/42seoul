@@ -1,9 +1,9 @@
 #include "Span.hpp"
 
-// void check_leaks()
-// {
-// 	system("leaks Span");
-// }
+void check_leaks()
+{
+	system("leaks Span");
+}
 
 int	main()
 {	
@@ -80,7 +80,7 @@ int	main()
 		int result2 = 0;
 
 		try {
-			span.addNumbers(1000, lst.begin(), lst.end());
+			span.addNumbers(10000, lst.begin(), lst.end());
 			result1 = span.shortestSpan();
 			result2 = span.longestSpan();
 		}
@@ -92,7 +92,7 @@ int	main()
 		std::cout << "Longest span: " << result2 << std::endl;
 	}
 
-	// atexit(check_leaks);
+	atexit(check_leaks);
 
 	return 0;
 }
