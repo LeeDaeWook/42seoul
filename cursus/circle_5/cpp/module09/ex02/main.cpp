@@ -24,8 +24,11 @@ int	main(int argc, char *argv[])
 
     c1.split(input, argc - 1);
     c1.sortPairs();
+    c1.dividePairs();
 
     c1.showPairs();
+    c1.showMainChain();
+    c1.showPendingChain();
 
 	// atexit(check_leaks);
 

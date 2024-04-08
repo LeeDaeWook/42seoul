@@ -3,13 +3,15 @@
 # include <iostream>
 # include <string>
 # include <list>
+# include <vector>
 
 class PmergeMe {
     private:
         unsigned int size;
-        std::list<int> list;
-        // std::list<std::pair<int, int>> pairs;
+        std::vector<int> vec;
         std::pair<int, int>** pairs;
+        int* mainChain;
+        int* pendingChain;
 
     public:
         PmergeMe();
@@ -22,10 +24,15 @@ class PmergeMe {
         void split(int* inputArr, int size);
         void sortPair(std::pair<int, int>* p);
         void sortPairs();
+        void dividePairs();
+        void mergeInsertionSort();
+        int binarySearch(int num, int end, int* arr);
 
         // temp 함수 (나중에 삭제)
         void show();
         void showPairs();
+        void showMainChain();
+        void showPendingChain();
 
         unsigned int getSize();
 };
