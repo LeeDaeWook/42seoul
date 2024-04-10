@@ -4,14 +4,16 @@
 # include <string>
 # include <list>
 # include <vector>
+# include <cmath>
+# include <algorithm>
 
 class PmergeMe {
     private:
         unsigned int size;
-        std::vector<int> vec;
         std::pair<int, int>** pairs;
-        int* mainChain;
-        int* pendingChain;
+        std::vector<int> mainChain;
+        std::vector<int> pendingChain;
+        // int* pendingChain;
 
     public:
         PmergeMe();
@@ -20,13 +22,12 @@ class PmergeMe {
         PmergeMe(PmergeMe &PmergeMe);
         PmergeMe &operator=(PmergeMe& PmergeMe);
 
-        void addElement(int number);
         void split(int* inputArr, int size);
         void sortPair(std::pair<int, int>* p);
         void sortPairs();
         void dividePairs();
         void mergeInsertionSort();
-        int binarySearch(int num, int end, int* arr);
+        int binarySearch(int num, int end, std::vector<int> vec);
 
         // temp 함수 (나중에 삭제)
         void show();

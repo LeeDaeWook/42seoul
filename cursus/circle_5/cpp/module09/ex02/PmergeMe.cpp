@@ -30,22 +30,18 @@ PmergeMe &PmergeMe::operator=(PmergeMe &PmergeMe)
     if (this != &PmergeMe)
     {
         this->size = PmergeMe.size;
-        for (iter = PmergeMe.list.begin(); iter != PmergeMe.list.end(); ++iter)
-            this->list.push_back(*iter);
+        // for (iter = PmergeMe.list.begin(); iter != PmergeMe.list.end(); ++iter)
+        //     this->list.push_back(*iter);
     }
     return *this;
-}
-
-void PmergeMe::addElement(int number) {
-    this->list.push_back(number);
 }
 
 void PmergeMe::show() {
     std::list<int>::iterator it;
 
-    for (it = this->list.begin(); it != this->list.end(); it++) {
-        std::cout << *it << std::endl;
-    }
+    // for (it = this->list.begin(); it != this->list.end(); it++) {
+    //     std::cout << *it << std::endl;
+    // }
 }
 
 void PmergeMe::split(int* inputArr, int size) {
@@ -94,39 +90,54 @@ void PmergeMe::dividePairs() {
     /*
         check if there is memory in pointer
     */
-    this->mainChain = new int[this->size / 2];
-    this->pendingChain = new int[this->size / 2];
+    // this->mainChain = new int[this->size / 2];
+    // this->pendingChain = new int[this->size / 2];
+
 
     for (unsigned int i = 0; i < this->size / 2; i++) {
-        this->mainChain[i] = this->pairs[i]->first;
-        this->pendingChain[i] = this->pairs[i]->second;
+        this->mainChain.insert(this->mainChain.begin() + i, this->pairs[i]->first);
+        // this->mainChain[i] = this->pairs[i]->first;
+        this->pendingChain.insert(this->pendingChain.begin() + i, this->pairs[i]->second);
+        // this->pendingChain[i] = this->pairs[i]->second;
     }
     if (this->size % 2 == 1) {
-        this->pendingChain[this->size / 2] = this->pairs[this->size / 2]->second;
+        // this->pendingChain[this->size / 2] = this->pairs[this->size / 2]->second;
+        this->pendingChain.insert(this->pendingChain.begin() + this->size / 2, this->pairs[this->size / 2]->second);
     }
 }
 
 void PmergeMe::mergeInsertionSort() {
-    int sign = 1;
     int t = 1;
-    while () {
-        t = 2 * t + sign;
-        for (int i = t; i > (t - sign) / 2; i--) {
-            
-            binarySearch(this->pendingChain[i], , this->vec);
-            this->vec.
+    int n = 2;
+    if (this->size >= 2) {
+        this->mainChain.insert(this->mainChain.begin(), this->pendingChain[0]);
+        // this->pendingChain.erase(this->pendingChain.begin());
+    }
+    while (this->size > this->mainChain.size()) {
+    // while (this->pendingChain.size()) {
+    // while (!this->pendingChain.empty()) {
+        t = 2 * t + std::pow(-1, n);
+        std::cout << n << std::endl;
+        for (int i = std::min(t, (int)this->pendingChain.size()); i > (t - (int)std::pow(-1, n)) / 2; i--) {
+            int findNum = this->pendingChain[i-1];
+            // this->pendingChain.erase(this->pendingChain.begin() + i - 1);
+            std::cout << "size : " << (int)this->mainChain.size() << std::endl;
+            std::cout << findNum << std::endl;
+            int targetIdx = binarySearch(findNum, std::min((int)std::pow(2, n) - 1, (int)this->mainChain.size()), this->mainChain);
+            this->mainChain.insert(this->mainChain.begin() + targetIdx, findNum);
+            showMainChain();
         }
-        sign *= -1;
+        n++;
     }
 }
 
-int PmergeMe::binarySearch(int num, int end, int* arr) {
+int PmergeMe::binarySearch(int num, int endIdx, std::vector<int> vec) {
     int l = 0;
-    int r = end;
+    int r = endIdx - 1;
     int mid;
     while (l <= r) {
-        mid = l + r / 2;
-        if (num > arr[mid]) {
+        mid = (l + r) / 2;
+        if (num > vec[mid]) {
             l = mid + 1;
         }
         else {
@@ -142,6 +153,7 @@ unsigned int PmergeMe::getSize() {
 
 // temp 함수
 void PmergeMe::showPairs() {
+    std::cout << "pairs : ";
     for (unsigned int i = 0; i < this->size / 2; i++) {
         std::cout << this->pairs[i]->first << " ";
     }
@@ -149,13 +161,15 @@ void PmergeMe::showPairs() {
 }
 
 void PmergeMe::showMainChain() {
-    for (unsigned int i = 0; i < this->size / 2; i++) {
-        std::cout << this->mainChain[i] << " ";
+    std::cout << "main chain : ";
+    for (std::vector<int>::iterator it = this->mainChain.begin(); it != this->mainChain.end() ;it++) {
+        std::cout << *it << " ";
     }
     std::cout << std::endl;
 }
 
 void PmergeMe::showPendingChain() {
+    std::cout << "pending chain : ";
     for (unsigned int i = 0; i < this->size / 2; i++) {
         std::cout << this->pendingChain[i] << " ";
     }

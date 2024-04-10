@@ -17,7 +17,9 @@ int	main(int argc, char *argv[])
             exit(1);
         }
         input[i-1] = number;
+        std::cout << number << " ";
     }
+    std::cout << std::endl;
 
 	PmergeMe c1;
 	PmergeMe c2;
@@ -25,6 +27,7 @@ int	main(int argc, char *argv[])
     c1.split(input, argc - 1);
     c1.sortPairs();
     c1.dividePairs();
+    c1.mergeInsertionSort();
 
     c1.showPairs();
     c1.showMainChain();
