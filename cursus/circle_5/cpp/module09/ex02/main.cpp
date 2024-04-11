@@ -7,7 +7,8 @@ void check_leaks()
 
 int	main(int argc, char *argv[])
 {	
-    int input[argc-1];
+    // int input[argc-1];
+    std::vector<int> input;
 
     // 입력
     for (int i = 1; i < argc; i++) {
@@ -16,22 +17,46 @@ int	main(int argc, char *argv[])
             std::cout << "Error" << std::endl;
             exit(1);
         }
-        input[i-1] = number;
-        std::cout << number << " ";
+        input.push_back(number);
+        // std::cout << number << " ";
     }
-    std::cout << std::endl;
+    // std::cout << std::endl;
 
 	PmergeMe c1;
-	PmergeMe c2;
 
-    c1.split(input, argc - 1);
-    c1.sortPairs();
-    c1.dividePairs();
-    c1.mergeInsertionSort();
+    // time 함수 사용
+    // time_t start = time(NULL); 
+ 
+    // c1.split(input, argc - 1);
+    // c1.sortPairs();
+    // c1.dividePairs();
+    // c1.mergeInsertionSort();
+ 
+    // time_t finish  = time(NULL); 
+    
+    // double duration = (double)(finish - start);
+    // std::cout << duration * 1000000 << "ms" << std::endl;
 
-    c1.showPairs();
+    // clock 함수 사용
+    clock_t start, finish;
+    double duration;
+ 
+    start = clock();
+    
+    // c1.split(input, argc - 1);
+    // c1.sortPairs();
+    // c1.dividePairs(c1.getMainVec(), c1.getPendingVec());
+    // c1.mergeInsertionSortVec(c1.getMainVec(), c1.getPendingVec());
+    c1.execute(input, argc - 1);
+ 
+    finish = clock();
+ 
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;
+    std::cout << duration << "초" << std::endl;
+
+    // c1.showPairs();
     c1.showMainChain();
-    c1.showPendingChain();
+    // c1.showPendingChain();
 
 	// atexit(check_leaks);
 
