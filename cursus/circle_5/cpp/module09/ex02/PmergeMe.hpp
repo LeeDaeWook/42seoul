@@ -13,6 +13,8 @@ class PmergeMe {
     private:
         unsigned int size;
         std::vector< std::pair<int, int>* > pairsVec;
+        // std::vector< std::pair<int, int> > pairsVec;
+        std::vector< std::pair<int, int> > vec;
         std::vector<int> mainVector;
         std::vector<int> pendingVector;
         std::deque<int> mainDeque;
@@ -25,13 +27,16 @@ class PmergeMe {
         PmergeMe(PmergeMe &PmergeMe);
         PmergeMe &operator=(PmergeMe& PmergeMe);
 
-        void split(std::vector<int> input, int size);
-        void sortPair(std::pair<int, int>* p);
+        // void split(std::vector<int> input, int size);
+        std::vector<std::pair<int, int>>& split(std::vector<int> input);
+        std::vector<std::pair<int, int>>& split(std::vector<std::pair<int, int>> input);
+        // void sortPair(std::pair<int, int>* p);
+        void sortPair(std::pair<std::pair<int, int>*, std::pair<int, int>*>& p);
         void sortPairs();
-        // void dividePairs();
         void dividePairs(std::vector<int>& mainVec, std::vector<int>& pendingVec);
-        void mergeInsertionSortVec(std::vector<int>& mainChain, std::vector<int>& pendingChain);
-        // void mergeInsertionSort();
+        void mergeInsertionSortVec(std::vector<int>& mainChain, std::vector<int>& pendingChain, unsigned int size);
+        void mergeInsertionSortVec(std::vector< std::pair<int, int> >& vec);
+        bool isSorted(std::vector<std::pair<int, int>>& vec);
         int binarySearch(int num, int end, std::vector<int> vec);
 
         void execute(std::vector<int> input, int size);

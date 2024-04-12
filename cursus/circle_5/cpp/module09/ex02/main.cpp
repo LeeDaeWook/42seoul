@@ -46,7 +46,7 @@ int	main(int argc, char *argv[])
     // c1.split(input, argc - 1);
     // c1.sortPairs();
     // c1.dividePairs(c1.getMainVec(), c1.getPendingVec());
-    // c1.mergeInsertionSortVec(c1.getMainVec(), c1.getPendingVec());
+    // c1.mergeInsertionSortVec(c1.getMainVec(), c1.getPendingVec(), c1.getSize());
     c1.execute(input, argc - 1);
  
     finish = clock();
@@ -54,8 +54,9 @@ int	main(int argc, char *argv[])
     duration = (double)(finish - start) / CLOCKS_PER_SEC;
     std::cout << duration << "초" << std::endl;
 
+    std::cout << c1.isSorted(c1.getMainVec()) << std::endl;
     // c1.showPairs();
-    c1.showMainChain();
+    // c1.showMainChain();
     // c1.showPendingChain();
 
 	// atexit(check_leaks);
