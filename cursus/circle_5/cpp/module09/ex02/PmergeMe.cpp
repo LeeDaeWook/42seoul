@@ -41,44 +41,24 @@ PmergeMe &PmergeMe::operator=(PmergeMe &PmergeMe)
 }
 
 // void PmergeMe::sortPair(std::pair<int, int>& p) {
-void PmergeMe::sortPair(std::pair<std::pair<int, int>*, std::pair<int, int>*>& p) {
-    if (p.first->first < p.second->first) {
-        std::pair<int, int>* temp;
-        temp = p.first;
-        p.first = p.second;
-        p.second = temp;
+//     if (p.first < p.second) {
+//         int temp;
+//         temp = p.first;
+//         p.first = p.second;
+//         p.second = temp;
+//     }
+// }
+
+void PmergeMe::sortPair(std::vector<std::pair<int, int> >& vec, int firstIdx, int secondIdx) {
+    if (vec[firstIdx].first < vec[secondIdx].first) {
+        std::pair<int, int> temp;
+        temp = vec[firstIdx];
+        vec[firstIdx] = vec[secondIdx];
+        vec[secondIdx] = temp;
     }
 }
 
-std::vector<std::pair<int, int>>& PmergeMe::split(std::vector<std::pair<int, int>> input) {
-    this->size = input.size();
-    std::vector<std::pair<std::pair<int, int>*, std::pair<int, int>*>> newVec;
-    for (int i = 0; i < size / 2; i++) {
-        // newVec.push_back(std::pair<int, int> (input[i].first, input[i+1].first));
-        newVec.push_back(std::pair<std::pair<int, int>*, std::pair<int, int>*> (&(input[i]), &(input[i+1])));
-        sortPair(newVec.back());
-    }
-    if (this->size % 2 == 1) {
-        // 입력 요소의 개수가 홀수인 경우
-        // newVec.push_back(std::pair<int, int> (0, input.back().first));
-        newVec.push_back(std::pair<std::pair<int, int>*, std::pair<int, int>*> (NULL, &(input.back())));
-    }
-    return newVec;
-}
 
-std::vector<std::pair<int, int>>& PmergeMe::split(std::vector<int> input) {
-    this->size = input.size();
-    std::vector<std::pair<int, int>> newVec;
-    for (int i = 0; i < size / 2; i++) {
-        newVec.push_back(std::pair<int, int> (input[i * 2], input[i * 2 + 1]));
-        sortPair(&(newVec.back()));
-    }
-    if (this->size % 2 == 1) {
-        // 입력 요소의 개수가 홀수인 경우
-        newVec.push_back(std::pair<int, int> (0, input[this->size - 1]));
-    }
-    return newVec;
-}
 
 // void PmergeMe::split(std::vector<int> input, int size) {
 //     this->size = size;
@@ -94,24 +74,160 @@ std::vector<std::pair<int, int>>& PmergeMe::split(std::vector<int> input) {
 //     }
 // }
 
-void PmergeMe::execute(std::vector<int> input, int size) {
-    std::vector<std::pair<int, int>>& vec = this->split(input);
-    this->mergeInsertionSortVec(vec);
+// std::vector<std::pair<int, int> >& PmergeMe::split(std::vector<int> input) {
+//     this->size = input.size();
+//     std::vector<std::pair<int, int> > newVec;
+//     for (int i = 0; i < size / 2; i++) {
+//         newVec.push_back(std::pair<int, int> (input[i * 2], input[i * 2 + 1]));
+//         sortPair(newVec.back());
+//     }
+//     if (this->size % 2 == 1) {
+//         // 입력 요소의 개수가 홀수인 경우
+//         newVec.push_back(std::pair<int, int> (0, input[this->size - 1]));
+//     }
+//     return newVec;
+// }
+
+std::vector<std::vector<std::pair<int, int> > >& PmergeMe::split(std::vector<int> input, std::vector<std::vector<std::pair<int, int> > >& vec) {
+    this->size = input.size();
+    // std::vector<std::vector<std::pair<int, int> > > newVec;
+    for (int i = 0; i < (int)input.size() / 2; i++) {
+        vec.push_back(std::vector<std::pair<int, int> > ((input[i * 2], input[i * 2 + 1])));
+    }
+    return vec;
+}
+
+std::vector<std::vector<std::pair<int, int> > >& PmergeMe::split(std::vector<std::vector<std::pair<int, int> > > input, std::vector<std::vector<std::pair<int, int> > >& newVec) {
+    this->size = input.size();
+    // std::vector<std::vector<std::pair<int, int> > > newVec;
+    for (int i = 0; i < (int)input.size() / 2; i++) {
+        newVec.push_back(std::vector<std::pair<int, int> > ((input[i * 2], input[i * 2 + 1])));
+        sortPair(newVec.back(), 0, newVec.back().size() / 2);
+    }
+    // if (input.size() % 2 == 1) {
+    //     // 입력 요소의 개수가 홀수인 경우
+    //     newVec.push_back(std::vector<std::pair<int, int> > ((NULL, input[input.size() - 1])));
+    // }
+    return newVec;
+}
+
+void PmergeMe::execute(std::vector<int> input) {
+    std::vector<std::vector<std::pair<int, int> > > vec;
+    vec = this->split(input, vec);
+    std::cout << vec[0][0] << std::endl;
+    // showMainChain(vec);
+    // if (vec.size() % 2 == 1) {
+    //     vec = this->mergeInsertionSortVec(vec, vec.back());
+    // }
+    // else {
+    //     std::vector<std::pair<int, int> > emptyVec;
+    //     vec = mergeInsertionSortVec(vec, emptyVec);
+    // }
+
+    // this->showMainChain(vec);
 
     // std::vector<int> mainChain;
     // std::vector<int> pendingChain;
 
-    // this->dividePairs(mainChain, this->pendingVector);
+    // this->split(input, input.size());
     // this->dividePairs(this->mainVector, this->pendingVector);
-
-    // this->split(mainChain, mainChain.size());
-    // this->dividePairs(this->mainVector, pendingChain);
-    // this->mergeInsertionSortVec(this->mainVector, pendingChain, mainChain.size());
+    // this->mergeInsertionSortVec(this->mainVector, this->pendingVector, this->mainVector.size());
 
     // this->mainVector.clear();
     // this->mainVector.assign(mainChain.begin(), mainChain.end());
     // this->mergeInsertionSortVec(this->mainVector, this->pendingVector, size);
 }
+
+std::vector<std::vector<std::pair<int, int> > >& PmergeMe::mergeInsertionSortVec(std::vector<std::vector<std::pair<int, int> > >& vec, std::vector<std::pair<int, int> >& odd) {
+    if (!isSorted(vec)) {
+        std::vector<std::vector<std::pair<int, int> > > splitVec;
+        splitVec = this->split(vec, splitVec);
+        vec.clear();
+        if (vec.size() % 2 == 1)
+            vec = mergeInsertionSortVec(splitVec, vec.back());
+        else {
+            std::vector<std::pair<int, int> > emptyVec;
+            vec = mergeInsertionSortVec(splitVec, emptyVec);
+        }
+    }
+    int t = 1;
+    int n = 2;
+    this->moveElements(vec, 0, vec[0].begin() + vec[0].size() / 2, vec[0].end());
+    vec[0].erase(vec[0].begin() + vec[0].size() / 2, vec[0].end() - 1);
+    unsigned int size = vec.size() % 2 == 0 ? vec.size() * 2 : vec.size() * 2 + 1;
+    while (size > vec.size()) {
+        t = 2 * t + std::pow(-1, n);
+        for (int i = std::min(t, odd.empty() ? (int)vec.size() : (int)vec.size() + 1); i > (t - (int)std::pow(-1, n)) / 2; i--) {
+            int findNum;
+            if (i == (int)vec.size())
+                findNum = odd[vec.size() / 2].first;
+            else
+                findNum = vec[i-1][vec.size() / 2].first;
+            int targetIdx = binarySearch(findNum, std::min((int)std::pow(2, n) - 1, (int)vec.size()), vec);
+            this->moveElements(vec, targetIdx, vec[i-1].begin() + vec[i-1].size() / 2, vec[i-1].end());
+        }
+        n++;
+    }
+    return vec;
+}
+
+void PmergeMe::moveElements(std::vector<std::vector<std::pair<int, int> > >& dst, int idx, std::vector<std::pair<int, int> >::iterator begin, std::vector<std::pair<int, int> >::iterator end) {
+    dst.insert(dst.begin() + idx, std::vector<std::pair<int, int> >());
+    std::vector<std::pair<int, int> >::iterator it;
+    for (it = begin; it != end; it++) {
+        dst[idx].push_back(*it);
+    }
+}
+
+bool PmergeMe::isSorted(std::vector<std::vector<std::pair<int, int> > > vec) {
+    for (unsigned int i = 1; i < vec.size(); i++) {
+        if (vec[i-1][0].first > vec[i][0].first)
+            return false;
+    }
+    return true;
+}
+
+int PmergeMe::binarySearch(int num, int endIdx, std::vector<std::vector<std::pair<int, int> > > vec) {
+    int l = 0;
+    int r = endIdx - 1;
+    int mid;
+    while (l <= r) {
+        mid = (l + r) / 2;
+        if (num > vec[mid][0].first) {
+            l = mid + 1;
+        }
+        else {
+            r = mid - 1;
+        }
+    }
+    return l;
+}
+
+// void PmergeMe::mergeInsertionSortVec(std::vector<int>& mainChain, std::vector<int>& pendingChain, unsigned int size) {
+//     if (!isSorted(mainChain)) {
+//         std::vector<int> tempMain; 
+//         std::vector<int> tempPending;
+//         this->split(mainChain, mainChain.size());
+//         this->dividePairs(tempMain, tempPending);
+//         mergeInsertionSortVec(tempMain, tempPending, mainChain.size());
+//         mainChain.clear();
+//         mainChain.assign(tempMain.begin(), tempMain.end());
+//     }
+//     int t = 1;
+//     int n = 2;
+//     if (size >= 2) {
+//         mainChain.insert(mainChain.begin(), pendingChain[0]);
+//     }
+//     while (size > mainChain.size()) {
+//         t = 2 * t + std::pow(-1, n);
+//         for (int i = std::min(t, (int)pendingChain.size()); i > (t - (int)std::pow(-1, n)) / 2; i--) {
+//             int findNum = pendingChain[i-1];
+//             int targetIdx = binarySearch(findNum, std::min((int)std::pow(2, n) - 1, (int)mainChain.size()), mainChain);
+//             mainChain.insert(mainChain.begin() + targetIdx, findNum);
+//         }
+//         n++;
+//     }
+// }
 
 // void PmergeMe::dividePairs(std::vector<int>& mainVec, std::vector<int>& pendingVec) {
 //     /*
@@ -132,80 +248,29 @@ void PmergeMe::execute(std::vector<int> input, int size) {
 //     //     delete this->pairsVec[size / 2];
 // }
 
-        
-void PmergeMe::mergeInsertionSortVec(std::vector< std::pair<int, int> >& vec) {
-    if (!isSorted(vec)) {
-        std::vector<std::pair<int, int>> newVec = this->split(vec);
-        mergeInsertionSortVec(newVec);
-        vec.clear();
-        vec.assign(newVec.begin(), newVec.end());
-    }
-    int t = 1;
-    int n = 2;
-    if (size >= 2) {
-        vec.insert(vec.begin(), std::pair<int, int> (vec[0].second, 0));
-    }
-    while (size > vec.size()) {
-        t = 2 * t + std::pow(-1, n);
-        for (int i = std::min(t, (int)pendingChain.size()); i > (t - (int)std::pow(-1, n)) / 2; i--) {
-            int findNum = pendingChain[i-1];
-            int targetIdx = binarySearch(findNum, std::min((int)std::pow(2, n) - 1, (int)mainChain.size()), mainChain);
-            mainChain.insert(mainChain.begin() + targetIdx, findNum);
-        }
-        n++;
-    }
-}
-
-// void PmergeMe::mergeInsertionSortVec(std::vector<int>& mainChain, std::vector<int>& pendingChain, unsigned int size) {
-//     if (!isSorted(mainChain)) {
-//         std::vector<int> tempMain;
-//         std::vector<int> tempPending;
-//         this->split(mainChain, mainChain.size());
-//         this->dividePairs(tempMain, tempPending);
-//         mergeInsertionSortVec(tempMain, tempPending, mainChain.size());
-//         mainChain.clear();
-//         mainChain.assign(tempMain.begin(), tempMain.end());
-//     }
-//     int t = 1;
-//     int n = 2;
-//     if (size >= 2) {
-//         mainChain.insert(mainChain.begin(), pendingChain[0]);
-//         // std::cout << pendingChain[0] << std::endl;
-//     }
-//     while (size > mainChain.size()) {
-//         t = 2 * t + std::pow(-1, n);
-//         for (int i = std::min(t, (int)pendingChain.size()); i > (t - (int)std::pow(-1, n)) / 2; i--) {
-//             int findNum = pendingChain[i-1];
-//             int targetIdx = binarySearch(findNum, std::min((int)std::pow(2, n) - 1, (int)mainChain.size()), mainChain);
-//             mainChain.insert(mainChain.begin() + targetIdx, findNum);
+// int PmergeMe::binarySearch(int num, int endIdx, std::vector<int> vec) {
+//     int l = 0;
+//     int r = endIdx - 1;
+//     int mid;
+//     while (l <= r) {
+//         mid = (l + r) / 2;
+//         if (num > vec[mid]) {
+//             l = mid + 1;
 //         }
-//         n++;
+//         else {
+//             r = mid - 1;
+//         }
 //     }
+//     return l;
 // }
 
-int PmergeMe::binarySearch(int num, int endIdx, std::vector<int> vec) {
-    int l = 0;
-    int r = endIdx - 1;
-    int mid;
-    while (l <= r) {
-        mid = (l + r) / 2;
-        if (num > vec[mid]) {
-            l = mid + 1;
-        }
-        else {
-            r = mid - 1;
-        }
-    }
-    return l;
-}
-
-bool PmergeMe::isSorted(std::vector<std::pair<int, int>>& vec) {
-    for (unsigned int i = 1; i < vec.size(); i++) {
-        if (vec[i-1].first > vec[i].first)
-            return false;
-    }
-    return true;
-}
+// bool PmergeMe::isSorted(std::vector<int>& vec) {
+//     for (unsigned int i = 1; i < vec.size(); i++) {
+//         if (vec[i-1] > vec[i])
+//             return false;
+//     }
+//     return true;
+// }
 
 // void PmergeMe::mergeInsertionSortVec(std::vector<int>& mainChain, std::vector<int>& pendingChain, unsigned int size) {
 //     int t = 1;
@@ -294,10 +359,10 @@ void PmergeMe::sortPairs() {
 //     std::cout << std::endl;
 // }
 
-void PmergeMe::showMainChain() {
+void PmergeMe::showMainChain(std::vector<std::vector<std::pair<int, int> > > vec) {
     std::cout << "main chain : ";
-    for (std::vector<int>::iterator it = this->mainVector.begin(); it != this->mainVector.end() ;it++) {
-        std::cout << *it << " ";
+    for (std::vector<std::vector<std::pair<int, int> > >::iterator it = vec.begin(); it != vec.end() ;it++) {
+        std::cout << (*it)[0].first << " ";
     }
     std::cout << std::endl;
 }
