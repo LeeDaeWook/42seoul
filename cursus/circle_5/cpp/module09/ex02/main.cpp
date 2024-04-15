@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
             exit(1);
         }
         input.push_back(number);
-        input.push_back(0);
+        // input.push_back(0);
         // std::cout << number << " ";
     }
     // std::cout << std::endl;
@@ -48,7 +48,11 @@ int	main(int argc, char *argv[])
     // c1.sortPairs();
     // c1.dividePairs(c1.getMainVec(), c1.getPendingVec());
     // c1.mergeInsertionSortVec(c1.getMainVec(), c1.getPendingVec(), c1.getSize());
-    c1.execute(input);
+    // c1.execute(input);
+    std::vector<std::pair<int, int> > vec;
+    c1.init(input, vec);
+    c1.mergeInsertionSortVec(vec);
+    c1.showMainChain(vec);
  
     finish = clock();
  

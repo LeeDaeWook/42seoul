@@ -27,22 +27,26 @@ class PmergeMe {
         PmergeMe(PmergeMe &PmergeMe);
         PmergeMe &operator=(PmergeMe& PmergeMe);
 
-        // void split(std::vector<int> input, int size);
+        void init(std::vector<int>& vec, std::vector<std::pair<int, int> >& newVec);
+        void split(std::vector<std::pair<int, int> >& input);
+        void makeMainChain(std::vector<std::pair<int, int> >& vec, std::vector<std::pair<int, int> >& newVec);
+        int binarySearch(int num, int end, std::vector<std::pair<int, int> >& vec);
+        void mergeInsertionSortVec(std::vector<std::pair<int, int> >& vec);
+        bool isSorted(std::vector<std::pair<int, int> >& vec);
+        void showMainChain(std::vector<std::pair<int, int> >& vec);
+
         // std::vector<std::pair<int, int>>& split(std::vector<int> input);
-        std::vector<std::vector<std::pair<int, int> > >& split(std::vector<int> input, std::vector<std::vector<std::pair<int, int> > >& vec);
-        std::vector<std::vector<std::pair<int, int> > >& split(std::vector<std::vector< std::pair<int, int> > > input, std::vector<std::vector<std::pair<int, int> > >& newVec);
-        // void sortPair(std::pair<int, int>& p);
-        void sortPair(std::vector<std::pair<int, int> >& vec, int firstIdx, int secondIdx);
-        void sortPairs();
+        // std::vector<std::vector<std::pair<int, int> > >& split(std::vector<int> input, std::vector<std::vector<std::pair<int, int> > >& vec);
+        // std::vector<std::vector<std::pair<int, int> > >& split(std::vector<std::vector< std::pair<int, int> > > input, std::vector<std::vector<std::pair<int, int> > >& newVec);
+        // void sortPair(std::vector<std::pair<int, int> >& vec, int firstIdx, int secondIdx);
+        // void sortPairs();
         void dividePairs(std::vector<int>& mainVec, std::vector<int>& pendingVec);
         std::vector<std::vector<std::pair<int, int> > >& mergeInsertionSortVec(std::vector<std::vector< std::pair<int, int> > >& vec, std::vector<std::pair<int, int> >& odd);
-        // void mergeInsertionSortVec(std::vector<int>& mainChain, std::vector<int>& pendingChain, unsigned int size);
         // void mergeInsertionSortVec(std::vector< std::pair<int, int> >& vec);
-        void moveElements(std::vector<std::vector< std::pair<int, int> > >& dst, int idx, std::vector< std::pair<int, int> >::iterator begin, std::vector<std::pair<int, int> >::iterator end);
+        // void moveElements(std::vector<std::vector< std::pair<int, int> > >& dst, int idx, std::vector< std::pair<int, int> >::iterator begin, std::vector<std::pair<int, int> >::iterator end);
         // bool isSorted(std::vector<int>& vec);
-        bool isSorted(std::vector<std::vector< std::pair<int, int> > > vec);
-        // int binarySearch(int num, int end, std::vector<int> vec);
-        int binarySearch(int num, int endIdx, std::vector<std::vector< std::pair<int, int> > > vec);
+        // bool isSorted(std::vector<std::vector< std::pair<int, int> > > vec);
+        // int binarySearch(int num, int endIdx, std::vector<std::vector< std::pair<int, int> > > vec);
 
         void execute(std::vector<int> input);
 
