@@ -27,13 +27,16 @@ class PmergeMe {
         PmergeMe(PmergeMe &PmergeMe);
         PmergeMe &operator=(PmergeMe& PmergeMe);
 
-        void init(std::vector<int>& vec, std::vector<std::pair<int, int> >& newVec);
-        void split(std::vector<std::pair<int, int> >& input);
-        void makeMainChain(std::vector<std::pair<int, int> >& vec, std::vector<std::pair<int, int> >& newVec);
-        int binarySearch(int num, int end, std::vector<std::pair<int, int> >& vec);
-        void mergeInsertionSortVec(std::vector<std::pair<int, int> >& vec);
-        bool isSorted(std::vector<std::pair<int, int> >& vec);
-        void showMainChain(std::vector<std::pair<int, int> >& vec);
+        void init(std::vector<int>& vec, std::vector<std::vector<int> >& newVec);
+        void split(std::vector<std::vector<int> >& input);
+        void makeMainChain(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec);
+        int binarySearch(int num, int end, std::vector<std::vector<int> >& vec);
+        void copyIdx(std::vector<std::vector<int> >& vec, std::vector<int>& newVec, int depth);
+        void makeEven(std::vector<std::vector<int> >& vec);
+        void attachLastElement(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec);
+        void mergeInsertionSortVec(std::vector<std::vector<int> >& vec, int depth);
+        bool isSorted(std::vector<std::vector<int> >& vec);
+        void showMainChain(std::vector<std::vector<int> >& vec);
 
         // std::vector<std::pair<int, int>>& split(std::vector<int> input);
         // std::vector<std::vector<std::pair<int, int> > >& split(std::vector<int> input, std::vector<std::vector<std::pair<int, int> > >& vec);

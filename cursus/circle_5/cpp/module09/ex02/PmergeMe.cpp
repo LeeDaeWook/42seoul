@@ -40,75 +40,100 @@ PmergeMe &PmergeMe::operator=(PmergeMe &PmergeMe)
     return *this;
 }
 
-void PmergeMe::init(std::vector<int>& vec, std::vector<std::pair<int, int> >& newVec) {
+void PmergeMe::init(std::vector<int>& vec, std::vector<std::vector<int> >& newVec) {
     for (unsigned int i = 0; i < vec.size(); i++) {
-        newVec.push_back(std::pair<int, int>(vec[i], -1));        
+        newVec.push_back(std::vector<int>());
+        newVec.back().push_back(vec[i]);
     }
 }
 
-void PmergeMe::split(std::vector<std::pair<int, int> >& input) {
+void PmergeMe::split(std::vector<std::vector<int> >& input) {
     for (unsigned int i = 0; i < input.size() / 2; i++) {
-        if (input[i * 2].first < input[i * 2 + 1].first) {
-            int temp = input[i * 2].first;
-            input[i * 2].first = input[i * 2 + 1].first;
-            input[i * 2 + 1].first = temp;
+        if (input[i * 2].front() < input[i * 2 + 1].front()) {
+            std::vector<int> temp = input[i * 2];
+            input[i * 2] = input[i * 2 + 1];
+            input[i * 2 + 1] = temp;
         }
     }
 }
 
-void PmergeMe::makeMainChain(std::vector<std::pair<int, int> >& vec, std::vector<std::pair<int, int> >& newVec) {
+void PmergeMe::makeMainChain(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec) {
     for (unsigned int i = 0; i < vec.size(); i += 2) {
-        newVec.push_back(std::pair<int, int>(vec[i].first, i));        
+        newVec.push_back(std::vector<int>(vec[i]));
+        newVec.back().push_back(i);
     }
+    // if (vec.size() % 2 == 1) {
+    //     newVec.push_back(std::vector<int>(vec.back()));
+    //     newVec.back().erase(newVec.back().begin());
+    //     newVec.back().insert(newVec.back().begin(), vec.size() - 1);
+    //     newVec.back().insert(newVec.back().begin(), INT_MAX);
+    // }
 }
 
-bool PmergeMe::isSorted(std::vector<std::pair<int, int> >& vec) {
+bool PmergeMe::isSorted(std::vector<std::vector<int> >& vec) {
     for (unsigned int i = 1; i < vec.size(); i++) {
-        if (vec[i-1].first > vec[i].first)
+        if (vec[i-1].front() > vec[i].front())
             return false;
     }
     return true;
 }
 
-void PmergeMe::mergeInsertionSortVec(std::vector<std::pair<int, int> >& vec) {
-    // showMainChain(vec);
-    this->split(vec);
-    std::vector<std::pair<int, int> > newVec;
-    this->makeMainChain(vec, newVec);
-    showMainChain(newVec);
-    if (!isSorted(newVec)) {
-        mergeInsertionSortVec(newVec);
+void PmergeMe::copyIdx(std::vector<std::vector<int> >& vec, std::vector<int>& newVec, int depth) {
+    for (unsigned int i = 0; i < vec.size(); i++) {
+        newVec.push_back(vec[i][depth]);
     }
-    std::vector<std::pair<int, int> > copyVec(vec.size());
-    std::copy(vec.begin(), vec.end(), copyVec.begin());
+}
+
+void PmergeMe::makeEven(std::vector<std::vector<int> >& vec) {
+    vec.insert(vec.begin() + vec.size() - 1, std::vector<int>(vec.front()));
+    vec[vec.size() - 1][0] = INT_MAX;
+    vec[vec.size() - 1].push_back(vec.size()-1);
+}
+
+void PmergeMe::attachLastElement(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec) {
+    newVec.push_back(vec[vec.size() - 2]);
+}
+
+void PmergeMe::mergeInsertionSortVec(std::vector<std::vector<int> >& vec, int depth) {
+    this->split(vec);
+    std::vector<std::vector<int> > newVec;
+    this->makeMainChain(vec, newVec);
+    std::vector<int> tempIdx;
+    this->copyIdx(newVec, tempIdx, depth+1);
+    if (!isSorted(newVec)) {
+        mergeInsertionSortVec(newVec, depth + 1);
+    }
+    if (vec.size() % 2 == 1) {
+        makeEven(vec);
+        attachLastElement(vec, newVec);
+        tempIdx.push_back(newVec.back()[depth+1]);
+    }
+    newVec.insert(newVec.begin(), vec[tempIdx[0] + 1]);
     int t = 1;
     int n = 2;
-    vec[0] = copyVec[newVec[0].second + 1];
-    // std::pair<int, int> tempPair = vec[newVec.front().second + 1];
-    // vec.erase(vec.begin() + newVec.front().second + 1);
-    // vec.insert(vec.begin(), tempPair);
     while (std::pow(2, n) <= vec.size()) {
         t = 2 * t + std::pow(-1, n);
-        for (int i = std::min(t, (int)newVec.size()); i > (t - (int)std::pow(-1, n)) / 2; i--) {
-            int findNum = vec[newVec[i - 1].second + 1].first;
-            int targetIdx = binarySearch(findNum, std::min((int)std::pow(2, n) - 1, (int)vec.size()), vec);
-            vec[targetIdx] = copyVec[newVec[i-1].second + 1];
-            // std::pair<int, int> tempPair = vec[newVec[i-1].second + 1];
-            // vec.erase(vec.begin() + newVec[i-1].second + 1);
-            // vec.insert(vec.begin() + targetIdx, tempPair);
+        for (int i = std::min(t, (int)tempIdx.size()); i > (t - (int)std::pow(-1, n)) / 2; i--) {
+            int findNum = vec[tempIdx[i-1] + 1].front();
+            int targetIdx = binarySearch(findNum, std::min((int)std::pow(2, n) - 1, (int)newVec.size()), newVec);
+            newVec.insert(newVec.begin() + targetIdx, vec[tempIdx[i-1] + 1]);
         }
         n++;
     }
-    // showMainChain(vec);
+    if (newVec[newVec.size()-1].front() == INT_MAX) {
+        newVec.erase(newVec.end() - 1);
+    }
+    vec.clear();
+    vec.assign(newVec.begin(), newVec.end());
 }
 
-int PmergeMe::binarySearch(int num, int endIdx, std::vector<std::pair<int, int> >& vec) {
+int PmergeMe::binarySearch(int num, int endIdx, std::vector<std::vector<int> >& vec) {
     int l = 0;
     int r = endIdx - 1;
     int mid;
     while (l <= r) {
         mid = (l + r) / 2;
-        if (num > vec[mid].first) {
+        if (num > vec[mid].front()) {
             l = mid + 1;
         }
         else {
@@ -118,10 +143,10 @@ int PmergeMe::binarySearch(int num, int endIdx, std::vector<std::pair<int, int> 
     return l;
 }
 
-void PmergeMe::showMainChain(std::vector<std::pair<int, int> >& vec) {
+void PmergeMe::showMainChain(std::vector<std::vector<int> >& vec) {
     std::cout << "main chain : ";
-    for (std::vector<std::pair<int, int> >::iterator it = vec.begin(); it != vec.end() ;it++) {
-        std::cout << (*it).first << " ";
+    for (std::vector<std::vector<int> >::iterator it = vec.begin(); it != vec.end() ;it++) {
+        std::cout << (*it).front() << " ";
     }
     std::cout << std::endl;
 }
@@ -401,7 +426,7 @@ std::vector<int>& PmergeMe::getPendingVec() {
 void PmergeMe::showMainChain(std::vector<std::vector<std::pair<int, int> > > vec) {
     std::cout << "main chain : ";
     for (std::vector<std::vector<std::pair<int, int> > >::iterator it = vec.begin(); it != vec.end() ;it++) {
-        std::cout << (*it)[0].first << " ";
+        std::cout << (*it)[0].first << ":" << (*it)[0].second << " ";
     }
     std::cout << std::endl;
 }

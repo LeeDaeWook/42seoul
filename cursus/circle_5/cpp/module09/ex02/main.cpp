@@ -49,9 +49,9 @@ int	main(int argc, char *argv[])
     // c1.dividePairs(c1.getMainVec(), c1.getPendingVec());
     // c1.mergeInsertionSortVec(c1.getMainVec(), c1.getPendingVec(), c1.getSize());
     // c1.execute(input);
-    std::vector<std::pair<int, int> > vec;
+    std::vector<std::vector<int> > vec;
     c1.init(input, vec);
-    c1.mergeInsertionSortVec(vec);
+    c1.mergeInsertionSortVec(vec, 0);
     c1.showMainChain(vec);
  
     finish = clock();
