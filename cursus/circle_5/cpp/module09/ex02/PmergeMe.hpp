@@ -10,19 +10,8 @@
 # include <deque>
 
 class PmergeMe {
-    private:
-        unsigned int size;
-        std::vector< std::pair<int, int>* > pairsVec;
-        // std::vector< std::pair<int, int> > pairsVec;
-        std::vector< std::pair<int, int> > vec;
-        std::vector<int> mainVector;
-        std::vector<int> pendingVector;
-        std::deque<int> mainDeque;
-        std::deque<int> pendingDeque;
-
     public:
         PmergeMe();
-        PmergeMe(unsigned int size);
         ~PmergeMe();
         PmergeMe(PmergeMe &PmergeMe);
         PmergeMe &operator=(PmergeMe& PmergeMe);
@@ -34,34 +23,23 @@ class PmergeMe {
         void copyIdx(std::vector<std::vector<int> >& vec, std::vector<int>& newVec, int depth);
         void makeEven(std::vector<std::vector<int> >& vec);
         void attachLastElement(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec);
+        int find(std::vector<std::vector<int> >& vec, std::vector<int>& tempIdx, unsigned int idx);
+        void insert(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec, std::vector<int>& tempIdx, unsigned int idx, unsigned int targetIdx);
         void mergeInsertionSortVec(std::vector<std::vector<int> >& vec, int depth);
         bool isSorted(std::vector<std::vector<int> >& vec);
         void showMainChain(std::vector<std::vector<int> >& vec);
 
-        // std::vector<std::pair<int, int>>& split(std::vector<int> input);
-        // std::vector<std::vector<std::pair<int, int> > >& split(std::vector<int> input, std::vector<std::vector<std::pair<int, int> > >& vec);
-        // std::vector<std::vector<std::pair<int, int> > >& split(std::vector<std::vector< std::pair<int, int> > > input, std::vector<std::vector<std::pair<int, int> > >& newVec);
-        // void sortPair(std::vector<std::pair<int, int> >& vec, int firstIdx, int secondIdx);
-        // void sortPairs();
-        void dividePairs(std::vector<int>& mainVec, std::vector<int>& pendingVec);
-        std::vector<std::vector<std::pair<int, int> > >& mergeInsertionSortVec(std::vector<std::vector< std::pair<int, int> > >& vec, std::vector<std::pair<int, int> >& odd);
-        // void mergeInsertionSortVec(std::vector< std::pair<int, int> >& vec);
-        // void moveElements(std::vector<std::vector< std::pair<int, int> > >& dst, int idx, std::vector< std::pair<int, int> >::iterator begin, std::vector<std::pair<int, int> >::iterator end);
-        // bool isSorted(std::vector<int>& vec);
-        // bool isSorted(std::vector<std::vector< std::pair<int, int> > > vec);
-        // int binarySearch(int num, int endIdx, std::vector<std::vector< std::pair<int, int> > > vec);
-
-        void execute(std::vector<int> input);
-
-
-        // temp 함수 (나중에 삭제)
-        void showPairs();
-        void showMainChain(std::vector< std::vector< std::pair<int, int> > > vec);
-        void showPendingChain();
-
-        unsigned int getSize();
-        std::vector<int>& getMainVec();
-        std::vector<int>& getPendingVec();
+        void init(std::deque<int>& deque, std::deque<std::deque<int> >& newDeque);
+        void split(std::deque<std::deque<int> >& input);
+        void makeMainChain(std::deque<std::deque<int> >& deque, std::deque<std::deque<int> >& newDeque);
+        bool isSorted(std::deque<std::deque<int> >& deque);
+        void copyIdx(std::deque<std::deque<int> >& deque, std::deque<int>& newDeque, int depth);
+        void makeEven(std::deque<std::deque<int> >& deque);
+        void attachLastElement(std::deque<std::deque<int> >& deque, std::deque<std::deque<int> >& newDeque);
+        int find(std::deque<std::deque<int> >& deque, std::deque<int>& tempIdx, unsigned int idx);
+        void insert(std::deque<std::deque<int> >& deque, std::deque<std::deque<int> >& newDeque, std::deque<int>& tempIdx, unsigned int idx, unsigned int targetIdx);
+        void mergeInsertionSortVec(std::deque<std::deque<int> >& deque, int depth);
+        int binarySearch(int num, int endIdx, std::deque<std::deque<int> >& deque);
 };
 
 #endif
