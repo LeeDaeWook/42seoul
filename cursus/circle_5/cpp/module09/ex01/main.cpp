@@ -7,6 +7,7 @@ void check_leaks()
 
 int	main(int argc, char *argv[])
 {	
+	(void)argc;
     RPN rpn;
     std::cout << rpn.calculate(argv) << std::endl;
 

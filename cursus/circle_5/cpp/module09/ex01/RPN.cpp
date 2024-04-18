@@ -28,49 +28,63 @@ int RPN::calculate(char *argv[]) {
     std::stack<int> s;
     std::istringstream is(argv[1]);
     std::string token;
-    int number;
-    char op;
 
-    int i = 0;
-    // 공백으로 구분된 단어(토큰) 추출하여 벡터에 저장
-    // while (std::getline(is, token, ' ')) {
-    while (is >> number) {
-        // int num = std::atoi(token.c_str());
-        s.push(number);
-        std::cout << number << std::endl;
+    // 공백으로 구분된 단어(토큰) 추출
+    while (std::getline(is, token, ' ')) {
+        int num = std::atoi(token.c_str());
+        if (num >= 10 || num < 0) {
+            std::cout << "Error : only numbers from 1 to 9 are available" << std::endl;
+            exit(1);
+        }
+        char op = token.c_str()[0];
         // 문자인 경우
-        // if (num == 0 && token.front() != '0') {
-        // if (is >> op) {
-        // std::cout << op << std::endl;
-        //     if (s.size() < 2) {
-        //         std::cout << "Error" << std::endl;
-        //         exit(1);
-        //     }
-        //     switch (op) {
-        //         int top;
-        //         int bottom;
-        //         case '+':
-        //             top = s.top();
-        //             s.pop();
-        //             bottom = s.top();
-        //             s.push(top + bottom);
-        //         case '-':
-        //             top = s.top();
-        //             s.pop();
-        //             bottom = s.top();
-        //             s.push(bottom - top);
-        //         case '*':
-        //             top = s.top();
-        //             s.pop();
-        //             bottom = s.top();
-        //             s.push(top * bottom);
-        //         case '/':
-        //             top = s.top();
-        //             s.pop();
-        //             bottom = s.top();
-        //             s.push(bottom / top);
-        //     }
-        // }
+        if (num != 0 || (num == 0 && token.front() == '0'))
+            s.push(num);
+        if (num == 0 && token.front() != '0') {
+            if (s.size() < 2) {
+                std::cout << "Error" << std::endl;
+                exit(1);
+            }
+            switch (op) {
+                int top;
+                int bottom;
+                case '+':
+                    top = s.top();
+                    s.pop();
+                    bottom = s.top();
+                    s.pop();
+                    s.push(top + bottom);
+                    break;
+                case '-':
+                    top = s.top();
+                    s.pop();
+                    bottom = s.top();
+                    s.pop();
+                    s.push(bottom - top);
+                    break;
+                case '*':
+                    top = s.top();
+                    s.pop();
+                    bottom = s.top();
+                    s.pop();
+                    s.push(top * bottom);
+                    break;
+                case '/':
+                    top = s.top();
+                    s.pop();
+                    if (top == 0) {
+                        std::cout << "Error : Division by zero" << std::endl;
+                        exit(1);
+                    }
+                    bottom = s.top();
+                    s.pop();
+                    s.push(bottom / top);
+                    break;
+                default:
+                    std::cout << "Error : \'" << token << "\' is not proper argument" << std::endl;
+                    exit(1);
+            }
+        }
     }
 
     return s.top();
