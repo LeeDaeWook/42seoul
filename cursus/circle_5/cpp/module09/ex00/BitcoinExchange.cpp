@@ -188,7 +188,8 @@ std::string BitcoinExchange::findLowerDate(std::string date) {
             }
         }
         std::stringstream is;
-        is << year << "-" << month << "-" << day;
+        if (month < 10)
+            is << year << "-" << month << "-" << day;
         date = is.str();
         std::map<std::string, std::string>::iterator it = this->dict.find(date);
         if (it != this->dict.end())
