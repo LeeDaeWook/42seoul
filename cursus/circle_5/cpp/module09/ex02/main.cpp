@@ -10,12 +10,12 @@ int	main(int argc, char *argv[])
     std::vector<int> inputVec;
     std::deque<int> inputDeq;
 
-    // 입력
     if (argc < 2) {
         std::cout << "Error" << std::endl;
         exit(1);
     }
 
+    // 입력
     for (int i = 1; i < argc; i++) {
         int number = std::atoi(argv[i]);
         if (number < 1) {
@@ -27,40 +27,6 @@ int	main(int argc, char *argv[])
     }
 
 	PmergeMe c1;
-
-    // // clock 함수 사용
-    // clock_t start, finish;
-    // double duration;
- 
-    // start = clock();
-    
-    // std::vector<std::vector<int> > vec;
-    // c1.showInputVec(inputVec);
-    // c1.init(inputVec, vec);
-    // c1.mergeInsertionSortVec(vec, 0);
- 
-    // finish = clock();
- 
-    // duration = (double)(finish - start) / CLOCKS_PER_SEC;
-    // c1.showVec(vec);
-    // std::cout << duration << "초" << std::endl;
-
-    // std::cout << "\n=======================\n" << std::endl;
- 
-    // start = clock();
-    
-    // std::deque<std::deque<int> > deque;
-    // c1.showInputDeque(inputDeq);
-    // c1.init(inputDeq, deque);
-    // c1.mergeInsertionSortVec(deque, 0);
- 
-    // finish = clock();
- 
-    // duration = (double)(finish - start) / CLOCKS_PER_SEC;
-    // c1.showDeque(deque);
-    // std::cout << duration << "초" << std::endl;
-
-    // std::cout << "\n=======================\n" << std::endl;
 
 {
     //MK: 시작/끝 시간을 측정하기 위해서 추가함 (time.h 필요)
@@ -118,7 +84,7 @@ int	main(int argc, char *argv[])
 
     std::cout << "\n=======================\n" << std::endl;
 }
-	// atexit(check_leaks);
+	atexit(check_leaks);
 
 	return 0;
 }
