@@ -216,6 +216,28 @@ bool BitcoinExchange::isValue(std::string str) {
     return true;
 }
 
+std::string BitcoinExchange::trimWhitespace(std::string str) {
+    unsigned int start = 0;
+    unsigned int end = str.size();
+    for (unsigned int i = 0; i < str.size(); i++) {
+        if (str[i] != ' ') {
+            start = i;
+            break;
+        }
+    }
+    for (unsigned int i = start; i < str.size(); i++) {
+        if (str[i] == ' ') {
+            end = i;
+            break;
+        }
+    }
+    std::string copyStr;
+    for (unsigned int i = start; i < end; i++) {
+        copyStr.push_back(str[i]);
+    }
+    return copyStr;
+}
+
 void BitcoinExchange::calculate(std::string fileName) {
     std::ifstream file(fileName);
     std::string line;
@@ -229,7 +251,7 @@ void BitcoinExchange::calculate(std::string fileName) {
 
             unsigned int wordCount = 0;
             while (std::getline(is, token, '|')) {
-                token.erase(remove(token.begin(), token.end(), ' '), token.end());
+                token = trimWhitespace(token);
                 if (wordCount >= 2) {
                     std::cout << "Error: bad input" << std::endl;
                     break;

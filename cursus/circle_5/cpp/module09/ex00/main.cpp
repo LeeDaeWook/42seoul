@@ -16,7 +16,7 @@ int	main(int argc, char *argv[])
 	btc.makeDict();
 	btc.calculate(argv[1]);
 	
-	// atexit(check_leaks);
+	atexit(check_leaks);
 
 	return 0;
 }

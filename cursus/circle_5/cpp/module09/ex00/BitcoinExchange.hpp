@@ -5,7 +5,6 @@
 # include <sstream>
 # include <string>
 # include <map>
-# include <algorithm>
 
 class BitcoinExchange {
     private:
@@ -31,6 +30,7 @@ class BitcoinExchange {
         void print(std::string date, double value, std::string rate);
         std::string numToStr(int year, int month, int day);
         bool isValue(std::string str);
+        std::string trimWhitespace(std::string str);
 };
 
 #endif
