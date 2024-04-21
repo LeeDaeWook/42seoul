@@ -2,11 +2,8 @@
 # define __PMERGEME_HPP__
 # include <iostream>
 # include <string>
-# include <list>
 # include <vector>
 # include <cmath>
-# include <algorithm>
-# include <ctime>
 # include <deque>
 
 class PmergeMe {
@@ -27,7 +24,8 @@ class PmergeMe {
         void insert(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec, std::vector<int>& tempIdx, unsigned int idx, unsigned int targetIdx);
         void mergeInsertionSortVec(std::vector<std::vector<int> >& vec, int depth);
         bool isSorted(std::vector<std::vector<int> >& vec);
-        void showMainChain(std::vector<std::vector<int> >& vec);
+        void showInputVec(std::vector<int>& vec);
+        void showVec(std::vector<std::vector<int> >& vec);
 
         void init(std::deque<int>& deque, std::deque<std::deque<int> >& newDeque);
         void split(std::deque<std::deque<int> >& input);
@@ -40,6 +38,9 @@ class PmergeMe {
         void insert(std::deque<std::deque<int> >& deque, std::deque<std::deque<int> >& newDeque, std::deque<int>& tempIdx, unsigned int idx, unsigned int targetIdx);
         void mergeInsertionSortVec(std::deque<std::deque<int> >& deque, int depth);
         int binarySearch(int num, int endIdx, std::deque<std::deque<int> >& deque);
+        void showInputDeque(std::deque<int>& deque);
+        void showDeque(std::deque<std::deque<int> >& deque);
+
 };
 
 #endif

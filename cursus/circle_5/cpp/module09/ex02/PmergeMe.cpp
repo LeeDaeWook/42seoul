@@ -72,22 +72,6 @@ void PmergeMe::makeMainChain(std::deque<std::deque<int> >& deque, std::deque<std
     }
 }
 
-bool PmergeMe::isSorted(std::vector<std::vector<int> >& vec) {
-    for (unsigned int i = 1; i < vec.size(); i++) {
-        if (vec[i-1].front() > vec[i].front())
-            return false;
-    }
-    return true;
-}
-
-bool PmergeMe::isSorted(std::deque<std::deque<int> >& deque) {
-    for (unsigned int i = 1; i < deque.size(); i++) {
-        if (deque[i-1].front() > deque[i].front())
-            return false;
-    }
-    return true;
-}
-
 void PmergeMe::copyIdx(std::vector<std::vector<int> >& vec, std::vector<int>& newVec, int depth) {
     for (unsigned int i = 0; i < vec.size(); i++) {
         newVec.push_back(vec[i][depth]);
@@ -131,13 +115,12 @@ void PmergeMe::insert(std::deque<std::deque<int> >& deque, std::deque<std::deque
 void PmergeMe::mergeInsertionSortVec(std::vector<std::vector<int> >& vec, int depth) {
     if (vec.size() == 1)
         return ;
-    this->split(vec);
+    split(vec);
     std::vector<std::vector<int> > newVec;
-    this->makeMainChain(vec, newVec);
+    makeMainChain(vec, newVec);
     std::vector<int> tempIdx;
-    // if (!isSorted(newVec))
     mergeInsertionSortVec(newVec, depth + 1);
-    this->copyIdx(newVec, tempIdx, depth+1);
+    copyIdx(newVec, tempIdx, depth+1);
     if (vec.size() % 2 == 1)
         tempIdx.push_back(vec.size() - 1);
     newVec.insert(newVec.begin(), vec[tempIdx[0] + 1]);
@@ -162,13 +145,12 @@ void PmergeMe::mergeInsertionSortVec(std::vector<std::vector<int> >& vec, int de
 void PmergeMe::mergeInsertionSortVec(std::deque<std::deque<int> >& deque, int depth) {
     if (deque.size() == 1)
         return ;
-    this->split(deque);
+    split(deque);
     std::deque<std::deque<int> > newDeque;
-    this->makeMainChain(deque, newDeque);
+    makeMainChain(deque, newDeque);
     std::deque<int> tempIdx;
-    // if (!isSorted(newDeque))
     mergeInsertionSortVec(newDeque, depth + 1);
-    this->copyIdx(newDeque, tempIdx, depth+1);
+    copyIdx(newDeque, tempIdx, depth+1);
     if (deque.size() % 2 == 1)
         tempIdx.push_back(deque.size() - 1);
     newDeque.insert(newDeque.begin(), deque[tempIdx[0] + 1]);
@@ -222,10 +204,50 @@ int PmergeMe::binarySearch(int num, int endIdx, std::deque<std::deque<int> >& de
     return l;
 }
 
-void PmergeMe::showMainChain(std::vector<std::vector<int> >& vec) {
-    std::cout << "main chain : ";
+void PmergeMe::showInputVec(std::vector<int >& vec) {
+    std::cout << "Before : ";
+    for (std::vector<int>::iterator it = vec.begin(); it != vec.end() ;it++) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+void PmergeMe::showVec(std::vector<std::vector<int> >& vec) {
+    std::cout << "After : ";
     for (std::vector<std::vector<int> >::iterator it = vec.begin(); it != vec.end() ;it++) {
         std::cout << (*it).front() << " ";
     }
     std::cout << std::endl;
+}
+
+void PmergeMe::showInputDeque(std::deque<int>& deque) {
+    std::cout << "Before : ";
+    for (std::deque<int>::iterator it = deque.begin(); it != deque.end() ;it++) {
+        std::cout << *it << " ";
+    }
+    std::cout << std::endl;
+}
+
+void PmergeMe::showDeque(std::deque<std::deque<int> >& deque) {
+    std::cout << "After : ";
+    for (std::deque<std::deque<int> >::iterator it = deque.begin(); it != deque.end() ;it++) {
+        std::cout << (*it).front() << " ";
+    }
+    std::cout << std::endl;
+}
+
+bool PmergeMe::isSorted(std::vector<std::vector<int> >& vec) {
+    for (unsigned int i = 1; i < vec.size(); i++) {
+        if (vec[i-1].front() > vec[i].front())
+            return false;
+    }
+    return true;
+}
+
+bool PmergeMe::isSorted(std::deque<std::deque<int> >& deque) {
+    for (unsigned int i = 1; i < deque.size(); i++) {
+        if (deque[i-1].front() > deque[i].front())
+            return false;
+    }
+    return true;
 }
