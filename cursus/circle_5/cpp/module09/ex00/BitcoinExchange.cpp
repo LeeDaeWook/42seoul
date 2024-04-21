@@ -46,15 +46,11 @@ void BitcoinExchange::makeDict() {
             std::string token;
             while (std::getline(is, token, ',')) {
                 if (isDate(token)) {
-                    // this->dict.insert(std::make_pair(token, 0));
                     this->dict.insert(std::make_pair(token, ""));
                     key = token;
                 }
                 else {
-                    this->dict[key] = std::strtod(token.c_str(), NULL);
                     this->dict[key] = token;
-                    // std::cout << key << " : "  << dict[key] << std::endl;
-                    // std::cout << key << " : "  << token.c_str() << std::endl;
                 }
             }
         }
@@ -101,7 +97,7 @@ bool BitcoinExchange::isValidDay(int year, int month, int day) {
 }
 
 bool BitcoinExchange::isValidYear(int year) {
-    if (year < 1)
+    if (year < 2009 || year > 2999)
         return false;
     return true;
 }
@@ -151,18 +147,28 @@ int BitcoinExchange::findDay(int year, int month) {
         return 30;
 }
 
+std::string BitcoinExchange::numToStr(int year, int month, int day) {
+        std::stringstream is;
+        if (month < 10 && day < 10)
+            is << year << "-" << "0" << month << "-" << "0" << day;
+        else if (month < 10)
+            is << year << "-" << "0" << month << "-" << day;
+        else if (day < 10)
+            is << year << "-" << month << "-" << "0" << day;
+        else
+            is << year << "-" << month << "-" << day;
+        return is.str();
+}
+
 std::string BitcoinExchange::findLowerDate(std::string date) {
-    
     std::string token;
     int year;
     int month;
     int day;
 
     int i = 0;
-    // while (this->dict[date]) {
     while (true) {
         std::istringstream ss(date);
-        std::cout << " date : " << date << std::endl;
         while (std::getline(ss, token, '-')) {
             if (i == 0)
                 year = std::atoi(token.c_str());
@@ -187,20 +193,24 @@ std::string BitcoinExchange::findLowerDate(std::string date) {
                 day = findDay(year, month);
             }
         }
-        std::stringstream is;
-        if (month < 10)
-            is << year << "-" << month << "-" << day;
-        date = is.str();
-        std::map<std::string, std::string>::iterator it = this->dict.find(date);
-        if (it != this->dict.end())
+        date = numToStr(year, month, day);
+        if (this->dict.find(date) != this->dict.end())
             break;
     }
-    // std::cout << " date : " << date << std::endl;
     return date;
 }
 
 void BitcoinExchange::print(std::string date, double value, std::string rate) {
-    std::cout << date << " => " << value << " = " << value * std::strtod(rate.c_str(), NULL) << std::endl;
+    std::cout << date << " => " << value << " = " << rate << std::endl;
+}
+
+bool BitcoinExchange::isValue(std::string str) {
+    for (unsigned int i = 0; i < str.size(); i++) {
+        if (!isdigit(str[i]) && str[i] != '.') {
+            return false;
+        }
+    }
+    return true;
 }
 
 void BitcoinExchange::calculate(std::string fileName) {
@@ -223,16 +233,17 @@ void BitcoinExchange::calculate(std::string fileName) {
                     else
                         date = token;
                 }
-                else if ((value = std::strtod(token.c_str(), NULL)) && errno == 0) {
+                else if (isValue(token)) {
+                    value = std::strtod(token.c_str(), NULL);
                     if (value > 1000)
                         std::cout << "Error: too large a number." << std::endl;
                     else if (value < 0)
                         std::cout << "Error: not a positive number." << std::endl;
                     else {
-                        // std::map<std::string, double>::iterator it = this->dict.find(date);
-                        std::map<std::string, std::string>::iterator it = this->dict.find(date);
-                        if (it != dict.end())
+                        date.erase(remove(date.begin(), date.end(), ' '), date.end());
+                        if (this->dict.find(date) != this->dict.end()) {
                             print(date, value, this->dict[date]);
+                        }
                         else {
                             std::string newDate = findLowerDate(date);
                             if (newDate == "NA")
@@ -242,6 +253,25 @@ void BitcoinExchange::calculate(std::string fileName) {
                         }
                     }
                 }
+                // else if ((value = std::strtod(token.c_str(), NULL)) && errno == 0) {
+                //     if (value > 1000)
+                //         std::cout << "Error: too large a number." << std::endl;
+                //     else if (value < 0)
+                //         std::cout << "Error: not a positive number." << std::endl;
+                //     else {
+                //         date.erase(remove(date.begin(), date.end(), ' '), date.end());
+                //         if (this->dict.find(date) != this->dict.end()) {
+                //             print(date, value, this->dict[date]);
+                //         }
+                //         else {
+                //             std::string newDate = findLowerDate(date);
+                //             if (newDate == "NA")
+                //                 std::cout << "Error: bad input => " << date << std::endl;
+                //             else
+                //                 print(date, value, this->dict[newDate]);
+                //         }
+                //     }
+                // }
                 else {
                     std::cout << "Error: bad input => " << date << std::endl;
                     break;

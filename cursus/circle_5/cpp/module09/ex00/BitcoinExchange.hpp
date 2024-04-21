@@ -5,13 +5,13 @@
 # include <sstream>
 # include <string>
 # include <map>
+# include <algorithm>
 
 class BitcoinExchange {
     private:
-        std::map<std::string, std::string> dict;
-        // std::map<std::string, double> dict;
 
     public:
+        std::map<std::string, std::string> dict;
 
         BitcoinExchange();
         ~BitcoinExchange();
@@ -27,11 +27,11 @@ class BitcoinExchange {
         bool isLeapYear(int year);
         bool isThirtyOne(int month);
         bool isValidYear(int year);
-        // double findRate(std::string date);
         std::string findLowerDate(std::string date);
         int findDay(int year, int month);
-        // void print(std::string date, double value, double rate);
         void print(std::string date, double value, std::string rate);
+        std::string numToStr(int year, int month, int day);
+        bool isValue(std::string str);
 };
 
 #endif
