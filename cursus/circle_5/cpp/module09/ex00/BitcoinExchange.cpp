@@ -45,6 +45,8 @@ void BitcoinExchange::makeDict() {
             std::string key;
             std::string token;
             while (std::getline(is, token, ',')) {
+                if (token == "date")
+                    break;
                 if (isDate(token)) {
                     this->dict.insert(std::make_pair(token, ""));
                     key = token;
@@ -201,14 +203,15 @@ std::string BitcoinExchange::findLowerDate(std::string date) {
 }
 
 void BitcoinExchange::print(std::string date, double value, std::string rate) {
-    std::cout << date << " => " << value << " = " << rate << std::endl;
+    std::cout << date << " => " << value << " = " << value * std::strtod(rate.c_str(), NULL) << std::endl;
 }
 
 bool BitcoinExchange::isValue(std::string str) {
     for (unsigned int i = 0; i < str.size(); i++) {
-        if (!isdigit(str[i]) && str[i] != '.') {
+        if (str[i] == '-' && i == 0 && str.size() > 1)
+            continue;
+        if (!isdigit(str[i]) && str[i] != '.')
             return false;
-        }
     }
     return true;
 }
@@ -224,10 +227,16 @@ void BitcoinExchange::calculate(std::string fileName) {
             std::string date;
             double value;
 
+            unsigned int wordCount = 0;
             while (std::getline(is, token, '|')) {
+                token.erase(remove(token.begin(), token.end(), ' '), token.end());
+                if (wordCount >= 2) {
+                    std::cout << "Error: bad input" << std::endl;
+                    break;
+                }
                 if (isDate(token)) {
                     if (!isValidDate(token)) {
-                        std::cout << "Error: bad input => " << token << std::endl;
+                        std::cout << "Error: bad input" << std::endl;
                         break;
                     }
                     else
@@ -240,42 +249,23 @@ void BitcoinExchange::calculate(std::string fileName) {
                     else if (value < 0)
                         std::cout << "Error: not a positive number." << std::endl;
                     else {
-                        date.erase(remove(date.begin(), date.end(), ' '), date.end());
                         if (this->dict.find(date) != this->dict.end()) {
                             print(date, value, this->dict[date]);
                         }
                         else {
                             std::string newDate = findLowerDate(date);
                             if (newDate == "NA")
-                                std::cout << "Error: bad input => " << date << std::endl;
+                                std::cout << "Error: bad input" << std::endl;
                             else
                                 print(date, value, this->dict[newDate]);
                         }
                     }
                 }
-                // else if ((value = std::strtod(token.c_str(), NULL)) && errno == 0) {
-                //     if (value > 1000)
-                //         std::cout << "Error: too large a number." << std::endl;
-                //     else if (value < 0)
-                //         std::cout << "Error: not a positive number." << std::endl;
-                //     else {
-                //         date.erase(remove(date.begin(), date.end(), ' '), date.end());
-                //         if (this->dict.find(date) != this->dict.end()) {
-                //             print(date, value, this->dict[date]);
-                //         }
-                //         else {
-                //             std::string newDate = findLowerDate(date);
-                //             if (newDate == "NA")
-                //                 std::cout << "Error: bad input => " << date << std::endl;
-                //             else
-                //                 print(date, value, this->dict[newDate]);
-                //         }
-                //     }
-                // }
                 else {
-                    std::cout << "Error: bad input => " << date << std::endl;
+                    std::cout << "Error: bad input" << std::endl;
                     break;
                 }
+                wordCount++;
             }
         }
         file.close();

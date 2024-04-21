@@ -9,10 +9,9 @@
 
 class BitcoinExchange {
     private:
-
-    public:
         std::map<std::string, std::string> dict;
 
+    public:
         BitcoinExchange();
         ~BitcoinExchange();
         BitcoinExchange(BitcoinExchange &BitcoinExchange);
