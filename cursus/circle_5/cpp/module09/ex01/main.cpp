@@ -7,11 +7,14 @@ void check_leaks()
 
 int	main(int argc, char *argv[])
 {	
-	(void)argc;
+	if (argc != 2) {
+		std::cout << "Error :Only one argument available" << std::endl;
+		exit(1);
+	}
     RPN rpn;
     std::cout << rpn.calculate(argv) << std::endl;
 
-	// atexit(check_leaks);
+	atexit(check_leaks);
 
 	return 0;
 }

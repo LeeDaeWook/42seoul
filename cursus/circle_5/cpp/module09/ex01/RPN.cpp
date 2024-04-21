@@ -41,7 +41,7 @@ int RPN::calculate(char *argv[]) {
         if (num != 0 || (num == 0 && token.front() == '0'))
             s.push(num);
         if (num == 0 && token.front() != '0') {
-            if (s.size() < 2) {
+            if (s.size() < 2 || token.size() > 1) {
                 std::cout << "Error" << std::endl;
                 exit(1);
             }
