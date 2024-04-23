@@ -18,8 +18,6 @@ class PmergeMe {
         void makeMainChain(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec);
         int binarySearch(int num, int end, std::vector<std::vector<int> >& vec);
         void copyIdx(std::vector<std::vector<int> >& vec, std::vector<int>& newVec, int depth);
-        void makeEven(std::vector<std::vector<int> >& vec);
-        void attachLastElement(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec);
         int find(std::vector<std::vector<int> >& vec, std::vector<int>& tempIdx, unsigned int idx);
         void insert(std::vector<std::vector<int> >& vec, std::vector<std::vector<int> >& newVec, std::vector<int>& tempIdx, unsigned int idx, unsigned int targetIdx);
         void mergeInsertionSortVec(std::vector<std::vector<int> >& vec, int depth);
@@ -32,15 +30,12 @@ class PmergeMe {
         void makeMainChain(std::deque<std::deque<int> >& deque, std::deque<std::deque<int> >& newDeque);
         bool isSorted(std::deque<std::deque<int> >& deque);
         void copyIdx(std::deque<std::deque<int> >& deque, std::deque<int>& newDeque, int depth);
-        void makeEven(std::deque<std::deque<int> >& deque);
-        void attachLastElement(std::deque<std::deque<int> >& deque, std::deque<std::deque<int> >& newDeque);
         int find(std::deque<std::deque<int> >& deque, std::deque<int>& tempIdx, unsigned int idx);
         void insert(std::deque<std::deque<int> >& deque, std::deque<std::deque<int> >& newDeque, std::deque<int>& tempIdx, unsigned int idx, unsigned int targetIdx);
         void mergeInsertionSortVec(std::deque<std::deque<int> >& deque, int depth);
         int binarySearch(int num, int endIdx, std::deque<std::deque<int> >& deque);
         void showInputDeque(std::deque<int>& deque);
         void showDeque(std::deque<std::deque<int> >& deque);
-
 };
 
 #endif

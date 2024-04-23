@@ -31,12 +31,11 @@ int RPN::calculate(char *argv[]) {
 
     // 공백으로 구분된 단어(토큰) 추출
     while (std::getline(is, token, ' ')) {
-        
-        int num = std::atoi(token.c_str());
-        if (num >= 10 || num < 0) {
-            std::cout << "Error : only numbers from 1 to 9 are available" << std::endl;
+        if (token.size() > 1) {
+            std::cout << "Error" << std::endl;
             exit(1);
         }
+        int num = std::atoi(token.c_str());
         char op = token.c_str()[0];
         // 문자인 경우
         if (num != 0 || (num == 0 && token.front() == '0'))

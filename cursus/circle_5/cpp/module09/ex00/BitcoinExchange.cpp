@@ -36,7 +36,7 @@ bool BitcoinExchange::isDate(std::string str) {
 }
 
 void BitcoinExchange::makeDict() {
-    std::ifstream file("./data.csv");
+    std::ifstream file("cpp_09/data.csv");
     std::string line;
 
     if (file.is_open()) {
@@ -252,6 +252,8 @@ void BitcoinExchange::calculate(std::string fileName) {
             unsigned int wordCount = 0;
             while (std::getline(is, token, '|')) {
                 token = trimWhitespace(token);
+                if (token == "date")
+                    break;
                 if (wordCount >= 2) {
                     std::cout << "Error: bad input" << std::endl;
                     break;
